@@ -1,18 +1,20 @@
+#include <vector>
+
 class Board {
     static const int DIR[8][2];
+
 private:
-    int rows = 8; 
-    int cols = 8;
-    int board[8][8];
+    int rows, cols;
+    std::vector<std::vector<int>> board;
     
-    bool isOnBoard();
+    bool isOnBoard(int x, int y);
     bool validDirection(int player, int x, int y, int dir_x, int dir_y);
 
     void setPiece(int player, int x, int y);
     void initPieces();
 
 public:
-    Board();
+    Board(int rows, int cols);
 
     void newBoard();
     void setAvailableMoves(int player);
