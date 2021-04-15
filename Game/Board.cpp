@@ -25,7 +25,7 @@ void Board::initPieces() {
 
 void Board::newBoard() {
     board.resize(rows, vector<int>(cols));
-    for (auto &i : board) fill(i.begin(), i.end(), 0);
+    fillBoard(0);
 
     Board::initPieces();
 }
@@ -84,8 +84,16 @@ void Board::printBoard() {
     cout << endl;
 }
 
+void Board::fillBoard(int val) {
+    for (auto &i : board) fill(i.begin(), i.end(), val);
+}
+
+void Board::easyWin(int player) {
+    fillBoard(player);
+}
+
 int* Board::getScores() {
-    int scores[2] = {0, 0};
+    scores[0] = scores[1] = 0;
 
     for(int x = 0; x < rows; x++) {
         for(int y = 0; y < cols; y++) {
@@ -124,6 +132,8 @@ bool Board::validDirection(int player, int x, int y, int dir_x, int dir_y) {
 }
 
 bool Board::validateMove(int player, int x, int y) {
+    cout << x << " " << y << endl;
+
     if(!Board::isOnBoard(x, y)) {
         cout << "INPUT OUT OF RANGE\n";
         return false;

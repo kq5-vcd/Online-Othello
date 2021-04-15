@@ -5,6 +5,7 @@ class Board {
 
 private:
     int rows, cols;
+    int scores[2];
     std::vector<std::vector<int>> board;
     
     bool isOnBoard(int x, int y);
@@ -12,6 +13,7 @@ private:
 
     void setPiece(int player, int x, int y);
     void initPieces();
+    void fillBoard(int val);
 
 public:
     Board(int rows, int cols);
@@ -19,6 +21,7 @@ public:
     void newBoard();
     void setAvailableMoves(int player);
     void makeMove(int player, int x, int y);
+    void easyWin(int player);
 
     int* getScores();
     void printBoard(); 
