@@ -35,7 +35,7 @@ int main(int argc, char **argv)
   socklen_t clilen;
   char buf[MAXLINE];
   struct sockaddr_in cliaddr, servaddr;
-  string mess;
+  string m;
 
   //Create a socket for the soclet
   //If sockfd<0 there was an error in the creation of the socket
@@ -82,12 +82,12 @@ int main(int argc, char **argv)
 					b[c] = buf[c];
 				}
         string receive(b);
+        cout<<"before\n";
         if(receive[0] == '1'){
           //string m = map_to_string(rooms);
-          string m = "";
-          
+          m.clear();
+          cout<<"check\n";
           if(!rooms.empty()){
-            
             vector<Room>::iterator it;
             for(it = rooms.begin(); it<=rooms.end(); it++){
               if(it->getNumPlayer()>0 && !it->getGame().gameOver()){  
@@ -95,8 +95,9 @@ int main(int argc, char **argv)
                 m.append(",");
               }
             }
+            send(connfd, m.c_str(),m.length()-1,0);
           }
-          send(connfd, m.c_str(),m.length()-1,0);
+          else send(connfd, "empty",5,0);
         }
         else if(receive[0] == '2'){
           cout<<"check\n";
@@ -105,7 +106,10 @@ int main(int argc, char **argv)
           //id++;
           //rooms.insert({id,room});
           rooms.push_back(room);
-          string m = to_string(room.getId());
+          m.clear();
+          m = to_string(room.getId());
+          cout<<m.c_str()<<endl;
+
           send(connfd, m.c_str(),m.length(),0);
           cout<<"Room ID: "<<m<<endl;
         }

@@ -10,6 +10,7 @@
 
 #define MAXLINE 4096   /*max text line length*/
 #define SERV_PORT 3000 /*port*/
+#define BUFF_SIZE 1024
 
 using namespace std;
 
@@ -19,7 +20,7 @@ int main(int argc, char **argv)
 {
     int sockfd, n,m;
     struct sockaddr_in servaddr;
-    string buff;
+    char buff[BUFF_SIZE + 1];
     char sendline[MAXLINE], recvline[MAXLINE];
 
     //basic check of the arguments
@@ -50,11 +51,13 @@ int main(int argc, char **argv)
         perror("Problem in connecting to the server");
         exit(3);
     }
-    while(cin>>buff){
-
-        
-        send(sockfd, buff.c_str(), buff.length()-1, 0);
-        
+    while(1){
+        memset(buff,'\0',(strlen(buff)+1));
+        cout<<"Input\n";
+        fgets(buff, BUFF_SIZE, stdin);
+        cout<<"asdf\n";
+        send(sockfd, buff, strlen(buff)-1, 0);
+        memset(recvline,'\0',(strlen(recvline)+1));
         if ((n = recv(sockfd, recvline, MAXLINE, 0)) == 0)
         {
             cout<<"The game is finished\n";
