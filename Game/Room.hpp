@@ -2,6 +2,7 @@
 
 class Room{
 private:
+    static int id = 0;
     int numPlayer;
     Game game;
 
@@ -10,4 +11,5 @@ public:
     Game getGame();
     int getNumPlayer();
     void setNumPlayer(int num);
+    int getId();
 };

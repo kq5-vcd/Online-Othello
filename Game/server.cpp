@@ -15,7 +15,7 @@
 
 using namespace std;
 
-int id = 0;
+static int id = 0;
 
 string map_to_string(map<int,Room>  &m);
 
@@ -23,7 +23,8 @@ vector<string> split(const string& str, const char& delimiter);
 
 int main(int argc, char **argv)
 {
-  map<int,Room> rooms;
+  //map<int,Room> rooms;
+  vector<Room> rooms;
   
   int listenfd, connfd, n;
   pid_t childpid;
@@ -56,8 +57,6 @@ int main(int argc, char **argv)
 
   for (;;)
   {
-    
-    
     clilen = sizeof(cliaddr);
     //accept a connection
     connfd = accept(listenfd, (struct sockaddr *)&cliaddr, &clilen);
@@ -73,6 +72,7 @@ int main(int argc, char **argv)
       close(listenfd);
       while ((n = recv(connfd, buf, MAXLINE, 0)) > 0)
       {
+        cout<<"check"<<endl;
         char b[n];
 				for(int c = 0; c<=n; c++){
 					b[c] = buf[c];
@@ -83,22 +83,27 @@ int main(int argc, char **argv)
           send(connfd, m.c_str(),m.length(),0);
         }
         else if(receive[0] == '2'){
+          cout<<"check\n";
           Room room = Room(false);
           room.setNumPlayer(1);
-          rooms.insert({++id,room});
+          id++;
+          //rooms.insert({id,room});
+          rooms.insert(room);
           string m = to_string(id);
           send(connfd, m.c_str(),m.length(),0);
-          
+          cout<<"Room ID: "<<m<<endl;
         }
         else if(receive[0] == '3'){
           string roomId = split(receive,' ')[1];
-          map<int,Room>::iterator it = rooms.find(stoi(roomId));
+          //map<int,Room>::iterator it = rooms.find(stoi(roomId));
+          vector<Room>::iterator it = find(rooms.begin(),rooms.end(),stoi(roomId));
           if(it == rooms.end() || it->second.getNumPlayer() == 0){
             send(connfd, "0",1,0);
           }
           else{
             send(connfd,roomId.c_str(),roomId.length(),0);
             it->second.setNumPlayer(2);
+            cout<<"Join"<<endl;
           }
         }
         else if(receive[0] == '4'){

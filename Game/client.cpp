@@ -17,8 +17,9 @@ bool checkNumber(string str);
 
 int main(int argc, char **argv)
 {
-    int sockfd, n;
+    int sockfd, n,m;
     struct sockaddr_in servaddr;
+    string buff;
     char sendline[MAXLINE], recvline[MAXLINE];
 
     //basic check of the arguments
@@ -49,24 +50,27 @@ int main(int argc, char **argv)
         perror("Problem in connecting to the server");
         exit(3);
     }
+    while(cin>>buff){
 
-    send(sockfd, "2", 1, 0);
-    
-    if (recv(sockfd, recvline, MAXLINE, 0) == 0)
-    {
-        cout<<"The game is finished\n";
-        exit(0);
-    } 
+        
+        send(sockfd, buff.c_str(), buff.length(), 0);
+        
+        if ((n = recv(sockfd, recvline, MAXLINE, 0)) == 0)
+        {
+            cout<<"The game is finished\n";
+            exit(0);
+        } 
 
-    cout<<"Received from the server: ";
-    string mess(recvline);
-    cout<<mess<<endl;
+        cout<<"Received from the server: ";
+        char b[n];
+        for(int c = 0; c<=n; c++){
+            b[c] = recvline[c];
+        }
+        string mess(b);
+        cout<<mess<<endl;
+    }
 
     exit(0);
 }
 
-bool checkNumber(string str) {
-   for (int i = 0; i < int(str.length()); i++) if (isdigit(str[i]) == false) return false;
-   return true;
-}
 

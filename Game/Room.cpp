@@ -3,7 +3,7 @@
 Room::Room(bool notification):
     game(notification){
         numPlayer = 1;
-    
+        id++;
 }
 
 Game Room::getGame(){
@@ -16,4 +16,8 @@ int Room::getNumPlayer(){
 
 void Room::setNumPlayer(int num){
     this->numPlayer = num;
+}
+
+int Room::getId(){
+    return this->id;
 }
