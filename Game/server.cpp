@@ -1,12 +1,13 @@
 #include <stdlib.h>
 #include <iostream>
+#include <sstream>
 #include <map>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/wait.h>
 #include <netinet/in.h>
 #include <unistd.h>
-#include "Game.hpp"
+#include "Room.hpp"
 
 #define MAXLINE 4096   /*max text line length*/
 #define SERV_PORT 3000 /*port*/
@@ -16,11 +17,13 @@ using namespace std;
 
 int id = 0;
 
-string map_to_string(map<int,Game>  *m);
+string map_to_string(map<int,Room>  &m);
+
+vector<string> split(const string& str, const char& delimiter);
 
 int main(int argc, char **argv)
 {
-  map<int,Game> rooms;
+  map<int,Room> rooms;
   
   int listenfd, connfd, n;
   pid_t childpid;
@@ -49,7 +52,7 @@ int main(int argc, char **argv)
   listen(listenfd, LISTENQ);
 
   cout<<"Server running...waiting for connections."<<endl;
-  Game game = Game(false);
+  
 
   for (;;)
   {
@@ -66,66 +69,49 @@ int main(int argc, char **argv)
 
 
       cout<<"Child created for dealing with client requests"<<endl;
-      //game.testing();
-      bool isOn = !game.gameOver();
       //close listening socket
       close(listenfd);
-      vector<int> mess = game.getStatus();
-      //send(connfd, (mess = game.getStatus()).c_str(),mess.length(),0);
-      
       while ((n = recv(connfd, buf, MAXLINE, 0)) > 0)
       {
-
         char b[n];
 				for(int c = 0; c<=n; c++){
 					b[c] = buf[c];
 				}
         string receive(b);
-        string m;
-
-        switch(receive[0]){
-          case '1':
-            m = map_to_string(rooms);
-            send(connfd, m.c_str(),m.length(),0);
-            break;
-          case '2':
-            game = Game(false);
-            rooms.insert({++id,game});
-            m = to_string(id);
-            send(connfd, m.c_str(),m.length(),0);
-            break;
-          case '3':
-            string roomId = split(receive," ")[1];
-            
-
+        if(receive[0] == '1'){
+          string m = map_to_string(rooms);
+          send(connfd, m.c_str(),m.length(),0);
         }
-        
-        if(isOn){
-          string move(buf);
-          size_t pos = 0;
-          int token, cor[2], i = 0;
-          
-          game.getStatus();
-
-          while ((pos = move.find(" ")) != string::npos) {
-              token = stoi(move.substr(0, pos));
-              cout << token << endl;
-              cor[i] = token;
-              i++;
-              move.erase(0, pos + 1);
+        else if(receive[0] == '2'){
+          Room room = Room(false);
+          rooms.insert({++id,room});
+          string m = to_string(id);
+          send(connfd, m.c_str(),m.length(),0);
+        }
+        else if(receive[0] == '3'){
+          string roomId = split(receive,' ')[1];
+          map<int,Room>::iterator it = rooms.find(stoi(roomId));
+          if(it == rooms.end() || it->second.getNumPlayer() == 0){
+            send(connfd, "0",1,0);
           }
-          if(game.validateInput(x, y)) {
-              game.makeMove(x, y);
-              game.checkStatus();
+          else{
+            send(connfd,roomId.c_str(),roomId.length(),0);
           }
+        }
+        else if(receive[0] == '4'){
+          vector<string> move = split(receive,' ');
+          string roomId = move[1];
+          Game game = rooms.find(stoi(roomId))->second.getGame();
+          int x = stoi(move[2]);
+          int y = stoi(move[3]);
 
+          if()
         }
-        else{ 
-          cout<<"Client closed\n";
-          break;
-        }
-        
       }
+        
+        
+        
+      
 
       if (n < 0)
         cout<<"Read error"<<endl;
@@ -136,15 +122,15 @@ int main(int argc, char **argv)
   }
 }
 
-string map_to_string(map<int,Game> m) {
+string map_to_string(map<int,Room> &m) {
   string output = "";
   string convrt = "";
   string result = "";
 
-	for (map<int,Game>::const_iterator it = m.cbegin(); it != m.cend(); it++) {
-    if(!it->second.gameOver()){
+	for (map<int,Room>::iterator it = m.begin(); it != m.end(); it++) {
+    if(!it->second.getGame().gameOver()){
       convrt = to_string(it->first);
-      output.append(convrt).append(" ").append((it->second.)).append(" ").append(it->second.).append(",");
+      output.append(convrt).append(" ").append((to_string(it->second.getGame().getScores()[0]))).append(" ").append((to_string(it->second.getGame().getScores()[1]))).append(",");
     }
   }
 	
@@ -153,11 +139,13 @@ string map_to_string(map<int,Game> m) {
   return result;
 }
 
-vector<string> split(const string& str, const string& delimiter)
+vector<string> split(const string& str, const char &delimiter)
 {
     vector<string> cont;
     stringstream ss(str);
     string token;
+    size_t pos = 0;
+    
     while (getline(ss, token, delimiter)) {
         cont.push_back(token);
     }

@@ -2,6 +2,11 @@
 
 class Room{
 private:
-    string roomId;
+    int numPlayer;
     Game game;
+
+public:
+    Room(bool notification);
+    Game getGame();
+    int getNumPlayer();
 };
