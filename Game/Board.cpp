@@ -107,7 +107,7 @@ vector<vector<int>> Board::getBoard() {
 }
 
 bool Board::isOnBoard(int x, int y) {
-    return x >= 0 and x < rows and y >= 0 and y < cols;
+    return x >= 0 && x < rows && y >= 0 && y < cols;
 }
 
 bool Board::validDirection(int player, int x, int y, int dir_x, int dir_y) {
@@ -125,7 +125,7 @@ bool Board::validDirection(int player, int x, int y, int dir_x, int dir_y) {
         if(!Board::isOnBoard(i, j)) return false;
     }
 
-    if(gain > 0 and board[i][j] == player) {
+    if(gain > 0 && board[i][j] == player) {
         return true;
     }
 
