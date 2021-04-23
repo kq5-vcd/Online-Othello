@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     while(cin>>buff){
 
         
-        send(sockfd, buff.c_str(), buff.length(), 0);
+        send(sockfd, buff.c_str(), buff.length()-1, 0);
         
         if ((n = recv(sockfd, recvline, MAXLINE, 0)) == 0)
         {

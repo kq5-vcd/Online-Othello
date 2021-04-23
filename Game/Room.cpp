@@ -2,8 +2,8 @@
 
 Room::Room(bool notification):
     game(notification){
-        numPlayer = 1;
-        id++;
+        this->numPlayer = 1;
+        this->id++;
 }
 
 Game Room::getGame(){

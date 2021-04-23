@@ -2,10 +2,10 @@ all: server client
 
 
 server:
-	g++ -Wall -o server server.cpp Game.cpp Board.cpp
+	g++ -o server server.cpp Game.cpp Board.cpp Room.cpp
 
 client:
-	g++ -Wall -o client client.cpp
+	g++ -o client client.cpp
 
 clean:
 	rm -rf othello server client

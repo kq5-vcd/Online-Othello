@@ -2,6 +2,8 @@
 #include <iostream>
 #include <sstream>
 #include <map>
+#include <iterator>
+#include <algorithm>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/wait.h>
@@ -15,7 +17,8 @@
 
 using namespace std;
 
-static int id = 0;
+//int id = 0;
+int Room::id = 0;
 
 string map_to_string(map<int,Room>  &m);
 
@@ -25,6 +28,7 @@ int main(int argc, char **argv)
 {
   //map<int,Room> rooms;
   vector<Room> rooms;
+  
   
   int listenfd, connfd, n;
   pid_t childpid;
@@ -79,37 +83,63 @@ int main(int argc, char **argv)
 				}
         string receive(b);
         if(receive[0] == '1'){
-          string m = map_to_string(rooms);
-          send(connfd, m.c_str(),m.length(),0);
+          //string m = map_to_string(rooms);
+          string m = "";
+          
+          if(!rooms.empty()){
+            
+            vector<Room>::iterator it;
+            for(it = rooms.begin(); it<=rooms.end(); it++){
+              if(it->getNumPlayer()>0 && !it->getGame().gameOver()){  
+                m.append(to_string(it->getId())).append(" ").append(to_string(it->getGame().getScores()[0])).append(" ").append(to_string(it->getGame().getScores()[1]));
+                m.append(",");
+              }
+            }
+          }
+          send(connfd, m.c_str(),m.length()-1,0);
         }
         else if(receive[0] == '2'){
           cout<<"check\n";
           Room room = Room(false);
           room.setNumPlayer(1);
-          id++;
+          //id++;
           //rooms.insert({id,room});
-          rooms.insert(room);
-          string m = to_string(id);
+          rooms.push_back(room);
+          string m = to_string(room.getId());
           send(connfd, m.c_str(),m.length(),0);
           cout<<"Room ID: "<<m<<endl;
         }
         else if(receive[0] == '3'){
           string roomId = split(receive,' ')[1];
           //map<int,Room>::iterator it = rooms.find(stoi(roomId));
-          vector<Room>::iterator it = find(rooms.begin(),rooms.end(),stoi(roomId));
-          if(it == rooms.end() || it->second.getNumPlayer() == 0){
+          vector<Room>::iterator it;
+          for(it = rooms.begin(); it<=rooms.end(); it++){
+            if(it->getId() == stoi(roomId)){
+              send(connfd,roomId.c_str(),roomId.length(),0);
+              it->setNumPlayer(2);
+              cout<<"Join"<<endl;
+            }
+          }
+          if(it == rooms.end() || it->getNumPlayer() == 0){
             send(connfd, "0",1,0);
           }
-          else{
-            send(connfd,roomId.c_str(),roomId.length(),0);
-            it->second.setNumPlayer(2);
-            cout<<"Join"<<endl;
-          }
+          // else{
+          //   send(connfd,roomId.c_str(),roomId.length(),0);
+          //   it->setNumPlayer(2);
+          //   cout<<"Join"<<endl;
+          // }
         }
         else if(receive[0] == '4'){
           vector<string> move = split(receive,' ');
           string roomId = move[1];
-          Game game = rooms.find(stoi(roomId))->second.getGame();
+          //Game game = rooms.find(stoi(roomId))->second.getGame();
+          vector<Room>::iterator it;
+          Game game = Game(false);
+          for(it = rooms.begin(); it<=rooms.end(); it++){
+            if(it->getId() == stoi(roomId)){
+              game = it->getGame();
+            }
+          }
           int x = stoi(move[2]);
           int y = stoi(move[3]);
 
@@ -126,8 +156,14 @@ int main(int argc, char **argv)
         else if(receive[0] == '5'){
           send(connfd, "0",1,0);
           string roomId = split(receive,' ')[1];
-          map<int,Room>::iterator it = rooms.find(stoi(roomId));
-          it->second.setNumPlayer(it->second.getNumPlayer()-1);
+          //map<int,Room>::iterator it = rooms.find(stoi(roomId));
+          vector<Room>::iterator it;
+          for(it = rooms.begin(); it<=rooms.end(); it++){
+            if(it->getId() == stoi(roomId)){
+              it->setNumPlayer(it->getNumPlayer()-1);
+            }
+          }
+          //it->second.setNumPlayer(it->second.getNumPlayer()-1);
           break;
         }
       }
@@ -140,22 +176,22 @@ int main(int argc, char **argv)
   }
 }
 
-string map_to_string(map<int,Room> &m) {
-  string output = "";
-  string convrt = "";
-  string result = "";
+// string map_to_string(map<int,Room> &m) {
+//   string output = "";
+//   string convrt = "";
+//   string result = "";
 
-	for (map<int,Room>::iterator it = m.begin(); it != m.end(); it++) {
-    if(it->second.getNumPlayer()>0){
-      convrt = to_string(it->first);
-      output.append(convrt).append(" ").append((to_string(it->second.getGame().getScores()[0]))).append(" ").append((to_string(it->second.getGame().getScores()[1]))).append(",");
-    }
-  }
+// 	for (map<int,Room>::iterator it = m.begin(); it != m.end(); it++) {
+//     if(it->second.getNumPlayer()>0){
+//       convrt = to_string(it->first);
+//       output.append(convrt).append(" ").append((to_string(it->second.getGame().getScores()[0]))).append(" ").append((to_string(it->second.getGame().getScores()[1]))).append(",");
+//     }
+//   }
 	
-	result = output.substr(0, output.size() - 1 );
+// 	result = output.substr(0, output.size() - 1 );
 	
-  return result;
-}
+//   return result;
+// }
 
 vector<string> split(const string& str, const char &delimiter)
 {
