@@ -105,7 +105,10 @@ int main(int argc, char **argv)
           int x = stoi(move[2]);
           int y = stoi(move[3]);
 
-          if()
+          if(game.validateInput(x, y)) {
+              game.makeMove(x, y);
+              game.checkStatus();
+          }
         }
       }
         
