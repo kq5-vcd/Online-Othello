@@ -49,6 +49,7 @@ int main(int argc, char **argv)
   listen(listenfd, LISTENQ);
 
   cout<<"Server running...waiting for connections."<<endl;
+  Game game = Game(false);
 
   for (;;)
   {
@@ -63,12 +64,13 @@ int main(int argc, char **argv)
     if ((childpid = fork()) == 0)
     { //if it’s 0, it’s child process
 
+
       cout<<"Child created for dealing with client requests"<<endl;
       //game.testing();
       bool isOn = !game.gameOver();
       //close listening socket
       close(listenfd);
-      string mess = game.getStatus();
+      vector<int> mess = game.getStatus();
       //send(connfd, (mess = game.getStatus()).c_str(),mess.length(),0);
       
       while ((n = recv(connfd, buf, MAXLINE, 0)) > 0)
@@ -76,18 +78,20 @@ int main(int argc, char **argv)
 
         char b[n];
 				for(int c = 0; c<=n; c++){
-					b[c] = buff[c];
+					b[c] = buf[c];
 				}
         string receive(b);
+        string m;
+
         switch(receive[0]){
           case '1':
-            string m = map_to_string(&rooms);
+            m = map_to_string(rooms);
             send(connfd, m.c_str(),m.length(),0);
             break;
           case '2':
-            Game game = Game(8,8);
+            game = Game(false);
             rooms.insert({++id,game});
-            string m = to_string(id);
+            m = to_string(id);
             send(connfd, m.c_str(),m.length(),0);
             break;
           case '3':
@@ -117,14 +121,9 @@ int main(int argc, char **argv)
 
         }
         else{ 
-          strcpy(buf,"server\n");
-
-          //send(connfd, buf, strlen(buf), 0);
           cout<<"Client closed\n";
           break;
         }
-
-        send(connfd, mess.c_str(),mess.length(),0);
         
       }
 
