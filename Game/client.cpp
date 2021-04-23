@@ -50,45 +50,17 @@ int main(int argc, char **argv)
         exit(3);
     }
 
-    while ((n = recv(sockfd, recvline, MAXLINE, 0))>0)
-    {
-        int x,y;
-        string inputX = "";
-        string inputY = "";
-        string sendMess = "";
-
-        cout << "Select row: ";
-        cin >> inputX;
-
-        if(!checkNumber(inputX)){
-            inputX = "-1";
-        }
-
-        cout << "Select column: ";
-        cin >> inputY;
-
-        if(!checkNumber(inputY)){
-            inputY = "-1";
-        }
-
-        sendMess.append(inputX).append(" ").append(inputY);
-
-        send(sockfd, sendMess.c_str(), sendMess.length(), 0);
-
-        
-        
-        cout<<"Received from the server: ";
-        string mess(recvline);
-        cout<<mess<<endl;
-        
-        
-        
-    }
+    send(sockfd, "2", 1, 0);
+    
     if (recv(sockfd, recvline, MAXLINE, 0) == 0)
     {
         cout<<"The game is finished\n";
         exit(0);
     } 
+
+    cout<<"Received from the server: ";
+    string mess(recvline);
+    cout<<mess<<endl;
 
     exit(0);
 }
