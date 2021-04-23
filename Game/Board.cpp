@@ -1,10 +1,8 @@
-#include <iostream>
 #include "Board.hpp"
-
 
 const int Board::DIR[8][2] = {{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
 
-Board::Board(int rows = 8, int cols = 8): rows(rows), cols(cols) {
+Board::Board(bool notification, int rows, int cols): notification(notification), rows(rows), cols(cols) {
     Board::newBoard();
 }
 
@@ -71,18 +69,16 @@ void Board::makeMove(int player, int x, int y) {
     }
 }
 
-string Board::printBoard() {
-    string boardStr;
+void Board::printBoard() {
     for(int x = 0; x < rows; x++) {
         for(int y = 0; y < cols; y++) {
-            if(board[x][y] != -1) boardStr.append(" ");
-            boardStr.append(to_string(board[x][y])).append(" ");
+            if(board[x][y] != -1) cout << " ";
+            cout << board[x][y] << " ";
         }
-        boardStr.append("\n");
+        cout << endl;
     }
 
-    boardStr.append("\n");
-    return boardStr;
+    cout << endl;
 }
 
 void Board::fillBoard(int val) {
@@ -93,8 +89,8 @@ void Board::easyWin(int player) {
     fillBoard(player);
 }
 
-int* Board::getScores() {
-    scores[0] = scores[1] = 0;
+vector<int> Board::getScores() {
+    vector<int> scores(2, 0);
 
     for(int x = 0; x < rows; x++) {
         for(int y = 0; y < cols; y++) {
@@ -104,6 +100,10 @@ int* Board::getScores() {
     }
 
     return scores;
+}
+
+vector<vector<int>> Board::getBoard() {
+    return board;
 }
 
 bool Board::isOnBoard(int x, int y) {
@@ -133,21 +133,21 @@ bool Board::validDirection(int player, int x, int y, int dir_x, int dir_y) {
 }
 
 bool Board::validateMove(int player, int x, int y) {
-    cout << x << " " << y << endl;
+    if(notification) cout << x << " " << y << endl;
 
     if(!Board::isOnBoard(x, y)) {
-        cout << "INPUT OUT OF RANGE\n";
+        if(notification) cout << "INPUT OUT OF RANGE\n";
         return false;
     }
 
     if(board[x][y] > 0) {
-        cout << "SLOT OCCUPIED\n";
+        if(notification) cout << "SLOT OCCUPIED\n";
         return false;
     }
 
     if(board[x][y] == -1) return true;
 
-    cout << "NO PIECE TO TAKE\n";
+    if(notification) cout << "NO PIECE TO TAKE\n";
     return false;
 }
 
