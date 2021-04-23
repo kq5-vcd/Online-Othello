@@ -1,12 +1,14 @@
 #include <vector>
+#include <string>
 
+using namespace std;
 class Board {
     static const int DIR[8][2];
 
 private:
     int rows, cols;
     int scores[2];
-    std::vector<std::vector<int>> board;
+    vector<vector<int>> board;
     
     bool isOnBoard(int x, int y);
     bool validDirection(int player, int x, int y, int dir_x, int dir_y);
@@ -24,7 +26,7 @@ public:
     void easyWin(int player);
 
     int* getScores();
-    void printBoard(); 
+    string printBoard(); 
 
     bool validateMove(int player, int x, int y);
     bool playable();

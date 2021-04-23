@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Board.hpp"
 
-using namespace std;
 
 const int Board::DIR[8][2] = {{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
 
@@ -72,16 +71,18 @@ void Board::makeMove(int player, int x, int y) {
     }
 }
 
-void Board::printBoard() {
+string Board::printBoard() {
+    string boardStr;
     for(int x = 0; x < rows; x++) {
         for(int y = 0; y < cols; y++) {
-            if(board[x][y] != -1) cout << " ";
-            cout << board[x][y] << " ";
+            if(board[x][y] != -1) boardStr.append(" ");
+            boardStr.append(to_string(board[x][y])).append(" ");
         }
-        cout << endl;
+        boardStr.append("\n");
     }
 
-    cout << endl;
+    boardStr.append("\n");
+    return boardStr;
 }
 
 void Board::fillBoard(int val) {

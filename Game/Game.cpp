@@ -2,7 +2,6 @@
 #include <string>
 #include "Game.hpp"
 
-using namespace std;
 
 Game::Game(int rows = 8, int cols = 8): board(rows, cols) { //board = Board(rows, cols);
    turn = 2;
@@ -16,13 +15,16 @@ void Game::newTurn() {
    board.setAvailableMoves(turn);
 }
 
-void Game::getStatus() {
-   cout << "Current player: " << turn << endl;
+string Game::getStatus() {
+   string output;
+   output.append("Current player: ").append(to_string(turn)).append("\n"); 
 
    int* scores = board.getScores();
-   cout << "x: " << *scores << "\ty: " << *(scores + 1) << endl;
+   output.append("x: ").append(to_string(scores[0])).append("\ty: ").append(to_string(scores[1])).append("\n");
+   
 
-   board.printBoard();
+   output.append(board.printBoard());
+   return output;
 }
 
 void Game::makeMove(int x, int y) {
@@ -64,17 +66,18 @@ void Game::testing() {
 
 int* Game::getMove() {
    int x, y;
-   string input = "";
+   string inputX = "";
+   string inputY = "";
 
    cout << "Select row: ";
-   cin >> input;
+   cin >> inputX;
 
-   x = checkNumber(input) ? stoi(input) : -1;
+   x = checkNumber(inputX) ? stoi(inputX) : -1;
 
    cout << "Select column: ";
-   cin >> input;
+   cin >> inputY;
 
-   y = checkNumber(input) ? stoi(input) : -1;
+   y = checkNumber(inputY) ? stoi(inputY) : -1;
 
    currentMove[0] = x;
    currentMove[1] = y;
