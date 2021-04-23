@@ -84,9 +84,11 @@ int main(int argc, char **argv)
         }
         else if(receive[0] == '2'){
           Room room = Room(false);
+          room.setNumPlayer(1);
           rooms.insert({++id,room});
           string m = to_string(id);
           send(connfd, m.c_str(),m.length(),0);
+          
         }
         else if(receive[0] == '3'){
           string roomId = split(receive,' ')[1];
@@ -96,6 +98,7 @@ int main(int argc, char **argv)
           }
           else{
             send(connfd,roomId.c_str(),roomId.length(),0);
+            it->second.setNumPlayer(2);
           }
         }
         else if(receive[0] == '4'){
@@ -106,20 +109,23 @@ int main(int argc, char **argv)
           int y = stoi(move[3]);
 
           if(game.validateInput(x, y)) {
-              game.makeMove(x, y);
-              game.checkStatus();
+            game.makeMove(x, y);
+            game.checkStatus();
           }
 
           if(game.gameOver()){
-            
+            send(connfd, "0",1,0);
+            break;
           }
         }
+        else if(receive[0] == '5'){
+          send(connfd, "0",1,0);
+          string roomId = split(receive,' ')[1];
+          map<int,Room>::iterator it = rooms.find(stoi(roomId));
+          it->second.setNumPlayer(it->second.getNumPlayer()-1);
+          break;
+        }
       }
-        
-        
-        
-      
-
       if (n < 0)
         cout<<"Read error"<<endl;
       exit(0);
@@ -135,7 +141,7 @@ string map_to_string(map<int,Room> &m) {
   string result = "";
 
 	for (map<int,Room>::iterator it = m.begin(); it != m.end(); it++) {
-    if(!it->second.getGame().gameOver()){
+    if(it->second.getNumPlayer()>0){
       convrt = to_string(it->first);
       output.append(convrt).append(" ").append((to_string(it->second.getGame().getScores()[0]))).append(" ").append((to_string(it->second.getGame().getScores()[1]))).append(",");
     }

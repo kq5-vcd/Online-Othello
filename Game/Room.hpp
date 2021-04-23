@@ -9,4 +9,5 @@ public:
     Room(bool notification);
     Game getGame();
     int getNumPlayer();
+    void setNumPlayer(int num);
 };

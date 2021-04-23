@@ -13,3 +13,7 @@ Game Room::getGame(){
 int Room::getNumPlayer(){
     return this->numPlayer;
 }
+
+void Room::setNumPlayer(int num){
+    this->numPlayer = num;
+}
