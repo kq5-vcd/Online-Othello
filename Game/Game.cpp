@@ -4,7 +4,8 @@
 
 using namespace std;
 
-Game::Game(int rows = 8, int cols = 8): board(rows, cols) { //board = Board(rows, cols);
+Game::Game(bool notification, int rows, int cols): 
+   board(notification, rows, cols) { //
    turn = 2;
    endCounter = 0;
 
@@ -16,11 +17,11 @@ void Game::newTurn() {
    board.setAvailableMoves(turn);
 }
 
-void Game::getStatus() {
+void Game::printStatus() {
    cout << "Current player: " << turn << endl;
 
-   int* scores = board.getScores();
-   cout << "x: " << *scores << "\ty: " << *(scores + 1) << endl;
+   vector<int>scores = board.getScores();
+   cout << "x: " << scores[0] << "\ty: " << scores[1] << endl;
 
    board.printBoard();
 }
@@ -40,11 +41,11 @@ void Game::checkStatus() {
 }
 
 void Game::declareResult() {
-   int* scores = board.getScores();
-   int x = *scores;
-   int y = *(scores + 1);
+   vector<int> scores = board.getScores();
+   int x = scores[0];
+   int y = scores[1];
 
-   getStatus();
+   printStatus();
 
    if(x > y) {
       cout << "Player 1 is the winner!";
@@ -62,7 +63,7 @@ void Game::testing() {
    endCounter = 2;
 }
 
-int* Game::getMove() {
+vector<int> Game::getMove() {
    int x, y;
    string input = "";
 
@@ -76,10 +77,27 @@ int* Game::getMove() {
 
    y = checkNumber(input) ? stoi(input) : -1;
 
-   currentMove[0] = x;
-   currentMove[1] = y;
+   vector<int> currentMove = {x, y};
 
    return currentMove;
+}
+
+vector<int> Game::getScores() {
+   return board.getScores();
+}
+
+vector<int> Game::getStatus() {
+   vector<int> status;
+
+   vector<vector<int>> tempBoard = board.getBoard();
+   for (auto &i : tempBoard) status.insert(status.end(), i.begin(), i.end());
+
+   vector<int> scores = board.getScores();
+   status.insert(status.end(), scores.begin(), scores.end());
+
+   status.push_back(turn);
+
+   return status;
 }
 
 bool Game::checkNumber(string str) {
@@ -92,5 +110,10 @@ bool Game::validateInput(int x, int y) {
 }
 
 bool Game::gameOver() {
-   return endCounter > 1;
+   if(endCounter > 1) {
+      turn = -1;
+      return true;
+   }
+
+   return false;
 }

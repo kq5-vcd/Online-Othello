@@ -6,22 +6,23 @@ private:
     Board board;
     int turn;
     int endCounter;
-    int currentMove[2];
 
     void newTurn();
 
-    bool checkNumber(std::string str);
+    bool checkNumber(string str);
 
 public:
-    Game(int rows, int cols);
+    Game(bool notification, int rows = 8, int cols = 8);
 
-    void getStatus();
+    void printStatus();
     void makeMove(int x, int y);
     void checkStatus();
     void declareResult();
     void testing();
 
-    int* getMove();
+    vector<int> getMove();
+    vector<int> getScores();
+    vector<int> getStatus();
 
     bool validateInput(int x, int y);
     bool gameOver();
