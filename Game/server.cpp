@@ -109,6 +109,10 @@ int main(int argc, char **argv)
               game.makeMove(x, y);
               game.checkStatus();
           }
+
+          if(game.gameOver()){
+            
+          }
         }
       }
         
