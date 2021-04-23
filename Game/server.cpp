@@ -19,6 +19,7 @@ using namespace std;
 
 //int id = 0;
 int Room::id = 0;
+vector<Room> rooms;
 
 string map_to_string(map<int,Room>  &m);
 
@@ -27,7 +28,7 @@ vector<string> split(const string& str, const char& delimiter);
 int main(int argc, char **argv)
 {
   //map<int,Room> rooms;
-  vector<Room> rooms;
+  
   
   
   int listenfd, connfd, n;
