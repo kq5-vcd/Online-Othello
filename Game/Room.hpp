@@ -3,14 +3,15 @@
 class Room{
 
 private:
+    int id;
     int numPlayer;
     Game game;
-
+    
 public:
-    static int id;
     Room(bool notification);
     Game getGame();
     int getNumPlayer();
     void setNumPlayer(int num);
     int getId();
+    void setId(int id);
 };

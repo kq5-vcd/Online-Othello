@@ -3,13 +3,12 @@
 
 class Game {
 private:
-    Board board;
     int turn;
     int endCounter;
-
+    Board board;
     void newTurn();
-
     bool checkNumber(string str);
+    
 
 public:
     Game(bool notification, int rows = 8, int cols = 8);
