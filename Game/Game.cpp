@@ -6,6 +6,10 @@ using namespace std;
 
 Game::Game(bool notification, int rows, int cols): 
    board(notification, rows, cols) { //
+   newGame();
+}
+
+void Game::newGame() {
    turn = 2;
    endCounter = 0;
 

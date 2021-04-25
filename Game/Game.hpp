@@ -17,6 +17,7 @@ public:
     void makeMove(int x, int y);
     void checkStatus();
     void declareResult();
+    void newGame();
     void testing();
 
     vector<int> getMove();
