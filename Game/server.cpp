@@ -261,7 +261,9 @@ void *connection_handler(void *client_socket){
       for(it = rooms.begin(); it<=rooms.end(); it++){
         if(it->getId() == stoi(roomId)){
           it->setNumPlayer(it->getNumPlayer()-1);
-          it->getGame() = Game(false);
+          it->getPlayers().erase(it->getPlayers().begin());
+          it->newGame();
+
           send(socket, "0",1,0);
         }
       }
