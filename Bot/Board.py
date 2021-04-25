@@ -59,13 +59,13 @@ class Board:
     def set_available_moves(self, player):
         for x in range(self.rows):
             for y in range(self.cols):
-                if self.board[x][y] == 'x':
+                if self.board[x][y] == -1:
                     self.board[x][y] = 0
 
                 if self.board[x][y] == 0:
                     for i, j in self.DIR:
                         if self.valid_direction(player, x, y, i, j):
-                            self.board[x][y] = 'x'
+                            self.board[x][y] = -1
 
 
     def validate_move(self, player, x, y):
@@ -73,11 +73,11 @@ class Board:
             print("INPUT OUT OF RANGE")
             return False
 
-        if self.board[x][y] == 1 or self.board[x][y] == 2:
+        if self.board[x][y] > 0:
             print("SLOT OCCUPIED")
             return False
 
-        if self.board[x][y] == 'x':
+        if self.board[x][y] == -1:
             return True
         else:
             print("NO PIECE TO TAKE")
@@ -119,7 +119,7 @@ class Board:
     def playable(self):
         for x in range(self.rows):
             for y in range(self.cols):
-                if self.board[x][y] == 'x':
+                if self.board[x][y] == -1:
                     return True
 
         return False
@@ -128,6 +128,6 @@ class Board:
     def print_board(self):
         for row in range(self.rows):
             for col in range(self.cols):
-                print(self.board[row][col], end=" ")
+                print(self.board[row][col], end="\t")
             print()
         print()

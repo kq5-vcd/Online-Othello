@@ -1,20 +1,23 @@
 import Board
 
 class Bot:
-    def __init__(self, turn, board):
+    def __init__(self, turn):
         self.turn = turn
-        self.board = board
-
-    
-    def get_board(self, input_board):
-        self.board.set_board(input_board)
 
 
-    def get_available_move(self):
-        for row in range
+    def get_available_moves(self, board):
+        temp_board = board.get_board()
+        moves = []
+
+        for row in range(self.board.rows):
+            for col in range(self.board.cols):
+                if temp_board[row][col] < 0:
+                    moves.append([row, col])
+
+        return moves
 
 
-    def make_move(self):
-        move = [-1, -1]
+    def make_move(self, board):
+        moves = self.get_available_moves(board)
 
-        return move
+        return moves[0]
