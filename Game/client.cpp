@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     //additional checks can be inserted
     if (argc != 2)
     {
-        perror("Usage: TCPClient <IP address of the server");
+        perror("Usage: client <IP address of the server");
         exit(1);
     }
 
@@ -76,7 +76,6 @@ int main(int argc, char **argv)
         string mess(b);
         op = simple_tokenizer(mess);
         cout<<mess<<endl;
-        cout<<op.size()<<endl;
 
         memset(recvline,'\0',(strlen(recvline)+1));
 
@@ -90,10 +89,8 @@ int main(int argc, char **argv)
             cout<<"check send\n";
             while((n = recv(sockfd, recvline,MAXLINE,0)) > 0){
                 cout<<"check recv"<<endl;
-                for(int c = 0; c<=n; c++){
-                    b[c] = recvline[c];
-                }
-                string m(b);
+                recvline[n] = '\0';
+                string m(recvline);
                 cout<<m<<endl;
                 if(m.compare("0") == 0){
                     cout<<"Exit room\n";

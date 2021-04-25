@@ -91,8 +91,6 @@ int main(int argc, char **argv)
 		pthread_join(threads[k],NULL);
 	}
 
-  //int send_status;
-  //send_status=send(client_socket, server_message, sizeof(server_message), 0);
   close(listenfd);
 
   return 0;
@@ -189,6 +187,7 @@ void *connection_handler(void *client_socket){
       for(it = rooms.begin(); it!=rooms.end(); it++){
         if(it->getId() == stoi(roomId) && it->getNumPlayer() == 1){
           it->addPlayer(socket, 2);
+          cout<<it->getPlayers()[0].getSocket()<<" "<<it->getPlayers()[1].getSocket()<<endl;
           roomId.append(" ").append(to_string(it->getPlayers()[1].getTurn()));
           it->setNumPlayer(2);
           send(socket,roomId.c_str(),roomId.length(),0);
@@ -199,11 +198,6 @@ void *connection_handler(void *client_socket){
       if(it == rooms.end()){
         send(socket, "0",1,0);
       }
-      // else{
-      //   send(connfd,roomId.c_str(),roomId.length(),0);
-      //   it->setNumPlayer(2);
-      //   cout<<"Join"<<endl;
-      // }
     }
     else if(receive[0] == '4' || receive[0] == 'S'){
       vector<Room>::iterator it;
@@ -239,8 +233,15 @@ void *connection_handler(void *client_socket){
       vector<int> status = it->getGame().getStatus();
       stringstream result;
       copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
-      if(it->getPlayers().size() == 1) send(socket, result.str().c_str(),result.str().length(),0);
-      if(it->getPlayers().size() == 2){
+      if(it->getPlayers().size() == 1) {
+        printf("%s\n",result.str().c_str());
+        send(socket, result.str().c_str(),result.str().length(),0);
+      }
+      else if(it->getPlayers().size() == 2 && receive[0] == 'S'){
+        send(it->getPlayers()[1].getSocket(), result.str().c_str(),result.str().length(),0);
+      }
+      else if(it->getPlayers().size() == 2 && receive[0] == '4'){
+        cout<<it->getPlayers()[0].getSocket()<<" "<<it->getPlayers()[1].getSocket()<<endl;
         send(it->getPlayers()[0].getSocket(), result.str().c_str(),result.str().length(),0);
         send(it->getPlayers()[1].getSocket(), result.str().c_str(),result.str().length(),0);
         cout<<"check send"<<endl;
