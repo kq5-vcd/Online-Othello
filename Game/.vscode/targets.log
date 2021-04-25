@@ -7,7 +7,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Sat Apr 17 09:34:35 2021
+# Make data base, printed on Sun Apr 25 15:24:14 2021
 
 # Variables
 
@@ -22,7 +22,7 @@ ProgramW6432 = C:\Program Files
 # environment
 LOCALAPPDATA = C:\Users\ADMIN\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-1d5fbedf-0364-4386-bd7e-9a9f953f7725-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-5d6e437a-3187-4a87-aabc-ffd74bdcf185-sock
 # environment
 VSCODE_CWD = C:\Users\ADMIN\Desktop\Online-Othello\Game
 # environment
@@ -32,7 +32,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_7304_VOADQEPJPOBLWGIC
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_14064_RSPJCGEBYIATTFMQ
 # environment
 CommonProgramFiles = C:\Program Files (x86)\Common Files
 # environment
@@ -84,7 +84,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 7304
+VSCODE_PID = 14064
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # environment
@@ -114,7 +114,7 @@ MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\Users\ADMIN\miniconda3\Scripts;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\xampp\php;C:\MinGW\bin;C:\Python39;C:\ProgramData\chocolatey\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\;C:\Users\ADMIN\AppData\Local\Microsoft\WindowsApps;C:\Users\ADMIN\AppData\Local\Programs\Microsoft VS Code\bin;C:\adb;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\PuTTY\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\;C:\Users\ADMIN\AppData\Local\Microsoft\WindowsApps;;C:\Users\ADMIN\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ADMIN\AppData\Roaming\npm;C:\Program Files\Azure Data Studio\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2021.1\bin;
+PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\Users\ADMIN\miniconda3\Scripts;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\xampp\php;C:\MinGW\bin;C:\Python39;C:\ProgramData\chocolatey\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\;C:\Users\ADMIN\AppData\Local\Microsoft\WindowsApps;C:\Users\ADMIN\AppData\Local\Programs\Microsoft VS Code\bin;C:\adb;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\PuTTY\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\;C:\Users\ADMIN\AppData\Local\Microsoft\WindowsApps;C:\Users\ADMIN\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ADMIN\AppData\Roaming\npm;C:\Program Files\Azure Data Studio\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2021.1\bin;;C:\Users\ADMIN\AppData\Local\GitHubDesktop\bin
 # environment
 COMPUTERNAME = DESKTOP-QAH63S1
 # default
@@ -174,7 +174,8 @@ APPDATA = C:\Users\ADMIN\AppData\Roaming
 # environment
 HOMEDRIVE = C:
 # environment
-PROCESSOR_ARCHITECTURE = x86
+PROCESSOR_A 
+RCHITECTURE = x86
 # environment
 DriverData = C:\Windows\System32\Drivers\DriverData
 # environment
@@ -214,9 +215,9 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1618564248): 13 files, no impossibilities.
+# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1619339037): 18 files, no impossibilities.
 
-# 13 files, no impossibilities in 1 directories.
+# 18 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -229,12 +230,12 @@ client:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 8):
-	g++ -Wall -o client client.cpp
+	g++ -o client client.cpp
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-04-16 16:10:35
+#  Last modified 2021-04-25 15:23:48
 #  File has been updated.
 #  Successfully updated.
 
@@ -270,7 +271,7 @@ server:
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
 #  recipe to execute (from 'Makefile', line 5):
-	g++ -Wall -o server server.cpp Game.cpp Board.cpp
+	g++ -o server server.cpp Game.cpp Board.cpp Room.cpp Players.cpp
 
 # Not a target:
 .DEFAULT:
@@ -301,12 +302,12 @@ all: server client
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 19 / storage = 159 B / avg = 8 B
-# current buf: size = 8174 B / used = 159 B / count = 19 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 24 / storage = 222 B / avg = 9 B
+# current buf: size = 8174 B / used = 222 B / count = 24 / avg = 9 B
 
-# strcache performance: lookups = 31 / hit rate = 38%
+# strcache performance: lookups = 36 / hit rate = 33%
 # hash-table stats:
-# Load=19/8192=0%, Rehash=0, Collisions=0/31=0%
-# Finished Make data base on Sat Apr 17 09:34:35 2021
+# Load=24/8192=0%, Rehash=0, Collisions=0/36=0%
+# Finished Make data base on Sun Apr 25 15:24:14 2021
 
  

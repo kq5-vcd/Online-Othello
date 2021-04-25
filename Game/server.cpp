@@ -71,6 +71,7 @@ int main(int argc, char **argv)
   while (num_threads<LISTENQ){
 		printf("Listening...\n");
 		int client_socket = accept(listenfd, NULL, NULL);
+    cout<<client_socket<<endl;
 		puts("Connection accepted");
 		if( pthread_create( &threads[num_threads], NULL ,  connection_handler , &client_socket) < 0){
 			perror("Could not create thread");
@@ -86,7 +87,7 @@ int main(int argc, char **argv)
 		num_threads++;
 	}
 	int k=0;
-    for (k=0;k<3;k++){
+  for (k=0;k<LISTENQ;k++){
 		pthread_join(threads[k],NULL);
 	}
 
@@ -94,131 +95,6 @@ int main(int argc, char **argv)
   //send_status=send(client_socket, server_message, sizeof(server_message), 0);
   close(listenfd);
 
-  // for (;;)
-  // {
-  //   clilen = sizeof(cliaddr);
-  //   //accept a connection
-  //   connfd = accept(listenfd, (struct sockaddr *)&cliaddr, &clilen);
-
-  //   cout<<"Received request..."<<endl;
-
-  //   if ((childpid = fork()) == 0)
-  //   { //if it’s 0, it’s child process
-
-
-  //     cout<<"Child created for dealing with client requests"<<endl;
-  //     //close listening socket
-  //     close(listenfd);
-  //     while ((n = recv(connfd, buf, MAXLINE, 0)) > 0)
-  //     {
-  //       cout<<"check0"<<endl;
-  //       char b[n];
-	// 			for(int c = 0; c<=n; c++){
-	// 				b[c] = buf[c];
-	// 			}
-  //       string receive(b);
-  //       cout<<"before\n";
-  //       if(receive[0] == '1'){
-  //         //string m = map_to_string(rooms);
-  //         m.clear();
-  //         cout<<"check1\n";
-  //         if(!rooms.empty()){
-  //           vector<Room>::iterator it;
-  //           for(it = rooms.begin(); it != rooms.end(); it++){
-  //             if(it->getNumPlayer()>0 && !it->getGame().gameOver()){  
-  //               m.append(to_string(it->getId())).append(" ").append(to_string(it->getGame().getScores()[0])).append(" ").append(to_string(it->getGame().getScores()[1]));
-  //               m.append(",");
-  //             }
-  //           }
-  //           send(connfd, m.c_str(),m.length()-1,0);
-  //         }
-  //         else send(connfd, "empty",5,0);
-  //       }
-  //       else if(receive[0] == '2'){
-  //         cout<<"check2\n";
-  //         Room *room = new Room(false);
-  //         room->setNumPlayer(1);
-  //         if(rooms.empty()){
-  //           room->setId(1);
-  //         }
-  //         else{
-  //           vector<Room>::iterator it = rooms.end() - 1;
-  //           room->setId(it->getId() + 1);
-  //         }
-  //         //id++;
-  //         //rooms.insert({id,room});
-  //         rooms.push_back(*room);
-  //         m.clear();
-  //         m = to_string(room->getId());
-          
-  //         send(connfd, m.c_str(),m.length(),0);
-  //       }
-  //       else if(receive[0] == '3'){
-  //         cout<<"check3\n";
-  //         string roomId = split(receive,' ')[1];
-  //         //map<int,Room>::iterator it = rooms.find(stoi(roomId));
-  //         vector<Room>::iterator it;
-  //         for(it = rooms.begin(); it<=rooms.end(); it++){
-  //           if(it->getId() == stoi(roomId)){
-  //             send(connfd,roomId.c_str(),roomId.length(),0);
-  //             it->setNumPlayer(2);
-  //             cout<<"Join"<<endl;
-  //           }
-  //         }
-  //         if(it == rooms.end() || it->getNumPlayer() == 0){
-  //           send(connfd, "0",1,0);
-  //         }
-  //         // else{
-  //         //   send(connfd,roomId.c_str(),roomId.length(),0);
-  //         //   it->setNumPlayer(2);
-  //         //   cout<<"Join"<<endl;
-  //         // }
-  //       }
-  //       else if(receive[0] == '4'){
-  //         vector<string> move = split(receive,' ');
-  //         string roomId = move[1];
-  //         //Game game = rooms.find(stoi(roomId))->second.getGame();
-  //         vector<Room>::iterator it;
-  //         Game game = Game(false);
-  //         for(it = rooms.begin(); it<=rooms.end(); it++){
-  //           if(it->getId() == stoi(roomId)){
-  //             game = it->getGame();
-  //           }
-  //         }
-  //         int x = stoi(move[2]);
-  //         int y = stoi(move[3]);
-
-  //         if(game.validateInput(x, y)) {
-  //           game.makeMove(x, y);
-  //           game.checkStatus();
-  //         }
-
-  //         if(game.gameOver()){
-  //           send(connfd, "0",1,0);
-  //           break;
-  //         }
-  //       }
-  //       else if(receive[0] == '5'){
-  //         send(connfd, "0",1,0);
-  //         string roomId = split(receive,' ')[1];
-  //         //map<int,Room>::iterator it = rooms.find(stoi(roomId));
-  //         vector<Room>::iterator it;
-  //         for(it = rooms.begin(); it<=rooms.end(); it++){
-  //           if(it->getId() == stoi(roomId)){
-  //             it->setNumPlayer(it->getNumPlayer()-1);
-  //           }
-  //         }
-  //         //it->second.setNumPlayer(it->second.getNumPlayer()-1);
-  //         break;
-  //       }
-  //     }
-  //     if (n < 0)
-  //       cout<<"Read error"<<endl;
-  //     exit(0);
-  //   }
-  //   //close socket of the server
-  //   close(connfd);
-  // }
   return 0;
 }
 
@@ -254,18 +130,18 @@ vector<string> split(const string& str, const char &delimiter)
 
 void *connection_handler(void *client_socket){
 	int socket = *(int*) client_socket;
+  
 	int n;
   string m;
 	char buf[MAXLINE];
   while ((n = recv(socket, buf, MAXLINE, 0)) > 0)
   {
-    cout<<"check0"<<endl;
+    cout<<socket<<endl;
     char b[n];
     for(int c = 0; c<=n; c++){
       b[c] = buf[c];
     }
     string receive(b);
-    cout<<"before\n";
     if(receive[0] == '1'){
       //string m = map_to_string(rooms);
       m.clear();
@@ -285,7 +161,9 @@ void *connection_handler(void *client_socket){
     else if(receive[0] == '2'){
       cout<<"check2\n";
       Room *room = new Room(false);
+      cout<<"check\n";
       room->setNumPlayer(1);
+      room->addPlayer(socket, 1);
       if(rooms.empty()){
         room->setId(1);
       }
@@ -298,22 +176,27 @@ void *connection_handler(void *client_socket){
       rooms.push_back(*room);
       m.clear();
       m = to_string(room->getId());
+      m.append(" ").append(to_string(room->getPlayers()[0].getTurn()));
       
       send(socket, m.c_str(),m.length(),0);
+      cout<<"Player 1 inside room"<<endl;
     }
     else if(receive[0] == '3'){
       cout<<"check3\n";
       string roomId = split(receive,' ')[1];
       //map<int,Room>::iterator it = rooms.find(stoi(roomId));
       vector<Room>::iterator it;
-      for(it = rooms.begin(); it<=rooms.end(); it++){
-        if(it->getId() == stoi(roomId)){
-          send(socket,roomId.c_str(),roomId.length(),0);
+      for(it = rooms.begin(); it!=rooms.end(); it++){
+        if(it->getId() == stoi(roomId) && it->getNumPlayer() == 1){
+          it->addPlayer(socket, 2);
+          roomId.append(" ").append(to_string(it->getPlayers()[1].getTurn()));
           it->setNumPlayer(2);
-          cout<<"Join"<<endl;
+          send(socket,roomId.c_str(),roomId.length(),0);
+          cout<<"Player 2 joined room"<<endl;
+          break;
         }
       }
-      if(it == rooms.end() || it->getNumPlayer() == 0){
+      if(it == rooms.end()){
         send(socket, "0",1,0);
       }
       // else{
@@ -322,42 +205,67 @@ void *connection_handler(void *client_socket){
       //   cout<<"Join"<<endl;
       // }
     }
-    else if(receive[0] == '4'){
+    else if(receive[0] == '4' || receive[0] == 'S'){
+      vector<Room>::iterator it;
       vector<string> move = split(receive,' ');
       string roomId = move[1];
       //Game game = rooms.find(stoi(roomId))->second.getGame();
-      vector<Room>::iterator it;
-      Game game = Game(false);
-      for(it = rooms.begin(); it<=rooms.end(); it++){
+      for(it = rooms.begin(); it!=rooms.end(); it++){
         if(it->getId() == stoi(roomId)){
-          game = it->getGame();
+          
+          break;
         }
       }
-      int x = stoi(move[2]);
-      int y = stoi(move[3]);
+      cout<<it->getId()<<endl;
 
-      if(game.validateInput(x, y)) {
-        game.makeMove(x, y);
-        game.checkStatus();
+      if(receive[0] == '4'){
+        
+        
+        int x = stoi(move[2]);
+        int y = stoi(move[3]);
+
+        if(it->getGame().validateInput(x, y)) {
+          cout<<"check move"<<endl;
+          it->getGame().makeMove(x, y);
+          it->getGame().checkStatus();
+          it->getGame().printStatus();
+        }
+      }
+      else if(receive[0] == 'S'){
+        //it->newGame();
+        cout<<"Check game\n";
       }
 
-      if(game.gameOver()){
-        send(socket, "0",1,0);
-        break;
+      vector<int> status = it->getGame().getStatus();
+      stringstream result;
+      copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
+      if(it->getPlayers().size() == 1) send(socket, result.str().c_str(),result.str().length(),0);
+      if(it->getPlayers().size() == 2){
+        send(it->getPlayers()[0].getSocket(), result.str().c_str(),result.str().length(),0);
+        send(it->getPlayers()[1].getSocket(), result.str().c_str(),result.str().length(),0);
+        cout<<"check send"<<endl;
       }
+      
+
+      if(it->getGame().gameOver()){
+        it->getPlayers().clear();
+      }
+
     }
     else if(receive[0] == '5'){
-      send(socket, "0",1,0);
+      
       string roomId = split(receive,' ')[1];
       //map<int,Room>::iterator it = rooms.find(stoi(roomId));
       vector<Room>::iterator it;
       for(it = rooms.begin(); it<=rooms.end(); it++){
         if(it->getId() == stoi(roomId)){
           it->setNumPlayer(it->getNumPlayer()-1);
+          it->getGame() = Game(false);
+          send(socket, "0",1,0);
         }
       }
       //it->second.setNumPlayer(it->second.getNumPlayer()-1);
-      break;
+      
     }
   }
   if (n < 0)
