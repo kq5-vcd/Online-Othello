@@ -12,7 +12,7 @@
 #include <algorithm>
 
 #define MAXLINE 4096   /*max text line length*/
-#define SERV_PORT 3000 /*port*/
+#define SERV_PORT 8910 /*port*/
 #define BUFF_SIZE 1024
 
 using namespace std;

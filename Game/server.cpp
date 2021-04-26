@@ -13,7 +13,7 @@
 #include "Room.hpp"
 
 #define MAXLINE 4096   /*max text line length*/
-#define SERV_PORT 3000 /*port*/
+#define SERV_PORT 8910 /*port*/
 #define LISTENQ 20      /*maximum number of client connections*/
 
 using namespace std;
