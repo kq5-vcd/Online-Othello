@@ -19,8 +19,9 @@
 using namespace std;
 
 //int id = 0;
+int num_threads = 0;
 vector<Room> rooms ;
-vector<Players> players;
+vector<string> playersName;
 
 //string map_to_string(map<int,Room>  &m);
 
@@ -67,7 +68,7 @@ int main(int argc, char **argv)
 
   cout<<"Server running...waiting for connections."<<endl;
   
-  int num_threads = 0;
+  
   pthread_t threads[LISTENQ];
   while (num_threads<LISTENQ){
 		printf("Listening...\n");
@@ -246,7 +247,9 @@ void *connection_handler(void *client_socket){
       else if(receive[0] == 'S'){
         cout<<"Check game\n";
         cout<<"Numplayer: "<<it->getNumPlayer()<<endl<<"size: "<<it->getPlayers().size()<<endl;
-        
+        string mess = "W";
+        mess.append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName());
+        send(socket,mess.c_str(),mess.length(),0);
       }
 
       vector<int> status = it->getGame().getStatus();
@@ -305,16 +308,32 @@ void *connection_handler(void *client_socket){
       //it->second.setNumPlayer(it->second.getNumPlayer()-1);
       
     }
+    else if(receive[0] == '6'){
+      string name = split(receive,' ')[1];
+      vector<string>::iterator i = find(playersName.begin(),playersName.end(),name);
+      if(i != playersName.end()){
+        send(socket,"0",1,0);
+      }
+      else{
+        playersName.push_back(name);
+        send(socket,"1",1,0);
+      }
+    }
   }
   if (n <= 0){
     cout<<"Read error"<<endl;
     vector<Room>::iterator it;
+    vector<string>::iterator i;
     for(it = rooms.begin(); it<=rooms.end(); it++){
       if(it->getPlayers()[0].getSocket() == socket){
+        i = find(playersName.begin(),playersName.end(),it->getPlayers()[0].getName());
+        playersName.erase(i);
         it->removePlayer(1);
         it->getPlayers()[0].setTurn(1);
       }
       else if(it->getPlayers()[1].getSocket() == socket){
+        i = find(playersName.begin(),playersName.end(),it->getPlayers()[1].getName());
+        playersName.erase(i);
         it->removePlayer(2);
       }
       else continue;
@@ -328,7 +347,8 @@ void *connection_handler(void *client_socket){
       send(it->getPlayers()[0].getSocket(),result.str().c_str(),result.str().length(),0);
       break;
     }
-
+    num_threads--;
+    
   }
     
 	
