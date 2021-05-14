@@ -7,34 +7,42 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Sun Apr 25 15:24:14 2021
+# Make data base, printed on Fri May 14 11:06:21 2021
 
 # Variables
 
 # environment
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
+SYSTEMDRIVE = C:
+# environment
+LC_ALL = C
+# environment
 USERPROFILE = C:\Users\ADMIN
 # environment
 VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
-ProgramW6432 = C:\Program Files
-# environment
 LOCALAPPDATA = C:\Users\ADMIN\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-5d6e437a-3187-4a87-aabc-ffd74bdcf185-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-87949731-10b0-40b9-be84-414c597db8b5-sock
 # environment
-VSCODE_CWD = C:\Users\ADMIN\Desktop\Online-Othello\Game
+VSCODE_CWD = C:\Users\ADMIN\Des 
+ktop\Online-Othello\Game
+# environment
+CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
+# environment
+SYSTEMROOT = C:\WINDOWS
 # environment
 PROCESSOR_LEVEL = 6
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\PowerShell\Modules\
 # default
 MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
-# environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_14064_RSPJCGEBYIATTFMQ
-# environment
-CommonProgramFiles = C:\Program Files (x86)\Common Files
+# environ 
+ment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_16824_DJILXQMUNBVBAEGG
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -49,18 +57,21 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 VSCODE_LOG_STACK = false
 # automatic
 %F = $(notdir $%)
+# environment
+LANG = C
 # default
 .LOADED := 
 # environment
 TMP = C:\Users\ADMIN\AppData\Local\Temp
 # default
-.INCLUDE_DIRS = .
+.INCL 
+UDE_DIRS = .
 # environment
 PROCESSOR_ARCHITEW6432 = AMD64
-# environment
-ChocolateyInstall = C:\ProgramData\chocolatey
 # makefile
 MAKEFLAGS = pqrR
+# environment
+ONEDRIVE = C:\Users\ADMIN\OneDrive
 # makefile
 CURDIR := c:/Users/ADMIN/Desktop/Online-Othello/Game
 # environment
@@ -70,11 +81,13 @@ APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # automatic
 *D = $(patsubst %/,%,$(patsubst %\,%,$(dir $*)))
 # environment
+PROGRAMFILES = C:\Program Files (x86)
+# environment
 MFLAGS = -pqrR
 # default
 .SHELLFLAGS := -c
 # environment
-PSModulePath = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\PowerShell\Modules\
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
 # automatic
 +D = $(patsubst %/,%,$(patsubst %\,%,$(dir $+)))
 # makefile (from 'Makefile', line 1)
@@ -84,37 +97,38 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 14064
+VSCODE_PID = 16824
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
-# environment
-ProgramFiles(x86) = C:\Program Files (x86)
-# environment
-PyCharm Community Edition = C:\Program Files\JetBrains\PyCharm Community Edition 2021.1\bin;
 # automatic
 *F = $(notdir $*)
 # automatic
 <D = $(patsubst %/,%,$(patsubst %\,%,$(dir $<)))
 # environment
-OneDrive = C:\Users\ADMIN\OneDrive
-# environment
-VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":tru 
+e}
 # default
 MAKE_HOST := Windows32
+# environment
+PROGRAMDATA = C:\ProgramData
 # default
 SHELL := sh.exe
-# environment
-windir = C:\WINDOWS
 # environment
 HOMEPATH = \Users\ADMIN
 # default
 MAKECMDGOALS := all
 # environment
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# environment
+COMSPEC = C:\WINDOWS\system32\cmd.exe
+# environment
+WINDIR = C:\WINDOWS
+# environment
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\Users\ADMIN\miniconda3\Scripts;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\xampp\php;C:\MinGW\bin;C:\Python39;C:\ProgramData\chocolatey\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\;C:\Users\ADMIN\AppData\Local\Microsoft\WindowsApps;C:\Users\ADMIN\AppData\Local\Programs\Microsoft VS Code\bin;C:\adb;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\PuTTY\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\;C:\Users\ADMIN\AppData\Local\Microsoft\WindowsApps;C:\Users\ADMIN\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ADMIN\AppData\Roaming\npm;C:\Program Files\Azure Data Studio\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2021.1\bin;;C:\Users\ADMIN\AppData\Local\GitHubDesktop\bin
+PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\Users\ADMIN\miniconda3\Scripts;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\xampp\php;C:\MinGW\bin;C:\Python39;C:\ProgramData\chocolatey\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\;C:\Users\ADMIN\AppData\Local\Microsoft\WindowsApps;C:\Users\ADMIN\AppData\Local\Programs\Microsoft VS Code\bin;C:\adb;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\PuTTY\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\ADMIN\AppData\Local\Programs\Python\Python39\;C:\Users\ADMIN\AppData\Local\Microsoft\WindowsApps;C:\Users\ADMIN\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ADMIN\AppData\Roaming\npm;C:\Program Files\Azure Data Studio\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2021.1\bin;;C:\Users\ADMIN\AppData\Local\GitHubDesktop\bin
 # environment
 COMPUTERNAME = DESKTOP-QAH63S1
 # default
@@ -122,19 +136,21 @@ MAKEFILES :=
 # automatic
 ^F = $(notdir $^)
 # environment
-CommonProgramFiles(x86) = C:\Program Files (x86)\Common Files
-# environment
 PROMPT = $P$G
+# environment
+CHOCOLATEYLASTPATHUPDATE = 132595987442811299
 # environment
 LOGONSERVER = \\DESKTOP-QAH63S1
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
 USERNAME = ADMIN
+# environment
+COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
 # automatic
 ?F = $(notdir $?)
 # environment
-ChocolateyLastPathUpdate = 132595987442811299
+PROGRAMW6432 = C:\Program Files
 # environment
 PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
 # automatic
@@ -147,16 +163,12 @@ USERDOMAIN = DESKTOP-QAH63S1
 GNUMAKEFLAGS := 
 # environment
 OS = Windows_NT
-# environment
-SystemRoot = C:\WINDOWS
 # makefile
 .DEFAULT_GOAL := all
-# environment
-ProgramFiles = C:\Program Files (x86)
-# environment
-SystemDrive = C:
 # default
 MAKE_VERSION := 4.3
+# environment
+PROGRAMFILES(X86) = C:\Program Files (x86)
 # environment
 USERDOMAIN_ROAMINGPROFILE = DESKTOP-QAH63S1
 # environment
@@ -164,9 +176,7 @@ NUMBER_OF_PROCESSORS = 8
 # environment
 PUBLIC = C:\Users\Public
 # environment
-ProgramData = C:\ProgramData
-# environment
-VSCODE_NODE_CACHED_DATA_DIR = C:\Users\ADMIN\AppData\Roaming\Code\CachedData\3c4e3df9e89829dce27b7b5c24508306b151f30d
+VSCODE_NODE_CACHED_DATA_DIR = C:\Users\ADMIN\AppData\Roaming\Code\CachedData\e713fe9b05fc24facbec8f34fb1017133858842b
 # environment
 MOZ_PLUGIN_PATH = C:\Program Files (x86)\Foxit Software\Foxit Reader\plugins\
 # environment
@@ -174,20 +184,22 @@ APPDATA = C:\Users\ADMIN\AppData\Roaming
 # environment
 HOMEDRIVE = C:
 # environment
-PROCESSOR_A 
-RCHITECTURE = x86
+PROCESSOR_ARCHITECTURE = x86
 # environment
-DriverData = C:\Windows\System32\Drivers\DriverData
+PYCHARM COMMUNITY EDITION = C:\Program Files\JetBrains\PyCharm Community Edition 2021.1\bin;
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
 # environment
-CommonProgramW6432 = C:\Program Files\Common Files
+VXIPNPPATH = C:\Program Files (x86)\IVI Foundation\VISA\
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
 # environment
 ELECTRON_RUN_AS_NODE = 1
-# environment
+# e 
+nvironment
 TEMP = C:\Users\ADMIN\AppData\Local\Temp
 # environment
-VSCODE_IPC_HOOK = \\.\pipe\f064d9ba3e130212370d733ca8e40496-1.55.2-main-sock
+VSCODE_IPC_HOOK = \\.\pipe\f064d9ba3e130212370d733ca8e40496-1.56.1-main-sock
 # default
 .RECIPEPREFIX := 
 # automatic
@@ -203,11 +215,9 @@ SESSIONNAME = Console
 # environment
 PROCESSOR_REVISION = 9e09
 # environment
-ComSpec = C:\WINDOWS\system32\cmd.exe
-# environment
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 # variable set hash-table stats:
-# Load=97/1024=9%, Rehash=0, Collisions=6/127=5%
+# Load=100/1024=10%, Rehash=0, Collisions=9/130=7%
 
 # Pattern-specific Variable Values
 
@@ -215,9 +225,9 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1619339037): 18 files, no impossibilities.
+# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1620898963): 19 files, no impossibilities.
 
-# 18 files, no impossibilities in 1 directories.
+# 19 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -302,12 +312,12 @@ all: server client
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 24 / storage = 222 B / avg = 9 B
-# current buf: size = 8174 B / used = 222 B / count = 24 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 25 / storage = 243 B / avg = 9 B
+# current buf: size = 8174 B / used = 243 B / count = 25 / avg = 9 B
 
-# strcache performance: lookups = 36 / hit rate = 33%
+# strcache performance: lookups = 37 / hit rate = 32%
 # hash-table stats:
-# Load=24/8192=0%, Rehash=0, Collisions=0/36=0%
-# Finished Make data base on Sun Apr 25 15:24:14 2021
+# Load=25/8192=0%, Rehash=0, Collisions=0/37=0%
+# Finished Make data base on Fri May 14 11:06:21 2021
 
  

@@ -20,3 +20,19 @@ void Players::setTurn(int turn){
 int Players::getTurn(){
     return this->turn;
 }
+
+void Players::setName(string name){
+    this->name = name;
+}
+
+string Players::getName(){
+    return this->name;
+}
+
+void Players::setRank(int rank){
+    this->rank = rank;
+}
+
+int Players::getRank(){
+    return this->rank;
+}
