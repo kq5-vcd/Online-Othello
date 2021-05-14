@@ -79,6 +79,7 @@ int main(int argc, char **argv)
 
         memset(recvline,'\0',(strlen(recvline)+1));
 
+
         if(op.size() == 2){
             string join = "S";
             join.append(" ").append(op[0]);
@@ -98,6 +99,9 @@ int main(int argc, char **argv)
                 }
                 vector<string> status = simple_tokenizer(m);
                 cout<<status.size()<<endl;
+                if(status.size() == 3){
+                    continue;
+                }
                 cout<<"check status\n";
                 if(status[66].compare("-1") == 0){
                     cout<<"Game over\n";
@@ -111,6 +115,9 @@ int main(int argc, char **argv)
                     memset(recvline,'\0',(strlen(recvline)+1));
                 }
                 cout<<"continue\n";
+            }
+            if(n < 0){
+                cout<<"Server is terminated\n";
             }
         }
     }

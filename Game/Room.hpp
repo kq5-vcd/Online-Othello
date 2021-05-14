@@ -16,7 +16,8 @@ public:
     int getId();
     void setNumPlayer(int num);
     void setId(int id);
-    void addPlayer(int socket, int turn);
+    void addPlayer(int socket, int turn, string name);
+    void removePlayer(int index);
     void newGame();
     vector<Players> getPlayers();
 };
