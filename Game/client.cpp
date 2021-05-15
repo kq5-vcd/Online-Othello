@@ -22,11 +22,10 @@ vector<string> simple_tokenizer(string& s);
 
 int main(int argc, char **argv)
 {
-    int sockfd, n, nextTurn, me;
+    int sockfd, n, nextTurn = 1, me = 0, gameOver = 0;
     struct sockaddr_in servaddr;
     char buff[BUFF_SIZE + 1];
     char sendline[MAXLINE], recvline[MAXLINE];
-    vector<string> op;
 
     //basic check of the arguments
     //additional checks can be inserted
@@ -57,10 +56,12 @@ int main(int argc, char **argv)
         exit(3);
     }
     while(1){
-        memset(buff,'\0',(strlen(buff)+1));
-        cout<<"Input\n";
-        fgets(buff, BUFF_SIZE, stdin);
-        send(sockfd, buff, strlen(buff)-1, 0);
+        if(me == 0 || me == nextTurn){
+            memset(buff,'\0',(strlen(buff)+1));
+            cout<<"Input\n";
+            fgets(buff, BUFF_SIZE, stdin);
+            send(sockfd, buff, strlen(buff)-1, 0);
+        }
         memset(recvline,'\0',(strlen(recvline)+1));
         if ((n = recv(sockfd, recvline, MAXLINE, 0)) == 0)
         {
@@ -69,57 +70,90 @@ int main(int argc, char **argv)
         } 
 
         cout<<"Received from the server: ";
-        char b[n];
-        for(int c = 0; c<=n; c++){
-            b[c] = recvline[c];
+        recvline[n] = '\0';
+        string m(recvline);
+        cout<<m<<endl;
+        if(m.compare("0") == 0){
+            cout<<"Exit room\n";
+            me = 0;
+            nextTurn = 1;
         }
-        string mess(b);
-        op = simple_tokenizer(mess);
-        cout<<mess<<endl;
+        else{
+            vector<string> status = simple_tokenizer(m);
+            cout<<status.size()<<endl;
+            if(status.size() == 64){
+                if(gameOver == 1){
+                    cout<<"You win\n";
+                    gameOver = 0;
+                    me = 0;
+                    nextTurn = 1;
+                }
+                else{
+                    gameOver = 1;
+                    cout<<"board"<<endl;
+                    me = 3;
+                    nextTurn = 1;
+                }
+            }
+            else if(status.size() == 67){
+                me = stoi(status[64]);
+                cout<<me<<endl;
+                cout<<"check\n";
+            }
+            else if(status.size() == 69){
+                cout<<"check status\n";
+                if(status[66].compare("-1") == 0){
+                    cout<<"Game over\n";
+                }
+                nextTurn = stoi(status[66]);
+                // if(me == nextTurn){
+                //     cout<<"Input move: \n";
+                //     fgets(buff, BUFF_SIZE, stdin);
+                //     send(sockfd, buff, strlen(buff)-1, 0);
+                //     memset(recvline,'\0',(strlen(recvline)+1));
+                // }
+            }
+        }
 
         memset(recvline,'\0',(strlen(recvline)+1));
 
 
-        if(op.size() == 2){
-            string join = "S";
-            join.append(" ").append(op[0]);
-            me = stoi(op[1]);
-            cout<<me<<endl;
-            cout<<"check\n";
-            send(sockfd,join.c_str(),join.length(),0);
-            cout<<"check send\n";
-            while((n = recv(sockfd, recvline,MAXLINE,0)) > 0){
-                cout<<"check recv"<<endl;
-                recvline[n] = '\0';
-                string m(recvline);
-                cout<<m<<endl;
-                if(m.compare("0") == 0){
-                    cout<<"Exit room\n";
-                    break;
-                }
-                vector<string> status = simple_tokenizer(m);
-                cout<<status.size()<<endl;
-                if(status.size() == 3){
-                    continue;
-                }
-                cout<<"check status\n";
-                if(status[66].compare("-1") == 0){
-                    cout<<"Game over\n";
-                    break;
-                }
-                nextTurn = stoi(status[66]);
-                if(me == nextTurn){
-                    cout<<"Input move: \n";
-                    fgets(buff, BUFF_SIZE, stdin);
-                    send(sockfd, buff, strlen(buff)-1, 0);
-                    memset(recvline,'\0',(strlen(recvline)+1));
-                }
-                cout<<"continue\n";
-            }
-            if(n < 0){
-                cout<<"Server is terminated\n";
-            }
-        }
+        // if(op.size() == 65){
+        //     me = stoi(op[64]);
+        //     cout<<me<<endl;
+        //     cout<<"check\n";
+        //     while((n = recv(sockfd, recvline,MAXLINE,0)) > 0){
+        //         cout<<"check recv"<<endl;
+        //         recvline[n] = '\0';
+        //         string m(recvline);
+        //         cout<<m<<endl;
+        //         if(m.compare("0") == 0){
+        //             cout<<"Exit room\n";
+        //             break;
+        //         }
+        //         vector<string> status = simple_tokenizer(m);
+        //         cout<<status.size()<<endl;
+        //         if(status.size() == 3){
+        //             continue;
+        //         }
+        //         cout<<"check status\n";
+        //         if(status[66].compare("-1") == 0){
+        //             cout<<"Game over\n";
+        //             break;
+        //         }
+        //         nextTurn = stoi(status[66]);
+        //         if(me == nextTurn){
+        //             cout<<"Input move: \n";
+        //             fgets(buff, BUFF_SIZE, stdin);
+        //             send(sockfd, buff, strlen(buff)-1, 0);
+        //             memset(recvline,'\0',(strlen(recvline)+1));
+        //         }
+        //         cout<<"continue\n";
+        //     }
+        //     if(n < 0){
+        //         cout<<"Server is terminated\n";
+        //     }
+        // }
     }
 
     exit(0);

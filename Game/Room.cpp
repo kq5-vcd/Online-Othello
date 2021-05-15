@@ -44,6 +44,11 @@ void Room::removePlayer(int index){
     else this->players.pop_back();
 }
 
+void Room::setTurn(int index, int turn){
+    this->players[index].setTurn(turn);
+}
+
 vector<Players> Room::getPlayers(){
     return this->players;
 }
+
