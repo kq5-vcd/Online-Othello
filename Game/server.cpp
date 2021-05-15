@@ -28,6 +28,7 @@ vector<string> playersName;
 vector<string> split(const string& str, const char& delimiter);
 
 void *connection_handler(void *client_socket);
+void replaceAll(string& str, const string& from, const string& to);
 
 int main(int argc, char **argv)
 {
@@ -209,6 +210,7 @@ void *connection_handler(void *client_socket){
           string mess1 = result.str();
           mess1 = mess1.substr(0,mess1.size()-6);
           string mess2 = mess1;
+          replaceAll(mess2,"-1","0");
           mess1.append(to_string(it->getPlayers()[0].getTurn())).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName());
           mess2.append(to_string(it->getPlayers()[1].getTurn())).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName());
           it->setNumPlayer(2);
@@ -267,8 +269,18 @@ void *connection_handler(void *client_socket){
       }
       else if(it->getPlayers().size() == 2){
         cout<<it->getPlayers()[0].getSocket()<<" "<<it->getPlayers()[1].getSocket()<<endl;
-        send(it->getPlayers()[0].getSocket(), mess.c_str(),mess.length(),0);
-        send(it->getPlayers()[1].getSocket(), mess.c_str(),mess.length(),0);
+        string turn = split(mess,' ')[66];
+        if(turn.compare("1") == 0){
+          send(it->getPlayers()[0].getSocket(), mess.c_str(),mess.length(),0);
+          replaceAll(mess,"-1","0");
+          send(it->getPlayers()[1].getSocket(), mess.c_str(),mess.length(),0);
+        }
+        else if(turn.compare("2") == 0){
+          send(it->getPlayers()[1].getSocket(), mess.c_str(),mess.length(),0);
+          replaceAll(mess,"-1","0");
+          send(it->getPlayers()[0].getSocket(), mess.c_str(),mess.length(),0);
+        }
+        
         cout<<"check send"<<endl;
       }
       
@@ -341,7 +353,6 @@ void *connection_handler(void *client_socket){
         else continue;
 
         it->setNumPlayer(it->getNumPlayer()-1);
-        it->addPlayer(it->getPlayers()[0].getSocket(),2,"");
         it->newGame();
         vector<int> status = it->getGame().getStatus();
         stringstream result;
@@ -357,4 +368,14 @@ void *connection_handler(void *client_socket){
     
 	
 	return 0;
+}
+
+void replaceAll(string& str, const string& from, const string& to) {
+    if(from.empty())
+        return;
+    size_t start_pos = 0;
+    while((start_pos = str.find(from, start_pos)) != string::npos) {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
+    }
 }
