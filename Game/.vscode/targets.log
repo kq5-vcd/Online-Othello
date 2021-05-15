@@ -5,9 +5,8 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Fri May 14 11:06:21 2021
+# Make data base, printed on Sat May 15 16:54:45 2021
 
 # Variables
 
@@ -24,10 +23,9 @@ VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
 LOCALAPPDATA = C:\Users\ADMIN\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-87949731-10b0-40b9-be84-414c597db8b5-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-af70a266-ac2a-4486-ba1b-868d8e6586ea-sock
 # environment
-VSCODE_CWD = C:\Users\ADMIN\Des 
-ktop\Online-Othello\Game
+VSCODE_CWD = C:\Users\ADMIN\Desktop\Online-Othello\Game
 # environment
 CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
 # environment
@@ -40,9 +38,8 @@ PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\Wi
 MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
-# environ 
-ment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_16824_DJILXQMUNBVBAEGG
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_17544_SFCONVQTXNNZGWBQ
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -64,8 +61,7 @@ LANG = C
 # environment
 TMP = C:\Users\ADMIN\AppData\Local\Temp
 # default
-.INCL 
-UDE_DIRS = .
+.INCLUDE_DIRS = .
 # environment
 PROCESSOR_ARCHITEW6432 = AMD64
 # makefile
@@ -97,7 +93,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 16824
+VSCODE_PID = 17544
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -105,8 +101,7 @@ VSCODE_PID = 16824
 # automatic
 <D = $(patsubst %/,%,$(patsubst %\,%,$(dir $<)))
 # environment
-VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":tru 
-e}
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # default
 MAKE_HOST := Windows32
 # environment
@@ -176,7 +171,7 @@ NUMBER_OF_PROCESSORS = 8
 # environment
 PUBLIC = C:\Users\Public
 # environment
-VSCODE_NODE_CACHED_DATA_DIR = C:\Users\ADMIN\AppData\Roaming\Code\CachedData\e713fe9b05fc24facbec8f34fb1017133858842b
+VSCODE_NODE_CACHED_DATA_DIR = C:\Users\ADMIN\AppData\Roaming\Code\CachedData\054a9295330880ed74ceaedda236253b4f39a335
 # environment
 MOZ_PLUGIN_PATH = C:\Program Files (x86)\Foxit Software\Foxit Reader\plugins\
 # environment
@@ -195,11 +190,10 @@ VXIPNPPATH = C:\Program Files (x86)\IVI Foundation\VISA\
 COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
 # environment
 ELECTRON_RUN_AS_NODE = 1
-# e 
-nvironment
+# environment
 TEMP = C:\Users\ADMIN\AppData\Local\Temp
 # environment
-VSCODE_IPC_HOOK = \\.\pipe\f064d9ba3e130212370d733ca8e40496-1.56.1-main-sock
+VSCODE_IPC_HOOK = \\.\pipe\f064d9ba3e130212370d733ca8e40496-1.56.2-main-sock
 # default
 .RECIPEPREFIX := 
 # automatic
@@ -225,7 +219,7 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1620898963): 19 files, no impossibilities.
+# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1620984038): 19 files, no impossibilities.
 
 # 19 files, no impossibilities in 1 directories.
 
@@ -318,6 +312,6 @@ all: server client
 # strcache performance: lookups = 37 / hit rate = 32%
 # hash-table stats:
 # Load=25/8192=0%, Rehash=0, Collisions=0/37=0%
-# Finished Make data base on Fri May 14 11:06:21 2021
+# Finished Make data base on Sat May 15 16:54:45 2021
 
  

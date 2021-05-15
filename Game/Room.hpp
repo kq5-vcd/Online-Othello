@@ -19,5 +19,6 @@ public:
     void addPlayer(int socket, int turn, string name);
     void removePlayer(int index);
     void newGame();
+    void setTurn(int index, int turn);
     vector<Players> getPlayers();
 };
