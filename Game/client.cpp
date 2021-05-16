@@ -102,10 +102,10 @@ int main(int argc, char **argv)
             }
             else if(status.size() == 69){
                 cout<<"check status\n";
-                if(status[66].compare("-1") == 0){
+                if(status[64].compare("-1") == 0){
                     cout<<"Game over\n";
                 }
-                nextTurn = stoi(status[66]);
+                nextTurn = stoi(status[64]);
                 // if(me == nextTurn){
                 //     cout<<"Input move: \n";
                 //     fgets(buff, BUFF_SIZE, stdin);
