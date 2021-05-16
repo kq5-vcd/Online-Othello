@@ -1,6 +1,6 @@
 1 - refresh live matches ( "1" ) (server -> client: "<room_id1> <Score1> <Score2>,<room_id2> <Score3> <Score4>, ..")
 
-2 - create room ( "2 <user1>" ) (server -> client: "000000000000000000000000000000000000000000000000000000000000000000")
+2 - create room ( "2 <user1>" ) (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <room_id>")
 
 3 - join room ( "3 <room_id> <user2>") (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <turn> <user1> <user2>"/"0")
 

@@ -8,4 +8,4 @@ client:
 	g++ -o client client.cpp
 
 clean:
-	rm -rf othello server client
+	rm -rf server client

@@ -188,6 +188,7 @@ void *connection_handler(void *client_socket){
       copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
       m = result.str();
       m = m.substr(0,m.size()-6);
+      m.append(" ").append(to_string(room->getId()));
       send(socket, m.c_str(),m.length(),0);
       cout<<"Player 1 inside room"<<endl;
       
@@ -369,7 +370,7 @@ void *connection_handler(void *client_socket){
           i = find(playersName.begin(),playersName.end(),it->getPlayers()[0].getName());
           playersName.erase(i);
           stringstream name;
-          copy(playersName.begin(), playersName.end(), ostream_iterator<int>(name, " "));
+          copy(playersName.begin(), playersName.end(), ostream_iterator<string>(name, " "));
           cout<<"Current players' names: "<<name.str()<<endl;
           it->removePlayer(1);
           it->setTurn(0,1);
