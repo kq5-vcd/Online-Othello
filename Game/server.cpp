@@ -278,7 +278,7 @@ void *connection_handler(void *client_socket){
           mess.append(info[i]).append(" ");
         }
         mess.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
-        if(turn.compare("1") == 0){
+        if(turn.compare("1") == 0 && !it->getGame().gameOver()){
           send(it->getPlayers()[0].getSocket(), mess.c_str(),mess.length(),0);
           string m = "";
           for(int i = 0; i<64; i++){
@@ -288,7 +288,7 @@ void *connection_handler(void *client_socket){
           m.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
           send(it->getPlayers()[1].getSocket(), m.c_str(),m.length(),0);
         }
-        else if(turn.compare("2") == 0){
+        else if(turn.compare("2") == 0 && !it->getGame().gameOver()){
           send(it->getPlayers()[1].getSocket(), mess.c_str(),mess.length(),0);
           string m = "";
           for(int i = 0; i<64; i++){
