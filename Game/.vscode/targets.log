@@ -5,9 +5,8 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Sun May 16 12:00:08 2021
+# Make data base, printed on Sun May 16 15:25:45 2021
 
 # Variables
 
@@ -24,7 +23,7 @@ VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
 LOCALAPPDATA = C:\Users\ADMIN\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-ba6e7973-56c5-4922-ac0a-7d3e96e3c352-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-a7be3a02-db78-400c-b073-4dd755c58f8c-sock
 # environment
 VSCODE_CWD = C:\Users\ADMIN\Desktop\Online-Othello\Game
 # environment
@@ -208,8 +207,7 @@ SESSIONNAME = Console
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync load
 # environment
-PROCESSOR 
-_REVISION = 9e09
+PROCESSOR_REVISION = 9e09
 # environment
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 # variable set hash-table stats:
@@ -221,9 +219,9 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1621140641): 14 files, no impossibilities.
+# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1621141392): 16 files, no impossibilities.
 
-# 14 files, no impossibilities in 1 directories.
+# 16 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -308,12 +306,12 @@ all: server client
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 20 / storage = 167 B / avg = 8 B
-# current buf: size = 8174 B / used = 167 B / count = 20 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 22 / storage = 189 B / avg = 8 B
+# current buf: size = 8174 B / used = 189 B / count = 22 / avg = 8 B
 
-# strcache performance: lookups = 32 / hit rate = 37%
+# strcache performance: lookups = 34 / hit rate = 35%
 # hash-table stats:
-# Load=20/8192=0%, Rehash=0, Collisions=0/32=0%
-# Finished Make data base on Sun May 16 12:00:08 2021
+# Load=22/8192=0%, Rehash=0, Collisions=0/34=0%
+# Finished Make data base on Sun May 16 15:25:45 2021
 
  
