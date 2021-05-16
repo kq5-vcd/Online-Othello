@@ -81,7 +81,7 @@ int main(int argc, char **argv)
         else{
             vector<string> status = simple_tokenizer(m);
             cout<<status.size()<<endl;
-            if(status.size() == 64){
+            if(status.size() == 65){
                 if(gameOver == 1){
                     cout<<"You win\n";
                     gameOver = 0;

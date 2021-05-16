@@ -6,7 +6,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May 16 15:25:45 2021
+# Make data base, printed on Sun May 16 17:39:27 2021
 
 # Variables
 
@@ -23,7 +23,7 @@ VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
 LOCALAPPDATA = C:\Users\ADMIN\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-a7be3a02-db78-400c-b073-4dd755c58f8c-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-06ed9413-dd76-4f7a-8ad8-db7d39cec198-sock
 # environment
 VSCODE_CWD = C:\Users\ADMIN\Desktop\Online-Othello\Game
 # environment
@@ -219,9 +219,9 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1621141392): 16 files, no impossibilities.
+# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1621158735): 18 files, no impossibilities.
 
-# 16 files, no impossibilities in 1 directories.
+# 18 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -306,12 +306,12 @@ all: server client
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 22 / storage = 189 B / avg = 8 B
-# current buf: size = 8174 B / used = 189 B / count = 22 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 24 / storage = 231 B / avg = 9 B
+# current buf: size = 8174 B / used = 231 B / count = 24 / avg = 9 B
 
-# strcache performance: lookups = 34 / hit rate = 35%
+# strcache performance: lookups = 36 / hit rate = 33%
 # hash-table stats:
-# Load=22/8192=0%, Rehash=0, Collisions=0/34=0%
-# Finished Make data base on Sun May 16 15:25:45 2021
+# Load=24/8192=0%, Rehash=0, Collisions=0/36=0%
+# Finished Make data base on Sun May 16 17:39:27 2021
 
  

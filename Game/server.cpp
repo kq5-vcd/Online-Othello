@@ -263,18 +263,20 @@ void *connection_handler(void *client_socket){
       vector<int> status = it->getGame().getStatus();
       stringstream result;
       copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
-      string mess = result.str();
+      string mess;
       if(it->getPlayers().size() == 1) {
         printf("%s\n",result.str().c_str());
         send(socket, mess.c_str(),mess.length(),0);
       }
       else if(it->getPlayers().size() == 2){
         cout<<it->getPlayers()[0].getSocket()<<" "<<it->getPlayers()[1].getSocket()<<endl;
-        vector<string> info = split(mess,' ');
+        vector<string> info = split(result.str(),' ');
         string score1 = info[64];
         string score2 = info[65];
         string turn = info[66];
-        mess = result.str().substr(0,result.str().size()-6);
+        for(int i = 0; i<64; i++){
+          mess.append(info[i]).append(" ");
+        }
         mess.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
         if(turn.compare("1") == 0){
           send(it->getPlayers()[0].getSocket(), mess.c_str(),mess.length(),0);
