@@ -305,14 +305,17 @@ void *connection_handler(void *client_socket){
             else {
               it->removePlayer(2);
             }
-            it->setNumPlayer(it->getNumPlayer()-1);
-            it->addPlayer(it->getPlayers()[0].getSocket(),2,"");
+            it->setNumPlayer(1);
             it->newGame();
             vector<int> status = it->getGame().getStatus();
             stringstream result;
             copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
             string mess = result.str().substr(0,result.str().size() - 6);
             send(it->getPlayers()[0].getSocket(),mess.c_str(),mess.length(),0);
+          }
+          else if(it->getNumPlayer() == 1){
+            it->removePlayer(1);
+            it->setNumPlayer(0);
           }
 
           send(socket, "0",1,0);
@@ -352,13 +355,28 @@ void *connection_handler(void *client_socket){
         }
         else continue;
 
-        it->setNumPlayer(it->getNumPlayer()-1);
+        it->setNumPlayer(1);
         it->newGame();
         vector<int> status = it->getGame().getStatus();
         stringstream result;
         copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
         string mess = result.str().substr(0,result.str().size() - 6);
         send(it->getPlayers()[0].getSocket(),mess.c_str(),mess.length(),0);
+        break;
+      }
+      else if(it->getNumPlayer() == 1){
+        if(it->getPlayers()[0].getSocket() == socket){
+          i = find(playersName.begin(),playersName.end(),it->getPlayers()[0].getName());
+          playersName.erase(i);
+          stringstream name;
+          copy(playersName.begin(), playersName.end(), ostream_iterator<int>(name, " "));
+          cout<<"Current players' names: "<<name.str()<<endl;
+          it->removePlayer(1);
+          it->setTurn(0,1);
+        }
+        else continue;
+
+        it->setNumPlayer(0);
         break;
       }
     }
