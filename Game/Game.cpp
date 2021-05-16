@@ -114,10 +114,9 @@ bool Game::validateInput(int x, int y) {
 }
 
 bool Game::gameOver() {
-   if(endCounter > 1) {
-      turn = -1;
-      return true;
+   if(board.playable()) {
+      return false;
    }
 
-   return false;
+   return true;
 }
