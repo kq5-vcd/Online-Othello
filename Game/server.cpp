@@ -264,6 +264,7 @@ void *connection_handler(void *client_socket){
       stringstream result;
       copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
       string mess = "";
+      cout<<result.str()<<endl;
       if(it->getPlayers().size() == 1) {
         printf("%s\n",result.str().c_str());
         send(socket, mess.c_str(),mess.length(),0);
@@ -277,6 +278,7 @@ void *connection_handler(void *client_socket){
         for(int i = 0; i<64; i++){
           mess.append(info[i]).append(" ");
         }
+        cout<<it->getGame().gameOver()<<endl;
         mess.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
         if(turn.compare("1") == 0 && !it->getGame().gameOver()){
           send(it->getPlayers()[0].getSocket(), mess.c_str(),mess.length(),0);
@@ -299,6 +301,7 @@ void *connection_handler(void *client_socket){
           send(it->getPlayers()[0].getSocket(), m.c_str(),m.length(),0);
         }
         else if(it->getGame().gameOver()){
+          cout<<"Game over\n";
           turn = "-1";
           string m = "";
           for(int i = 0; i<64; i++){
