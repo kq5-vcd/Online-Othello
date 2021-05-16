@@ -26,7 +26,7 @@ vector<string> playersName;
 //string map_to_string(map<int,Room>  &m);
 
 vector<string> split(const string& str, const char& delimiter);
-
+vector<string> simple_tokenizer(string& s);
 void *connection_handler(void *client_socket);
 void replaceAll(string& str, const string& from, const string& to);
 
@@ -263,14 +263,19 @@ void *connection_handler(void *client_socket){
       vector<int> status = it->getGame().getStatus();
       stringstream result;
       copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
-      string mess = result.str().append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName());
+      string mess = result.str();
       if(it->getPlayers().size() == 1) {
         printf("%s\n",result.str().c_str());
         send(socket, mess.c_str(),mess.length(),0);
       }
       else if(it->getPlayers().size() == 2){
         cout<<it->getPlayers()[0].getSocket()<<" "<<it->getPlayers()[1].getSocket()<<endl;
-        string turn = split(mess,' ')[66];
+        vector<string> info = split(mess,' ');
+        string score1 = info[64];
+        string score2 = info[65];
+        string turn = info[66];
+        mess = result.str().substr(0,result.str().size()-6);
+        mess.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
         if(turn.compare("1") == 0){
           send(it->getPlayers()[0].getSocket(), mess.c_str(),mess.length(),0);
           replaceAll(mess,"-1","0");
@@ -397,4 +402,16 @@ void replaceAll(string& str, const string& from, const string& to) {
         str.replace(start_pos, from.length(), to);
         start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
     }
+}
+
+vector<string> simple_tokenizer(string& s)
+{
+    stringstream ss(s);
+    vector<string> word;
+    string token;
+    while (ss >> token) {
+        word.push_back(token);
+    }
+    cout<<"check token"<<endl;
+    return word;
 }
