@@ -1,20 +1,14 @@
 import React from 'react'
 import Board from './Board'
+import axios from 'axios'
 
 class Game extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       message: '',
-      board: this.props.board.split(' ')
+      roomID: this.props.roomID
     }
-  }
-
-  handleClick(i) {
-    console.log('Position: ' + i)
-    //console.log(this.state.board)
-    //this.props.board.split(' ')[i] = this.props.board.split(' ')[64]
-    //console.log(this.props.board.split(' '))
   }
 
   getScore() {
@@ -35,14 +29,42 @@ class Game extends React.Component {
 
   }
 
+  winner() {
+    if (this.props.board.split(' ')[64] === '-1') {
+      if (this.props.board.split(' ')[67] < this.props.board.split(' ')[68]) {
+        return (
+          <>
+            {this.props.board.split(' ')[66]} won!!!!
+          </>
+        )
+      } else if (this.props.board.split(' ')[67] > this.props.board.split(' ')[68]) {
+        return (
+          <>
+            {this.props.board.split(' ')[65]} won!!!!
+          </>
+        )
+      } else {
+        return (
+          <>
+            DRAW!!!
+          </>
+        )
+      }
+    }
+  }
+
   render() {
+
+    console.log("Render: " + this.props.board)
     return(
       <>
         <div>
+          ROOM: {this.state.roomID}<br />
           {this.props.board.split(' ')[65]} : {this.getScore()} : {this.props.board.split(' ')[66]}
+          <br/>{this.winner()}
         </div>
         <div className="game">
-          <Board squares={this.props.board.split(' ').slice(0,64)} onClick={this.handleClick} />
+          <Board squares={this.props.board.split(' ').slice(0,64)} roomID={this.props.roomID} />
         </div>
 
         {/* {console.log(this.props.board.split(' '))} */}

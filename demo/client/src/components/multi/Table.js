@@ -37,13 +37,20 @@ class Table extends React.Component {
 
         console.log(req)
         axios
-            .post('http://localhost:9000/join', req)
+            .post('http://localhost:9001/join', req)
             .then(res => {
-                console.log(res.body.response)
+                console.log(res.data.response)
                 this.setState({response: res.data.response})
+                ReactDOM.render(<Game username={this.props.username} board={this.state.response} roomID={id} />, document.getElementById('root'))
 
-                ReactDOM.render(<Game username={this.props.username} board={this.state.response} />, document.getElementById('root'))
-            }).catch(err => err)
+                fetch('http://localhost:9001/getMove')
+                    .then(res => res.text())
+                    .then(res => {
+                        ReactDOM.render(<Game username={this.props.username} board={res} roomID={id} />, document.getElementById('root'))
+
+                    }).catch(err => console.error(err))
+
+            }).catch(err => console.log(err))
         
         console.log("CHECK")
     }

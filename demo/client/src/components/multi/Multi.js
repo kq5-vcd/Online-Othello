@@ -12,6 +12,7 @@ class Multi extends React.Component {
             response: '', 
             username: '',
             data: [],
+            roomID: ''
         }
     }
 
@@ -67,12 +68,16 @@ class Multi extends React.Component {
             .post('http://localhost:9000/create', req)
             .then(res => {
                 console.log(this.state.response)
-                this.setState({response: res.data.response})
-                ReactDOM.render(<Game username={this.props.username} board={this.state.response} />, document.getElementById('root'))
-
+                console.log(res.data.response.split(' ')[64])
+                this.setState({response: res.data.response, roomID: res.data.response.split(' ')[64]})
+                ReactDOM.render(<Game username={this.props.username} board={this.state.response} roomID={this.state.roomID}/>, document.getElementById('root'))
+                console.log(this.state.roomID)
                 fetch('http://localhost:9000/ingame')
                     .then(res => res.text())
-                    .then(res => console.log(res))
+                    .then(res => {
+                        console.log('Res: ' + res)
+                        ReactDOM.render(<Game username={this.props.username} board={res} roomID={this.state.roomID}/>, document.getElementById('root'))        
+                    })
                     .catch(err => console.error(err))
             })
             .catch(err => {
