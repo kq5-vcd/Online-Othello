@@ -298,9 +298,15 @@ void *connection_handler(void *client_socket){
           m.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
           send(it->getPlayers()[0].getSocket(), m.c_str(),m.length(),0);
         }
-        else if(turn.compare("-1") == 0){
-          send(it->getPlayers()[1].getSocket(), mess.c_str(),mess.length(),0);
-          send(it->getPlayers()[0].getSocket(), mess.c_str(),mess.length(),0);
+        else if(it->getGame().gameOver()){
+          turn = "-1";
+          string m = "";
+          for(int i = 0; i<64; i++){
+            m.append(info[i]).append(" ");
+          }
+          m.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
+          send(it->getPlayers()[1].getSocket(), m.c_str(),m.length(),0);
+          send(it->getPlayers()[0].getSocket(), m.c_str(),m.length(),0);
         }
         
         cout<<"check send"<<endl;

@@ -5,8 +5,9 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Sun May 16 17:39:27 2021
+# Make data base, printed on Sun May 16 21:35:51 2021
 
 # Variables
 
@@ -23,7 +24,7 @@ VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
 LOCALAPPDATA = C:\Users\ADMIN\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-06ed9413-dd76-4f7a-8ad8-db7d39cec198-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-a5099d0c-d1c7-45f5-8ccf-d17a7999536b-sock
 # environment
 VSCODE_CWD = C:\Users\ADMIN\Desktop\Online-Othello\Game
 # environment
@@ -39,7 +40,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_14976_DOHYPZVQIIISINZY
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12384_AOHIYVMHTNUWBUXN
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -93,7 +94,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 14976
+VSCODE_PID = 12384
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -250,7 +251,8 @@ clean:
 #  recipe to execute (from 'Makefile', line 11):
 	rm -rf server client
 
-server:
+server 
+:
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: ''
 #  File does not exist.
@@ -312,6 +314,6 @@ all: server client
 # strcache performance: lookups = 36 / hit rate = 33%
 # hash-table stats:
 # Load=24/8192=0%, Rehash=0, Collisions=0/36=0%
-# Finished Make data base on Sun May 16 17:39:27 2021
+# Finished Make data base on Sun May 16 21:35:51 2021
 
  
