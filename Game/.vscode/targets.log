@@ -7,7 +7,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Sun May 16 21:35:51 2021
+# Make data base, printed on Fri May 21 15:29:33 2021
 
 # Variables
 
@@ -24,7 +24,7 @@ VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
 LOCALAPPDATA = C:\Users\ADMIN\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-a5099d0c-d1c7-45f5-8ccf-d17a7999536b-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-f01ec171-2abd-45e6-a7f7-f625fb4bace1-sock
 # environment
 VSCODE_CWD = C:\Users\ADMIN\Desktop\Online-Othello\Game
 # environment
@@ -40,7 +40,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12384_AOHIYVMHTNUWBUXN
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_15028_PSOUUDRCARSWRMUU
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -94,7 +94,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 12384
+VSCODE_PID = 15028
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -135,7 +135,8 @@ MAKEFILES :=
 PROMPT = $P$G
 # environment
 CHOCOLATEYLASTPATHUPDATE = 132595987442811299
-# environment
+# e 
+nvironment
 LOGONSERVER = \\DESKTOP-QAH63S1
 # environment
 VSCODE_LOG_NATIVE = false
@@ -212,7 +213,7 @@ PROCESSOR_REVISION = 9e09
 # environment
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 # variable set hash-table stats:
-# Load=100/1024=10%, Rehash=0, Collisions=9/130=7%
+# Load=100/1024=10%, Rehash=0, Collisions=9/127=7%
 
 # Pattern-specific Variable Values
 
@@ -220,9 +221,9 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1621158735): 18 files, no impossibilities.
+# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1621180450): 20 files, no impossibilities.
 
-# 18 files, no impossibilities in 1 directories.
+# 20 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -232,8 +233,9 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 client:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Last modified 2021-05-16 22:54:10
+#  File has been updated.
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 8):
 	g++ -o client client.cpp
 
@@ -251,31 +253,11 @@ clean:
 #  recipe to execute (from 'Makefile', line 11):
 	rm -rf server client
 
-server 
-:
+server:
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
-#  File does not exist.
+#  Last modified 2021-05-16 22:54:10
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := server
-# automatic
-# * := 
-# automatic
-# < := 
-# automatic
-# + := 
-# automatic
-# % := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
-# automatic
-# | := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/11=9%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 5):
 	g++ -o server server.cpp Game.cpp Board.cpp Room.cpp Players.cpp -pthread
 
@@ -288,20 +270,13 @@ server
 all: server client
 #  Command line target.
 #  Implicit rule search has been done.
-#  File does not exist.
+#  File does no 
+t exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
-
-# Not a target:
-.SUFFIXES:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Successfully updated.
 
 # files hash-table stats:
-# Load=7/1024=1%, Rehash=0, Collisions=0/23=0%
+# Load=7/1024=1%, Rehash=0, Collisions=0/22=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
@@ -311,9 +286,9 @@ all: server client
 # strcache buffers: 1 (0) / strings = 24 / storage = 231 B / avg = 9 B
 # current buf: size = 8174 B / used = 231 B / count = 24 / avg = 9 B
 
-# strcache performance: lookups = 36 / hit rate = 33%
+# strcache performance: lookups = 37 / hit rate = 35%
 # hash-table stats:
-# Load=24/8192=0%, Rehash=0, Collisions=0/36=0%
-# Finished Make data base on Sun May 16 21:35:51 2021
+# Load=24/8192=0%, Rehash=0, Collisions=0/37=0%
+# Finished Make data base on Fri May 21 15:29:33 2021
 
  
