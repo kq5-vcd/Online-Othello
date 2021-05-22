@@ -5,9 +5,8 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Sat May 22 17:26:17 2021
+# Make data base, printed on Sat May 22 19:11:13 2021
 
 # Variables
 
@@ -24,9 +23,9 @@ VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
 LOCALAPPDATA = C:\Users\ADMIN\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-ea1584b1-33e2-40f7-8d45-cd916174d672-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-37deac78-7521-43a7-8383-e80f016b6eed-sock
 # environment
-VSCODE_CWD = C:\Users\ADMIN\Desktop\Online-Othello\Game
+VSCODE_CWD = C:\Users\ADMIN\AppData\Local\Programs\Microsoft VS Code
 # environment
 CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
 # environment
@@ -40,7 +39,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_1408_CHTOQCSCDBZKIJGO
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_21416_MVMNNWRUUJSGJDHF
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -94,7 +93,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 1408
+VSCODE_PID = 21416
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -250,8 +249,7 @@ clean:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 11):
-	rm -rf s 
-erver client
+	rm -rf server client
 
 server:
 #  Implicit rule search has not been done.
@@ -288,6 +286,6 @@ all: server client
 # strcache performance: lookups = 37 / hit rate = 35%
 # hash-table stats:
 # Load=24/8192=0%, Rehash=0, Collisions=0/37=0%
-# Finished Make data base on Sat May 22 17:26:17 2021
+# Finished Make data base on Sat May 22 19:11:13 2021
 
  

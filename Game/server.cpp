@@ -339,13 +339,6 @@ void *connection_handler(void *client_socket){
       
       cout<<"check send"<<endl;
       
-      
-
-      if(it->getGame().gameOver()){
-        it->removePlayer(1);
-        it->removePlayer(1);
-      }
-
     }
     else if(receive[0] == '5'){
       string roomId = split(receive,' ')[1];
@@ -371,6 +364,7 @@ void *connection_handler(void *client_socket){
           else if(it->getNumPlayer() == 1){
             it->removePlayer(1);
             it->setNumPlayer(0);
+            it->removeAllSpectators();
           }
 
           send(socket, "0",1,0);

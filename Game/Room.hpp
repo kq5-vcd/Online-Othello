@@ -21,6 +21,7 @@ public:
     void removePlayer(int index);
     void addSpectator(int socket, string name);
     void removeSpectator(int socket);
+    void removeAllSpectators();
     void newGame();
     void setTurn(int index, int turn);
     vector<Players> getPlayers();

@@ -61,6 +61,10 @@ void Room::removeSpectator(int socket){
     }
 }
 
+void Room::removeAllSpectators(){
+    this->spectators.clear();
+}
+
 void Room::setTurn(int index, int turn){
     this->players[index].setTurn(turn);
 }
