@@ -2,6 +2,7 @@
 
 Room::Room(bool notification):game(notification){
     this->numPlayer = 1;
+    this->state = 1;
 }
 
 void Room::newGame(){
@@ -27,6 +28,14 @@ int Room::getId(){
 
 void Room::setId(int id){
     this->id = id;
+}
+
+int Room::getState(){
+    return this->state;
+}
+
+void Room::setState(int state){
+    this->state = state;
 }
 
 void Room::addPlayer(int socket, int turn, string name){
