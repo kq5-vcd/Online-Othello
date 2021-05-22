@@ -6,6 +6,7 @@
 					  spectator: "00000000000000000000000000000000000000000000000000000000000000000 3"
 
 4 - move ( "4 <room_id> <move_row> <move_col>") (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <turn> <user1> <user2> <score1> <score2>")
+						spectator: "0000000000000000000000000000000000000000000000000000000000000000000 3 <user1> <user2> <score1> <score2>"
 
 5 - player stop/abbadon ( "5 <room_id>" ) (server -> client: "0")	
 
