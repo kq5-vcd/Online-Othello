@@ -7,6 +7,7 @@ private:
     int id;
     int numPlayer;
     vector<Players> players;
+    vector<Players> spectators;
     Game game;
     
 public:
@@ -18,7 +19,10 @@ public:
     void setId(int id);
     void addPlayer(int socket, int turn, string name);
     void removePlayer(int index);
+    void addSpectator(int socket, string name);
+    void removeSpectator(int socket);
     void newGame();
     void setTurn(int index, int turn);
     vector<Players> getPlayers();
+    vector<Players> getSpectators();
 };

@@ -1,11 +1,14 @@
 1 - refresh live matches ( "1" ) (server -> client: "<room_id1> <Score1> <Score2>,<room_id2> <Score3> <Score4>, ..")
 
-2 - create room ( "2 <user1>" ) (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <room_id>")
+2 - create room ( "2 <username>" ) (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <room_id>")
 
-3 - join room ( "3 <room_id> <user2>") (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <turn> <user1> <user2>"/"0")
+3 - join room ( "3 <room_id> <username>") (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <turn> <user1> <user2>"/"0")
+					  spectator: "00000000000000000000000000000000000000000000000000000000000000000 3"
 
 4 - move ( "4 <room_id> <move_row> <move_col>") (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <turn> <user1> <user2> <score1> <score2>")
 
-5 - stop/abbadon ( "5 <room_id>" ) (server -> client: "0")	
+5 - player stop/abbadon ( "5 <room_id>" ) (server -> client: "0")	
 
 6 - input username ( "6 <username>" ) (server -> client: "1"/"0")
+
+7 - spectator out game ( "7 <room_id>" ) (server -> client: "0")

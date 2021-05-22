@@ -7,7 +7,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Fri May 21 15:29:33 2021
+# Make data base, printed on Sat May 22 17:26:17 2021
 
 # Variables
 
@@ -24,7 +24,7 @@ VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
 LOCALAPPDATA = C:\Users\ADMIN\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-f01ec171-2abd-45e6-a7f7-f625fb4bace1-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-ea1584b1-33e2-40f7-8d45-cd916174d672-sock
 # environment
 VSCODE_CWD = C:\Users\ADMIN\Desktop\Online-Othello\Game
 # environment
@@ -40,7 +40,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_15028_PSOUUDRCARSWRMUU
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_1408_CHTOQCSCDBZKIJGO
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -94,7 +94,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 15028
+VSCODE_PID = 1408
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -135,8 +135,7 @@ MAKEFILES :=
 PROMPT = $P$G
 # environment
 CHOCOLATEYLASTPATHUPDATE = 132595987442811299
-# e 
-nvironment
+# environment
 LOGONSERVER = \\DESKTOP-QAH63S1
 # environment
 VSCODE_LOG_NATIVE = false
@@ -251,7 +250,8 @@ clean:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 11):
-	rm -rf server client
+	rm -rf s 
+erver client
 
 server:
 #  Implicit rule search has not been done.
@@ -270,8 +270,7 @@ server:
 all: server client
 #  Command line target.
 #  Implicit rule search has been done.
-#  File does no 
-t exist.
+#  File does not exist.
 #  File has been updated.
 #  Successfully updated.
 
@@ -289,6 +288,6 @@ t exist.
 # strcache performance: lookups = 37 / hit rate = 35%
 # hash-table stats:
 # Load=24/8192=0%, Rehash=0, Collisions=0/37=0%
-# Finished Make data base on Fri May 21 15:29:33 2021
+# Finished Make data base on Sat May 22 17:26:17 2021
 
  

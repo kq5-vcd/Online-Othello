@@ -44,11 +44,32 @@ void Room::removePlayer(int index){
     else this->players.pop_back();
 }
 
+void Room::addSpectator(int socket, string name){
+    Players *p = new Players();
+    p->setSocket(socket);
+    p->setName(name);
+    this->spectators.push_back(*p);
+}
+
+void Room::removeSpectator(int socket){
+    vector<Players>::iterator it;
+    for(it = spectators.begin(); it != spectators.end(); it++){
+        if(it->getSocket() == socket){
+            this->spectators.erase(it);
+            break;
+        }
+    }
+}
+
 void Room::setTurn(int index, int turn){
     this->players[index].setTurn(turn);
 }
 
 vector<Players> Room::getPlayers(){
     return this->players;
+}
+
+vector<Players> Room::getSpectators(){
+    return this->spectators;
 }
 
