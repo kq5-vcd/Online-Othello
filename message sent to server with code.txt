@@ -15,5 +15,5 @@
 
 7 - spectator out game ( "7 <room_id>" ) (server -> client: "0")
 
-8 - play again ( "8 <room_id>" ) (server -> 2 clients: "000000000000000000000000000000000000000000000000000000000000000 <turn_depend_on_user> <user1> <user2>")
+8 - play again ( "8 <room_id>" ) (server -> 2 clients: "000000000000000000000000000000000000000000000000000000000000000 <turn_depend_on_user> <user1> <user2> <score1> <score2>")
 				 if(room.state == 0) : "000000000000000000000000000000000000000000000000000000000000000 0"
