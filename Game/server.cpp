@@ -215,8 +215,8 @@ void *connection_handler(void *client_socket){
             stringstream result;
             copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
             join = split(result.str(),' ');
-            string score1 = info[64];
-            string score2 = info[65];
+            string score1 = join[64];
+            string score2 = join[65];
             string mess1 = result.str();
             mess1 = mess1.substr(0,mess1.size()-6);
             string mess2 = mess1;
@@ -236,8 +236,8 @@ void *connection_handler(void *client_socket){
             stringstream result;
             copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
             join = split(result.str(),' ');
-            string score1 = info[64];
-            string score2 = info[65];
+            string score1 = join[64];
+            string score2 = join[65];
             string turn = join[66];
             for(int i = 0; i<64; i++){
               m.append(join[i]).append(" ");
