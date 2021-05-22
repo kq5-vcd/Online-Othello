@@ -203,7 +203,7 @@ void *connection_handler(void *client_socket){
       join.clear();
       vector<Room>::iterator it;
       for(it = rooms.begin(); it!=rooms.end(); it++){
-        if(it->getId() == stoi(roomId){
+        if(it->getId() == stoi(roomId)){
           if(it->getNumPlayer() == 1){
             cout<<it->getPlayers().size()<<endl;
             it->addPlayer(socket,2,username2);
@@ -236,7 +236,7 @@ void *connection_handler(void *client_socket){
             }
             m.append("3");
             for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
-              send(i.getSocket(),m,m.length(),0);
+              send(i->getSocket(),m,m.length(),0);
             }
           }
         }
@@ -334,7 +334,7 @@ void *connection_handler(void *client_socket){
       }
       mess.append("3").append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
       for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
-        send(i.getSocket(),mess,mess.length(),0);
+        send(i->getSocket(),mess,mess.length(),0);
       }
       
       cout<<"check send"<<endl;
