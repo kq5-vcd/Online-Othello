@@ -423,6 +423,9 @@ void *connection_handler(void *client_socket){
             int x = stoi(move[2]);
             int y = stoi(move[3]);
 
+            cout << "x = " << x << endl;
+            cout << "y = " << y << endl;
+
             // validate input
             if(it->getGame().validateInput(x, y)) {
               it->getGame().makeMove(x, y);
