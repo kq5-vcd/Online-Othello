@@ -3,141 +3,232 @@
 
 
 body {
-    margin: 0;
+  margin: 0;
+  background: rgb(85, 128, 85);
 }
 
+.logo {
+  width: 100vw;
+  height: 10vh;
+  text-align: center;
+}
 
+.logo p {
+
+  color: rgb(211, 116, 72);
+  margin: 20px;
+  font-size: 60px;
+  font-family: Zen Dots;
+  font-weight: 2000;
+}
 
 .header {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 30vh;
-    background: red;
-}
-
-.menu {
-    position: relative;
-    left: 0;
-    width: 100%;
-    background: green;
-    height: 70vh;
-}
-
-.header p {
-    font-size: 50px;
-    font-weight: 600;
-    font-family: Zen Dots;
-    text-align: center;
-    padding-top: 10px;
+  position: relative;
+  width: 100vw;
+  height: 20vh;
 }
 
 .header input {
-    position: relative;
-    border-radius: 5px;
-    height: 50px;
-    width: 40vw;
-    left: 30vw;
+  position: absolute;
+  width: 50%;
+  height: 50px;
+  top: 15%;
+  left: 25%;
+  border-radius: 10px;
 }
 
 .header button {
-    position: relative;
-    border-radius: 5px;
-    width: 20vw;
-    height: 40px;
-    top: 10px;
-    left: 40vw;
-    background: rgb(75, 133, 177);
-    font-size: 20px;
-    font-weight: 500;
-    color: #fff;
+  position: absolute;
+  width: 20%;
+  height: 50px;
+  bottom: 10%;
+  left: 40%;
+  border-radius: 10px;
 }
 
-.header button:hover {
-    transform: scale(1.1);
+/* Multi */
+.logo button {
+  position: absolute;
+  top: 2vh;
+  left: 2vh;
+  width: 200px;
+  height: 50px;
+  border-radius: 5px;
 }
+
 
 .menu {
-    position: relative;
+  position: relative;
+  /*background: cornflowerblue;*/
+  height: 70vh;
+}
+
+.menu .button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .menu button {
-    position: relative;
-    top: 5vh;
-    border-radius: 10px;
-    height: 10vh;
-    width: 40vw;
-    left: 30vw;
-    margin: 20px;
-    font-size: 20px;
+  border-radius: 10px ;
+  width: 600px;
+  height: 100px;
+  margin: 20px;
+  font-size: 30px;
+  font-weight: 600;
 }
 
 .menu button:hover {
-    transform: scaleX(1.1);
+  transform: scale(1.1);
 }
 
-/* Multi play mode */
-.search {
-}
-
-.search p {
-    font-size: 30px;
-    font-family: Zen Dots;
-    font-weight: 600;
-}
-
-.search input {
-    margin-left: 20px;
-    width: 70vw;
-    height: 5vh;
-    border-radius: 10px;
+.toolbar {
+  position: relative;
+  background: darkcyan;
+  height: 15vh;
 
 }
 
-.search button {
-    margin: 10px;
-    border-radius: 10px;
-    width: 20vw;
-    height: 5vh;
+.toolbar .element {
+  padding-left: 100px;
+  padding-top: 30px; 
+}
+
+.toolbar input {
+  width: 50%;
+  height: 50px;
+  border-radius: 10px;
+}
+
+.toolbar .createRoom {
+  height: 54px;
+  width: 150px;
+  border-radius: 10px;
+  margin-left: 30px;
+  margin-right: 10px;
+}
+
+.toolbar .backToMenu {
+  height: 54px;
+  width: 150px;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* .toolbar input {
+  position: absolute;
+  top: 50%;
+  left: 4%;
+  width: 50%;
+  height: 40%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.toolbar .createRoom{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  right: 0%;
+  width: 150px;
+  height: 43%;  
+  border-radius: 10px;
+}
+
+.toolbar .backToMenu {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 100px;
+  width: 150px;
+  height: 43%;  
+  border-radius: 10px;
+} */
+
+.title {
+  text-align: center;
+  font-family:'Courier New', Courier, monospace;
+
+}
+
+.table {
+  position: relative;
+  height: 50vh;
+}
+
+.table h1 {
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  color:rgb(211, 230, 40);
+  font-size: 50px;
+}
+.table #rooms {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 80%;
+  transform: translateX(-50%);
+}
+
+.table #rooms th {
+  border: 3px solid black;
+  font-size: 25px;
+  background-color: burlywood;
+}
+
+.table #rooms td {
+  border: 3px solid black;
+  text-align: center;
+  background-color: #fff;
 }
 
 
-#title {
-    text-align: center;
-    font-family: arial, sans-serif;
-  }
-  
-  #students {
-    text-align: center;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    border: 3px solid #ddd;
-    width: 100%;
-  }
-  
-  #students td, #students th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  #students tr:nth-child(even){background-color: #f2f2f2;}
-  
-  #students tr:hover {background-color: #ddd;}
-  
-  #students th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    background-color: #4CAF50;
-    color: white;
-  }
+/* ----- */
+/* css for pop up */
+.popup {
+  border-radius: 20px;
+  border: 10px solid rgb(238, 204, 92);
+  position: fixed;
+  width: 50vw;
+  height: 20vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(231, 238, 171);
+}
 
+.popup-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.popup-inner button {
+  width: 40%;
+  margin: 10px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 20px;
+  background-color: #fff;
+}
+
+.popup-inner .play-again:hover {
+  background-color:dodgerblue;
+}
+
+.popup-inner .leave-room:hover {
+  background-color: red;
+}
   /* game-css */
-.game {
-    position: relative;
-    top: 10vh;
-    left: calc((100vw - 80vh)/2);
+  .game {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border: none;
     background: #000000;
     border: 5px solid black;
@@ -145,6 +236,7 @@ body {
     height: 80vh;
     display: grid;
     grid-template: repeat(8, 1fr) / repeat(8, 1fr);
+    z-index: -1;
   }
 
   .board {
@@ -225,5 +317,64 @@ body {
 
 .game button:hover {
     background-color: #d49d66;
+}
+  
+
+.room .quit {
+  position: fixed;
+  width: 100px;
+  height: 50px;
+  top: 10px;
+  left: 10px;
+  border-radius: 20px;
+}
+
+
+.result {
+  position: absolute;
+  width: 80vh;
+  height: 90px;
+  left: calc((100vw - 80vh)/2) ;
+}
+
+.result .a1 {
+  position: absolute;
+  top: 10px;
+  left: 20vh;
+}
+
+.result .score p{
+  position: absolute;
+  font-size: 35px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  left: 35vh;
+  top: 30px;;
+  margin: 0;
+  width: 200px;
+}
+
+.result .a2 {
+  position: absolute;
+  top: 10px;
+  right: 20vh;
+}
+
+.result .player1 {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+}
+
+.result .player2 {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
 }
 
