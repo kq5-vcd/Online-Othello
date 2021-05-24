@@ -10,6 +10,7 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <string.h>
 #include "Room.hpp"
 
 #define MAXLINE 4096   /*max text line length*/
@@ -415,13 +416,16 @@ void *connection_handler(void *client_socket){
       // cout<<"check send"<<endl;
         // ------------------------
         vector<string> move = split(receive, ' ');
+        cout << "Received: " << receive << endl;
         string roomId = move[1];
+        int x = stoi(move[2]);
+        int y = stoi(move[3]);
+        
         vector<Room>::iterator it;
         for (it = rooms.begin(); it != rooms.end(); it++) {
           if (it->getId() == stoi(roomId)) {
             
-            int x = stoi(move[2]);
-            int y = stoi(move[3]);
+            
 
             cout << "x = " << x << endl;
             cout << "y = " << y << endl;
@@ -578,6 +582,8 @@ void *connection_handler(void *client_socket){
       }
       default: break;
     }
+    
+    bzero(buf, MAXLINE);
   }
 
   if (n <= 0){

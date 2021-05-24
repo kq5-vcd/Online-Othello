@@ -11,7 +11,7 @@ class Multi extends React.Component {
         this.state = { 
             rooms: '',
             response: '', 
-            username: '',
+            username: this.props.username,
             data: [],
             roomID: ''
         }
@@ -45,7 +45,7 @@ class Multi extends React.Component {
 
     showRoom() {
         return (
-            <Table data={this.state.data} username={this.props.username}/>
+            <Table data={this.state.data} username={this.state.username}/>
         )
     }
     
@@ -63,13 +63,13 @@ class Multi extends React.Component {
                 const start = false
 
                 //this.setState({response: res.data.response})
-                ReactDOM.render(<Game player1={this.props.username} player2=''  board={board} roomID={roomID} turn={turn} start={start} />, document.getElementById('root'))
+                ReactDOM.render(<Game player1={this.state.username} player2=''  board={board} roomID={roomID} turn={turn} start={start} />, document.getElementById('root'))
             }).catch(err => {console.error(err)})
     }
 
     // user clicks back to menu
     backToMenu = () => {
-        ReactDOM.render(<Home username={this.props.username} status={this.props.status} />, document.getElementById('root'))
+        ReactDOM.render(<Home username={this.state.username} status={this.props.status} />, document.getElementById('root'))
     }
 
     render () {

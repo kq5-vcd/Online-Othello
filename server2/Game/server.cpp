@@ -538,30 +538,6 @@ void *connection_handler(void *client_socket){
 
       case '7': {
         cout << "In message 7" << endl;
-        vector<string> req = split(receive, ' ');
-        int roomID = stoi(req[1]);
-        string turn = req[2];
-
-        vector<Room>::iterator it;
-
-        for (it = rooms.begin(); it != rooms.end(); it++) {
-          if (it->getId() == roomID) {
-            vector<int> status = it->getGame().getStatus();
-            stringstream result;
-            copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
-            vector<string> m = split(result.str(), ' ');
-
-            string board = "";
-            for (int i = 0; i < 64; i++) {
-              board.append(m[i]).append(" ");
-            }
-
-            board.append(turn);
-
-            send(socket, board.c_str(). board.length(), 0);
-
-          }
-        }
         
 
         break;
