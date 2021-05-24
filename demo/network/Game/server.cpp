@@ -10,6 +10,7 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <string.h>
 #include "Room.hpp"
 
 #define MAXLINE 4096   /*max text line length*/
@@ -415,13 +416,19 @@ void *connection_handler(void *client_socket){
       // cout<<"check send"<<endl;
         // ------------------------
         vector<string> move = split(receive, ' ');
+        cout << "Received: " << receive << endl;
         string roomId = move[1];
+        int x = stoi(move[2]);
+        int y = stoi(move[3]);
+        
         vector<Room>::iterator it;
         for (it = rooms.begin(); it != rooms.end(); it++) {
           if (it->getId() == stoi(roomId)) {
             
-            int x = stoi(move[2]);
-            int y = stoi(move[3]);
+            
+
+            cout << "x = " << x << endl;
+            cout << "y = " << y << endl;
 
             // validate input
             if(it->getGame().validateInput(x, y)) {
@@ -521,6 +528,7 @@ void *connection_handler(void *client_socket){
                 
                 cout << it->getPlayers()[0].getName() << "now is hosting..." << endl;
               } else {
+
                 // code for quitting during game
               } 
               
@@ -538,12 +546,44 @@ void *connection_handler(void *client_socket){
 
       case '7': {
         cout << "In message 7" << endl;
+        // vector<string> req = split(receive, ' ');
+        // int roomID = stoi(req[1]);
+        // string turn = req[2];
+
+        // vector<Room>::iterator it;
+
+        // for (it = rooms.begin(); it != rooms.end(); it++) {
+        //   if (it->getId() == roomID) {
+
+        //     if (it->getNumPlayer() == 2) {
+              
+        //       vector<int> status = it->getGame().getStatus();
+        //       stringstream result;
+        //       copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
+
+        //       vector<string> m = split(result.str(), ' ');
+
+        //       string board = "";
+        //       for (int i = 0; i < 64; i++) {
+        //         board.append(m[i]).append(" ");
+        //       }
+
+        //       board.append(turn);
+
+
+        //     }
+            
+
+        //   }
+        // }
         
 
         break;
       }
       default: break;
     }
+    
+    bzero(buf, MAXLINE);
   }
 
   if (n <= 0){

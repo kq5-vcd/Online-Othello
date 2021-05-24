@@ -19,69 +19,53 @@ class Table extends React.Component {
 
     renderTableData() {
         return this.props.data.map((room, index) => {
-            const { id, player1, player2, score1, score2 } = room //destructuring
+            const { id, player1, score1, score2, player2 } = room //destructuring
             return (
                 <tr key={index}>
                     <td>{id}</td>
                     <td>{player1}</td>
                     <td>{score1} - {score2}</td>
                     <td>{player2}</td>
-                    <td><button id='join-btn' onClick={() => {this.joinRoom(id)}}>Join</button></td>
+                    <td><button id='join-btn' onClick={() => {this.joinRoom(id, player1)}}>Join</button></td>
                 </tr>
             )
         })
     }
 
-    joinRoom(id) {
-        const req = { message: '3', roomID: id, player2: this.props.username}
+    joinRoom(id, player1) {
+        const req = { message: '3', roomID: id, player2: this.props.username, player1: player1}
 
-        console.log(req)
         axios
-            .post('http://localhost:9001/join', req)
+            .post('http://localhost:9000/join', req)
             .then(res => {
-                console.log(res.data.response)
-                this.setState({response: res.data.response})
-                ReactDOM.render(<Game username={this.props.username} board={this.state.response} roomID={id} />, document.getElementById('root'))
-
-                fetch('http://localhost:9001/getMove')
-                    .then(res => res.text())
-                    .then(res => {
-                        ReactDOM.render(<Game username={this.props.username} board={res} roomID={id} />, document.getElementById('root'))
-
-                    }).catch(err => console.error(err))
-
+                const board = res.data.response.split(' ').slice(0,64)
+                const turn = res.data.response.split(' ')[64]
+                //this.setState({response: res.data.response})
+                ReactDOM.render(<Game player1={player1} player2={req.player2} board={board} roomID={id} turn={turn}/>, document.getElementById('root'))
             }).catch(err => console.log(err))
-        
-        console.log("CHECK")
     }
- 
-
-    // renderTableHeader() {
-    //     let header = Object.keys(this.state.students[0])
-    //     return header.map((key, index) => {
-    //         return <th key={index}>{key.toUpperCase()}</th>
-    //     })
-    // }
-    
 
     render() {
         
         return (
-            <div>
-                <h1 id='title'>React Dynamic Table</h1>
-                <table id='students'>
-                    <tbody>
-                        <tr>
-                            <th>ID</th>
-                            <th>Player 1</th>
-                            <th>Score</th>
-                            <th>Player 2</th>
-                            <th>Action</th>
-                        </tr>
-                        {this.renderTableData()}
-                    </tbody>
-                </table>
-            </div>
+            <>
+                <div className='table'>
+                    <h1 id='title'>ONLINE ROOMS</h1>
+                    <table id='rooms'>
+                        <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <th>Player 1</th>
+                                <th>Score</th>
+                                <th>Player 2</th>
+                                <th>Action</th>
+                            </tr>
+                            {this.renderTableData()}
+                        </tbody>
+                    </table>
+                </div>
+
+            </>
         )
     }
 }

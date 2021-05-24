@@ -6,52 +6,58 @@ class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            response: '',
             username: '',
-            welcome: '',
+            status: '0',
+            input: '',
         }
     }
 
-    // handle the username
-    handleUsername = e => {
+    handleUsername = e =>  {
         this.setState({
             [e.target.name]: e.target.value,
         })
     }
-    
-    confirmUsername = e => {
-        e.preventDefault()
-        console.log("Input: " + this.state.username)
 
-        const req = {message: '6', username: this.state.username}
+    componentDidMount() {
+        if (this.props.username !== undefined) {
+            this.setState({ username: this.props.username, status: this.props.status, input: this.props.username})
+        }
+    }
+
+    submitUsername = e => {
+        const username = this.state.input
+        
+        const req = { message: '0', username: username}
 
         axios
             .post('http://localhost:9000/username', req)
             .then(res => {
-                if (res.data.response === '1') {
-                    this.setState({ welcome: 'Hello ' + this.state.username }) 
+                if (res.data.status === '1') {
+                    this.setState({username: username, status: false})
+                    console.log('Available')
                 } else {
-                    this.setState({ welcome: 'Username existed. Please choose another one!!'})
+                    console.log('Try another one')
                 }
             })
-            .catch(err => console.error(err))
     }
 
     render() {
-        return(
+        return (
             <>
-                <div className='header'>
+                <div className='logo'>
                     <p>ONLINE OTHELLO</p>
-                    <input type='text' name='username' onChange={this.handleUsername} /><br />
-                    <button onClick={this.confirmUsername}>Confirm</button>
-                    <h4>{this.state.welcome}</h4>
+                </div>
+
+                <div className='header'>
+                    <input type='text' name='input' value={this.state.input} onChange={this.handleUsername} /><br />
+                    <button disabled={!this.state.status} onClick={this.submitUsername}>Confirm</button>
+                    
                 </div>
 
                 <div className='menu'>
-                  
-                    <Menu username={this.state.username} />
+                    <Menu username={this.state.username} status={this.state.status} />
                 </div>
-            </>  
+            </>
         )
     }
 }
