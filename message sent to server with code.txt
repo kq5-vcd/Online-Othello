@@ -1,11 +1,19 @@
 1 - refresh live matches ( "1" ) (server -> client: "<room_id1> <Score1> <Score2>,<room_id2> <Score3> <Score4>, ..")
 
-2 - create room ( "2 <user1>" ) (server -> client: "000000000000000000000000000000000000000000000000000000000000000000")
+2 - create room ( "2 <username>" ) (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <room_id>")
 
-3 - join room ( "3 <room_id> <user2>") (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <turn> <user1> <user2>"/"0")
+3 - join room ( "3 <room_id> <username>") (server -> 2 clients: "000000000000000000000000000000000000000000000000000000000000000000 <turn_depend_on_user> <user1> <user2> <score1> <score2>"/"0")
+					  spectators: "00000000000000000000000000000000000000000000000000000000000000000 <current_turn> <user1> <user2> <score1> <score2>"
 
-4 - move ( "4 <room_id> <move_row> <move_col>") (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <score1> <score2> <turn> <user1> <user2>")
+4 - move ( "4 <room_id> <move_row> <move_col>") (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <current_turn> <user1> <user2> <score1> <score2>")
+						spectators: "0000000000000000000000000000000000000000000000000000000000000000000 <current_turn> <user1> <user2> <score1> <score2>"
 
-5 - stop/abbadon ( "5 <room_id>" ) (server -> client: "0")	
+5 - player stop/abbadon ( "5 <room_id>" ) (server -> client: "0")
+					   client con lai: "0000000000000000000000000000000000000000000000000000000000000000000 -1 <user1> <user2> <score1> <score2>"	
 
 6 - input username ( "6 <username>" ) (server -> client: "1"/"0")
+
+7 - spectator out game ( "7 <room_id>" ) (server -> client: "0")
+
+8 - play again ( "8 <room_id>" ) (server -> 2 clients: "000000000000000000000000000000000000000000000000000000000000000 <turn_depend_on_user> <user1> <user2> <score1> <score2>")
+				 if(room.state == 0) : "000000000000000000000000000000000000000000000000000000000000000 0"
