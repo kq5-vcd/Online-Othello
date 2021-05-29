@@ -283,6 +283,10 @@ void *connection_handler(void *client_socket){
         for (it = rooms.begin(); it != rooms.end(); it++) {
           if (it->getId() == stoi(roomId)) {
             if (it->getNumPlayer() == 2) {
+              
+              if (it->getState() == 1) {
+                it->setState(0);
+              }
 
               vector<int> status = it->getGame().getStatus();
               stringstream result;
@@ -332,89 +336,7 @@ void *connection_handler(void *client_socket){
         cout << "In message 5" << endl;
 
         // ------------------------
-      //   vector<Room>::iterator it;
-      // vector<string> move = split(receive,' ');
-      // string roomId = move[1];
-      // for(it = rooms.begin(); it!=rooms.end(); it++){
-      //   if(it->getId() == stoi(roomId)){
-          
-      //     break;
-      //   }
-      // }
-
-      // cout<<it->getId()<<endl;
-      // if(it->getState() == 1){
-      //   it->setState(0);
-      // }
-      // int x = stoi(move[2]);
-      // int y = stoi(move[3]);
-
-      // if(it->getGame().validateInput(x, y)) {
-      //   cout<<"check move"<<endl;
-      //   it->getGame().makeMove(x, y);
-      //   it->getGame().checkStatus();
-      //   it->getGame().printStatus();
-      // }
-
-      // vector<int> status = it->getGame().getStatus();
-      // stringstream result;
-      // copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
-      
-      // cout<<result.str()<<endl;
-      // cout<<it->getPlayers()[0].getSocket()<<" "<<it->getPlayers()[1].getSocket()<<endl;
-      // vector<string> info = split(result.str(),' ');
-      // string score1 = info[64];
-      // string score2 = info[65];
-      // string turn = info[66];
-      // string mess = "";
-      // for(int i = 0; i<64; i++){
-      //   mess.append(info[i]).append(" ");
-      // }
-      // cout<<"Game over? "<<it->getGame().gameOver()<<endl;
-      // mess.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
-      // if(turn.compare(to_string(it->getPlayers()[0].getTurn())) == 0 && !it->getGame().gameOver()){
-      //   send(it->getPlayers()[0].getSocket(), mess.c_str(),mess.length(),0);
-      //   string m = "";
-      //   for(int i = 0; i<64; i++){
-      //     m.append(info[i]).append(" ");
-      //   }
-      //   replaceAll(m,"-1","0");
-      //   m.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
-      //   send(it->getPlayers()[1].getSocket(), m.c_str(),m.length(),0);
-      // }
-      // else if(turn.compare(to_string(it->getPlayers()[1].getTurn())) == 0 && !it->getGame().gameOver()){
-      //   send(it->getPlayers()[1].getSocket(), mess.c_str(),mess.length(),0);
-      //   string m = "";
-      //   for(int i = 0; i<64; i++){
-      //     m.append(info[i]).append(" ");
-      //   }
-      //   replaceAll(m,"-1","0");
-      //   m.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
-      //   send(it->getPlayers()[0].getSocket(), m.c_str(),m.length(),0);
-      // }
-      // else if(it->getGame().gameOver()){
-      //   cout<<"Game over\n";
-      //   turn = "-1";
-      //   string m = "";
-      //   for(int i = 0; i<64; i++){
-      //     m.append(info[i]).append(" ");
-      //   }
-      //   m.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
-      //   send(it->getPlayers()[1].getSocket(), m.c_str(),m.length(),0);
-      //   send(it->getPlayers()[0].getSocket(), m.c_str(),m.length(),0);
-      // }
-      
-      // mess = "";
-      // for(int i = 0; i<64; i++){
-      //   mess.append(info[i]).append(" ");
-      // }
-      // mess.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
-      // for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
-      //   send(i->getSocket(),mess.c_str(),mess.length(),0);
-      // }
-      
-      // cout<<"check send"<<endl;
-        // ------------------------
+  
         vector<string> move = split(receive, ' ');
         cout << "Received: " << receive << endl;
         string roomId = move[1];
@@ -513,6 +435,8 @@ void *connection_handler(void *client_socket){
                   it->setTurn(0,1);
                 }
 
+                cout << "Socket: " << it->getPlayers()[0].getSocket() << endl;
+
                 // set number of player in room == 1
                 it->setNumPlayer(1);
                 vector<int> status = it->getGame().getStatus();
@@ -522,11 +446,11 @@ void *connection_handler(void *client_socket){
                 m = m.substr(0,m.size()-6);
                 replaceAll(m,"-1","0");
                 //m.append(to_string(it->getId()));
-                m.append(" 1");
+                m.append(" 0");
                 cout << "Send to server: " << m << endl;
                 send(it->getPlayers()[0].getSocket(), m.c_str(),m.length(),0);
                 
-                cout << it->getPlayers()[0].getName() << "now is hosting..." << endl;
+                cout << it->getPlayers()[0].getName() << " now is hosting..." << endl;
               } else {
 
                 // code for quitting during game
@@ -544,38 +468,53 @@ void *connection_handler(void *client_socket){
         break;
       }
 
-      case '7': {
+      case '7': { // play again
         cout << "In message 7" << endl;
-        // vector<string> req = split(receive, ' ');
-        // int roomID = stoi(req[1]);
-        // string turn = req[2];
+        vector<string> req = split(receive, ' ');
+        int roomID = stoi(req[1]);
+        string turn = req[2];
 
-        // vector<Room>::iterator it;
+        vector<Room>::iterator it;
 
-        // for (it = rooms.begin(); it != rooms.end(); it++) {
-        //   if (it->getId() == roomID) {
-
-        //     if (it->getNumPlayer() == 2) {
+        for (it = rooms.begin(); it != rooms.end(); it++) {
+          if (it->getId() == roomID) {
+            // if clicked first
+            cout << "State: " << it->getState() << endl;
+            if (it->getState() == 0) {
+              // wait for another player's response
+              it->setState(1);
+              it->newGame();
+              vector<int> status = it->getGame().getStatus();
+              stringstream result;
+              copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
+              m = result.str();
+              m = m.substr(0,m.size()-6);
+              replaceAll(m,"-1","0");
+              m.append(to_string(it->getId()));
+              m.append(" 1");
+              cout << "Send to server: " << m << endl;
+              send(socket, m.c_str(),m.length(),0);
               
-        //       vector<int> status = it->getGame().getStatus();
-        //       stringstream result;
-        //       copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
+              cout << "Player 1 inside room" << endl;
+              break;
+            } else if (it->getState() == 1){  // if clicked after
 
-        //       vector<string> m = split(result.str(), ' ');
-
-        //       string board = "";
-        //       for (int i = 0; i < 64; i++) {
-        //         board.append(m[i]).append(" ");
-        //       }
-
-        //       board.append(turn);
-
-
-        //     }
+              vector<int> status = it->getGame().getStatus();
+              stringstream result;
+              copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
+              m = result.str();
+              m = m.substr(0,m.size()-6);
+              replaceAll(m,"-1","0");
+              m.append("2");
+              cout << "Send here" << endl;
+              // Send to player 2
+              send(it->getPlayers()[1].getSocket(), m.c_str(), m.length(), 0);
+              send(it->getPlayers()[0].getSocket(), it->getPlayers()[1].getName().c_str(), it->getPlayers()[1].getName().length(), 0);
+            }
             
-
-        //   }
-        // }
+            break;
+          }
+        }
         
 
         break;
@@ -587,6 +526,7 @@ void *connection_handler(void *client_socket){
       }
 
       case '9': {
+        break;
         
       }
 
