@@ -20,6 +20,7 @@ public:
     void newGame();
     void testing();
 
+    vector<vector<int>> getBoard();
     vector<int> getMove();
     vector<int> getScores();
     vector<int> getStatus();

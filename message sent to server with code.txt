@@ -1,19 +1,30 @@
+0 - input username ( "0 <username>" ) (server -> client: "1"/"0")
+
 1 - refresh live matches ( "1" ) (server -> client: "<room_id1> <Score1> <Score2>,<room_id2> <Score3> <Score4>, ..")
 
-2 - create room ( "2 <username>" ) (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <room_id>")
+2 - create room ( "2 <username>" ) (server -> client: "<board> <room_id> 1")
 
-3 - join room ( "3 <room_id> <username>") (server -> 2 clients: "000000000000000000000000000000000000000000000000000000000000000000 <turn_depend_on_user> <user1> <user2> <score1> <score2>"/"0")
-					  spectators: "00000000000000000000000000000000000000000000000000000000000000000 <current_turn> <user1> <user2> <score1> <score2>"
+3 - join room ( "3 <room_id> <username>") (server ->  	user1: "<user2>"
+					  		user2: "<board> 2"
+							spectators: "<current_board> <current_turn> <user1> <user2> <score1> <score2>"
 
-4 - move ( "4 <room_id> <move_row> <move_col>") (server -> client: "000000000000000000000000000000000000000000000000000000000000000000 <current_turn> <user1> <user2> <score1> <score2>")
-						spectators: "0000000000000000000000000000000000000000000000000000000000000000000 <current_turn> <user1> <user2> <score1> <score2>"
+4 - start game ( "4 <room_id>" ) (server ->  if (room_id == '0') : ("<board> <turn> <score1> <score2>")
+					     else:
+						2 clients: "<board> <turn> <user1> <user2> <score1> <score2>"
 
-5 - player stop/abbadon ( "5 <room_id>" ) (server -> client: "0")
-					   client con lai: "0000000000000000000000000000000000000000000000000000000000000000000 -1 <user1> <user2> <score1> <score2>"	
+5 - move ( "5 <room_id> <move_row> <move_col>") (server -> if (room_id == '0') : ("<board> <turn> <score1> <score2>")
+							   else:
+								2 clients: "<board> <turn> <user1> <user2> <score1> <score2>"
+								spectators: "<current_board> <current_turn> <user1> <user2> <score1> <score2>"
 
-6 - input username ( "6 <username>" ) (server -> client: "1"/"0")
 
-7 - spectator out game ( "7 <room_id>" ) (server -> client: "0")
+6 - quit game ( "6 <room_id> <state>" ) (server -> 2 clients + spectators:	if (state == true)  -> ( "<board> -1 <Name_of_remained_player>" )
+										if (state == false) -> ( "<board> 1" )
 
-8 - play again ( "8 <room_id>" ) (server -> 2 clients: "000000000000000000000000000000000000000000000000000000000000000 <turn_depend_on_user> <user1> <user2> <score1> <score2>")
-				 if(room.state == 0) : "000000000000000000000000000000000000000000000000000000000000000 0"
+7 - play again ( "7 <room_id> <turn>" ) (server -> 2 clients + spectators:	if (turn == 1)  -> ( "<board> 2" )
+										if (turn == 2)  -> ( "<board> 1" )
+
+8 - spectator out game ( "8 <room_id>" ) (server -> client: "0")
+
+
+9 - play with bot ( "9 <difficulty>" ) (server -> client: "<board>" )

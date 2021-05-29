@@ -6,6 +6,7 @@ private:
     int turn;
     int rank;
     string name;
+    
 
 
 public:

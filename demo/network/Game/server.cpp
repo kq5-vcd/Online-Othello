@@ -580,6 +580,16 @@ void *connection_handler(void *client_socket){
 
         break;
       }
+
+      case '8': {
+
+        break;
+      }
+
+      case '9': {
+        
+      }
+
       default: break;
     }
     
@@ -602,6 +612,7 @@ void *connection_handler(void *client_socket){
           i = find(playersName.begin(),playersName.end(),it->getPlayers()[1].getName());
           playersName.erase(i);
           it->removePlayer(2);
+          it->setTurn(0,1);
         }
         else continue;
 
