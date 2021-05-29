@@ -90,6 +90,10 @@ vector<int> Game::getScores() {
    return board.getScores();
 }
 
+vector<vector<int>> Game::getBoard() {
+   return board.getBoard();
+}
+
 vector<int> Game::getStatus() {
    vector<int> status;
 

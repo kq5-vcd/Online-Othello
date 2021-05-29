@@ -2,13 +2,12 @@
 
 Bot::Bot(int turn): turn(turn){}
 
-vector<vector<int>> Bot::getAvailableMoves(Board board) {
-    vector<vector<int>> temp_board = board.getBoard();
+vector<vector<int>> Bot::getAvailableMoves(vector<vector<int>> board) {
     vector<vector<int>> moves;
 
-    for(int x = 0; x < temp_board.size(); x++) {
-        for(int y = 0; y < temp_board[0].size(); y++) {
-            if(temp_board[x][y] == -1) {
+    for(int x = 0; x < board.size(); x++) {
+        for(int y = 0; y < board[0].size(); y++) {
+            if(board[x][y] == -1) {
                 vector<int> move = {x, y};
                 moves.push_back(move);
             }
@@ -18,8 +17,10 @@ vector<vector<int>> Bot::getAvailableMoves(Board board) {
     return moves;
 }
 
-vector<int> Bot::makeMove(Board board) {
+vector<int> Bot::makeMove(vector<vector<int>> board) {
     vector<vector<int>> moves = getAvailableMoves(board);
+
+    srand (time(NULL));
     int choice = rand() % moves.size();
 
     return moves[choice];

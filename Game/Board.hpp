@@ -20,6 +20,7 @@ private:
 
 public:
     Board(bool notification, int rows, int cols);
+    Board(bool notification, vector<vector<int>> board);
 
     void newBoard();
     void setAvailableMoves(int player);
