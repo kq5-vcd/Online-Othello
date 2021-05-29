@@ -3,7 +3,7 @@
 
 int main() {
     Game game = Game(true);
-    Bot randy = Bot(2);
+    Bot randy = Bot();
 
     //game.testing();
 

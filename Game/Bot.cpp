@@ -1,6 +1,6 @@
 #include "Bot.hpp"
 
-Bot::Bot(int turn): turn(turn){}
+Bot::Bot(){}
 
 vector<vector<int>> Bot::getAvailableMoves(vector<vector<int>> board) {
     vector<vector<int>> moves;
