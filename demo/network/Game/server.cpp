@@ -168,7 +168,7 @@ void *connection_handler(void *client_socket){
         
           vector<Players>::iterator i;
           for(i = players.begin(); i != players.end(); i++){
-            if(i->getName() == name && i->getSocket != socket){
+            if(i->getName() == name && i->getSocket() != socket){
               send(socket,"0",1,0);
               break;
             }
