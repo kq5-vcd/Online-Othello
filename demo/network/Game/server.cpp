@@ -153,26 +153,38 @@ void *connection_handler(void *client_socket){
     switch (receive[0]) {
       case '0': {
         cout << "In message 0" << endl;
-
-        string name = split(receive,' ')[1];
-        vector<Players>::iterator i;
-        for(i = players.begin(); i != players.end(); i++){
-          if(i->getName() == name){
-            send(socket,"0",1,0);
-            break;
+        if(split(receive,' ').size() == 1){
+          vector<Players>::iterator i;
+          for(i = players.begin(); i != players.end(); i++){
+            if(i->getSocket() == socket){
+              send(socket,i->getName().c_str(),i->getName().length(),0);
+              break;
+            }
           }
-          if(i->getSocket() == socket){
-            i->setName(name);
-            send(socket,"1",1,0);
-            break;
-          }
+          
         }
-        if(i == players.end()){
-          Players* p = new Players();
-          p->setName(name);
-          p->setSocket(socket);
-          players.push_back(*p);
-          send(socket,"1",1,0);
+        else{
+          string name = split(receive,' ')[1];
+        
+          vector<Players>::iterator i;
+          for(i = players.begin(); i != players.end(); i++){
+            if(i->getName() == name && i->getSocket != socket){
+              send(socket,"0",1,0);
+              break;
+            }
+            if(i->getSocket() == socket){
+              i->setName(name);
+              send(socket,"1",1,0);
+              break;
+            }
+          }
+          if(i == players.end()){
+            Players* p = new Players();
+            p->setName(name);
+            p->setSocket(socket);
+            players.push_back(*p);
+            send(socket,"1",1,0);
+          }
         }
         break;
       }
