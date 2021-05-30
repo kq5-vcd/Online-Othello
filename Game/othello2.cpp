@@ -1,9 +1,8 @@
 #include "Game.hpp"
-#include "Bot.hpp"
+#include "MiniMax.hpp"
 
-int main() {
+void play(Bot& bot) {
     Game game = Game(true);
-    Bot randy = Bot();
 
     //game.testing();
 
@@ -18,7 +17,8 @@ int main() {
             game.printStatus();
             move = game.getMove();
         } else if(turn == 2) {
-            move = randy.makeMove(game.getBoard());
+            //move = randy.makeMove(game.getBoard());
+            move = bot.makeMove(game.getBoard());
         }
 
         int x = move[0];
@@ -38,5 +38,33 @@ int main() {
     }
 
     game.declareResult();
+}
+
+int main() {
+    int difficulty = 3;
+    
+    switch(difficulty) {
+        case 1: {
+            Bot bot = Bot();
+            play(bot);
+            break;
+            }
+        case 2: {
+            MiniMax bot = MiniMax(2, 1);
+            play(bot);
+            break;
+            }
+        case 3: {
+            MiniMax bot = MiniMax(2, 3);
+            play(bot);
+            break;
+            }
+        case 4: {
+            MiniMax bot = MiniMax(2, 3);
+            play(bot);
+            break;
+            }
+    }
+    
     return 0;
 }

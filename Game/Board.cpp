@@ -6,7 +6,10 @@ Board::Board(bool notification, int rows, int cols): notification(notification),
     Board::newBoard();
 }
 
-Board::Board(bool notification, vector<vector<int>> board): notification(notification), board(board) {}
+Board::Board(bool notification, vector<vector<int>> board): notification(notification), board(board) {
+    rows = board.size();
+    cols = board[0].size();
+}
 
 void Board::setPiece(int player, int x, int y) {
     board[x][y] = player;

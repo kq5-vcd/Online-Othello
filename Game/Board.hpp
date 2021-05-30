@@ -1,3 +1,6 @@
+#ifndef BOARD
+#define BOARD
+
 #include <vector>
 #include <iostream>
 
@@ -35,3 +38,5 @@ public:
     bool validateMove(int player, int x, int y);
     bool playable();
 };
+
+#endif
