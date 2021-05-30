@@ -5,7 +5,7 @@
 using namespace std;
 
 class Bot {
-private:
+protected:
     vector<vector<int>> getAvailableMoves(vector<vector<int>> board);
     
 
