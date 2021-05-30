@@ -153,7 +153,7 @@ void *connection_handler(void *client_socket){
     switch (receive[0]) {
       case '0': {
         cout << "In message 0" << endl;
-        if(split(receive,' ').size() == 1){
+        if(receive.length() == 1){
           vector<Players>::iterator i;
           for(i = players.begin(); i != players.end(); i++){
             if(i->getSocket() == socket){
@@ -163,7 +163,7 @@ void *connection_handler(void *client_socket){
           }
           
         }
-        else{
+        else if(split(receive,' ').size() > 1){
           string name = split(receive,' ')[1];
         
           vector<Players>::iterator i;
