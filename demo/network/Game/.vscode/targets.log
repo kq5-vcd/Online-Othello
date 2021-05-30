@@ -7,7 +7,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Sat May 29 17:30:29 2021
+# Make data base, printed on Sun May 30 14:18:49 2021
 
 # Variables
 
@@ -24,7 +24,7 @@ VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
 LOCALAPPDATA = C:\Users\ADMIN\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-41582b28-cb08-4ea8-847a-a640576a4f06-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-d4b68170-5558-4908-b3ec-6d5c8c618879-sock
 # environment
 VSCODE_CWD = C:\Users\ADMIN\Desktop\Online-Othello\demo\network\Game
 # environment
@@ -40,7 +40,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_9056_JLGSBFAQCQZBSKXH
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12016_NTISZDJTENALRPIO
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -94,7 +94,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 9056
+VSCODE_PID = 12016
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -206,14 +206,13 @@ ALLUSERSPROFILE = C:\ProgramData
 # environment
 SESSIONNAME = Console
 # default
-.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync load 
-
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync load
 # environment
 PROCESSOR_REVISION = 9e09
 # environment
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 # variable set hash-table stats:
-# Load=100/1024=10%, Rehash=0, Collisions=9/130=7%
+# Load=100/1024=10%, Rehash=0, Collisions=9/127=7%
 
 # Pattern-specific Variable Values
 
@@ -221,9 +220,9 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/ADMIN/Desktop/Online-Othello/demo/network/Game, mtime 1622284224): 19 files, no impossibilities.
+# . (key c:/Users/ADMIN/Desktop/Online-Othello/demo/network/Game, mtime 1622314055): 21 files, no impossibilities.
 
-# 19 files, no impossibilities in 1 directories.
+# 21 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -233,15 +232,16 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 client:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Last modified 2021-05-30 01:47:35
+#  File has been updated.
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 8):
 	g++ -o client client.cpp
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-05-29 17:29:21
+#  Last modified 2021-05-29 18:03:13
 #  File has been updated.
 #  Successfully updated.
 
@@ -249,33 +249,15 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 11):
+#  recipe to exec 
+ute (from 'Makefile', line 11):
 	rm -rf server client
 
 server:
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
-#  File does not exist.
+#  Last modified 2021-05-30 01:47:35
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := server
-# automatic
-# * := 
-# automatic
-# < := 
-# automatic
-# + := 
-# automatic
-# % := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
-# automatic
-# | := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/11=9%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 5):
 	g++ -o server server.cpp Game.cpp Board.cpp Room.cpp Players.cpp Bot.cpp -pthread
 
@@ -290,18 +272,10 @@ all: server client
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
-
-# Not a target:
-.SUFFIXES:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Successfully updated.
 
 # files hash-table stats:
-# Load=7/1024=1%, Rehash=0, Collisions=0/23=0%
+# Load=7/1024=1%, Rehash=0, Collisions=0/22=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
@@ -311,9 +285,9 @@ all: server client
 # strcache buffers: 1 (0) / strings = 25 / storage = 218 B / avg = 8 B
 # current buf: size = 8174 B / used = 218 B / count = 25 / avg = 8 B
 
-# strcache performance: lookups = 37 / hit rate = 32%
+# strcache performance: lookups = 38 / hit rate = 34%
 # hash-table stats:
-# Load=25/8192=0%, Rehash=0, Collisions=0/37=0%
-# Finished Make data base on Sat May 29 17:30:29 2021
+# Load=25/8192=0%, Rehash=0, Collisions=0/38=0%
+# Finished Make data base on Sun May 30 14:18:49 2021
 
  
