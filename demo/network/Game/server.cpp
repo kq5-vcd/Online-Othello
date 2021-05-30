@@ -610,9 +610,11 @@ void *connection_handler(void *client_socket){
               break;
             }
           }
-          stringstream name;
-          copy(players.begin(), players.end(), ostream_iterator<string>(name, " "));
-          cout<<"Current players' names: "<<name.str()<<endl;
+          string name = "";
+          for(vector<Players>::iterator i = players.begin(); i != players.end(); i++){
+            name.append(i->getName()).append(" ");
+          }
+          cout<<"Current players' names: "<<name<<endl;
           it->removePlayer(1);
           it->setTurn(0,1);
         }
