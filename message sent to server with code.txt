@@ -28,4 +28,6 @@
 8 - spectator out game ( "8 <room_id>" ) (server -> client: "0")
 
 
-9 - play with bot ( "9 <difficulty>" ) (server -> client: "<board> 1" )
+9 - play with bot ( "9 <difficulty>" ) 	if(difficulty == 0) : ( "0" )  //exit bot
+					else : (server -> client: "<board> 1" )
+					
