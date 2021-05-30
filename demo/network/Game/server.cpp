@@ -157,6 +157,7 @@ void *connection_handler(void *client_socket){
           vector<Players>::iterator i;
           for(i = players.begin(); i != players.end(); i++){
             if(i->getSocket() == socket){
+              cout<<"Name: "<<i->getName()<<endl;
               send(socket,i->getName().c_str(),i->getName().length(),0);
               break;
             }
