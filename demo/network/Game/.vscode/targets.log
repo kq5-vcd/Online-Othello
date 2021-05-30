@@ -7,7 +7,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Sun May 30 14:18:49 2021
+# Make data base, printed on Sun May 30 17:05:54 2021
 
 # Variables
 
@@ -190,7 +190,8 @@ VXIPNPPATH = C:\Program Files (x86)\IVI Foundation\VISA\
 # environment
 COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
 # environment
-ELECTRON_RUN_AS_NODE = 1
+EL 
+ECTRON_RUN_AS_NODE = 1
 # environment
 TEMP = C:\Users\ADMIN\AppData\Local\Temp
 # environment
@@ -212,7 +213,7 @@ PROCESSOR_REVISION = 9e09
 # environment
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 # variable set hash-table stats:
-# Load=100/1024=10%, Rehash=0, Collisions=9/127=7%
+# Load=100/1024=10%, Rehash=0, Collisions=9/130=7%
 
 # Pattern-specific Variable Values
 
@@ -220,7 +221,7 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/ADMIN/Desktop/Online-Othello/demo/network/Game, mtime 1622314055): 21 files, no impossibilities.
+# . (key c:/Users/ADMIN/Desktop/Online-Othello/demo/network/Game, mtime 1622369128): 21 files, no impossibilities.
 
 # 21 files, no impossibilities in 1 directories.
 
@@ -232,16 +233,15 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 client:
 #  Implicit rule search has not been done.
-#  Last modified 2021-05-30 01:47:35
-#  File has been updated.
-#  Successfully updated.
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 8):
 	g++ -o client client.cpp
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-05-29 18:03:13
+#  Last modified 2021-05-30 17:05:44
 #  File has been updated.
 #  Successfully updated.
 
@@ -249,17 +249,35 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to exec 
-ute (from 'Makefile', line 11):
+#  recipe to execute (from 'Makefile', line 11):
 	rm -rf server client
 
 server:
 #  Implicit rule search has not been done.
-#  Last modified 2021-05-30 01:47:35
+#  Implicit/static pattern stem: ''
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := server
+# automatic
+# * := 
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/11=9%
 #  recipe to execute (from 'Makefile', line 5):
-	g++ -o server server.cpp Game.cpp Board.cpp Room.cpp Players.cpp Bot.cpp -pthread
+	g++ -o server server.cpp Game.cpp Board.cpp Room.cpp Players.cpp Bot.cpp MiniMax.cpp -pthread
 
 # Not a target:
 .DEFAULT:
@@ -272,22 +290,30 @@ all: server client
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # files hash-table stats:
-# Load=7/1024=1%, Rehash=0, Collisions=0/22=0%
+# Load=7/1024=1%, Rehash=0, Collisions=0/23=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 25 / storage = 218 B / avg = 8 B
-# current buf: size = 8174 B / used = 218 B / count = 25 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 27 / storage = 242 B / avg = 8 B
+# current buf: size = 8174 B / used = 242 B / count = 27 / avg = 8 B
 
-# strcache performance: lookups = 38 / hit rate = 34%
+# strcache performance: lookups = 39 / hit rate = 30%
 # hash-table stats:
-# Load=25/8192=0%, Rehash=0, Collisions=0/38=0%
-# Finished Make data base on Sun May 30 14:18:49 2021
+# Load=27/8192=0%, Rehash=0, Collisions=0/39=0%
+# Finished Make data base on Sun May 30 17:05:54 2021
 
  

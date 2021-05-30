@@ -39,7 +39,7 @@ void Room::setState(int state){
 }
 
 void Room::addPlayer(int socket, int turn, string name){
-    Players *p = new Players();
+    Players *p = new Players(false);
     p->setSocket(socket);
     p->setTurn(turn);
     p->setName(name);
@@ -54,7 +54,7 @@ void Room::removePlayer(int index){
 }
 
 void Room::addSpectator(int socket, string name){
-    Players *p = new Players();
+    Players *p = new Players(false);
     p->setSocket(socket);
     p->setName(name);
     this->spectators.push_back(*p);

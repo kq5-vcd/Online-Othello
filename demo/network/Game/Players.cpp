@@ -1,8 +1,10 @@
 #include "Players.hpp"
 
-Players::Players(){
+Players::Players(bool notification, int rows, int cols):
+    game(notification, rows, cols){
     socket = 0;
     turn = 0;
+    bot = Bot();
 }
 
 void Players::setSocket(int socket){
@@ -35,4 +37,16 @@ void Players::setRank(int rank){
 
 int Players::getRank(){
     return this->rank;
+}
+
+Game& Players::getGame(){
+    return this->game;
+}
+
+Bot& Players::getBot(){
+    return this->bot;
+}
+
+void Players::setBot(Bot bot){
+    this->bot = bot;
 }

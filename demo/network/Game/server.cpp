@@ -136,7 +136,7 @@ void *connection_handler(void *client_socket){
 	int n;
   string m;
 	char buf[MAXLINE];
-  Players *p = new Players();
+  Players *p = new Players(false);
   p->setName("");
   p->setSocket(socket);
   players.push_back(*p);
@@ -158,7 +158,12 @@ void *connection_handler(void *client_socket){
           for(i = players.begin(); i != players.end(); i++){
             if(i->getSocket() == socket){
               cout<<"Name: "<<i->getName()<<endl;
-              send(socket,i->getName().c_str(),i->getName().length(),0);
+              if(i->getName().length() == 0){
+                send(socket,"null",4,0);
+              }
+              else{
+                send(socket,i->getName().c_str(),i->getName().length(),0);
+              }
               break;
             }
           }
@@ -180,7 +185,7 @@ void *connection_handler(void *client_socket){
             }
           }
           if(i == players.end()){
-            Players* p = new Players();
+            Players* p = new Players(false);
             p->setName(name);
             p->setSocket(socket);
             players.push_back(*p);
@@ -308,54 +313,87 @@ void *connection_handler(void *client_socket){
         vector<string> tmp = split(receive, ' ');
         string roomId = tmp[1];
 
-        vector<Room>::iterator it;
+        if(stoi(roomId) == 0){
+          vector<Players>::iterator i;
+          for(i = players.begin(); i != players.end(); i++){
+            if(i->getSocket() == socket){
+              break;
+            }
+          }
+          vector<int> status = i->getGame().getStatus();
+          stringstream result;
+          copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
 
-        for (it = rooms.begin(); it != rooms.end(); it++) {
-          if (it->getId() == stoi(roomId)) {
-            if (it->getNumPlayer() == 2) {
-              
-              if (it->getState() == 1) {
-                it->setState(0);
+          tmp = split(result.str(), ' ');
+
+          string board = result.str().substr(0,result.str().size() - 6);
+          string score1 = tmp[64];
+          string score2 = tmp[65];
+          
+          if(i->getTurn() == 0 || i->getTurn() == 2){
+            i->setTurn(1);
+          }
+          else if(i->getTurn() == 1){
+            i->setTurn(2);
+          }
+
+          string m = board.append(to_string(i->getTurn())).append(" ")
+                        .append(score1).append(" ")
+                        .append(score2);
+          
+          send(socket,m.c_str(),m.length(),0);
+
+        }
+        else{
+          vector<Room>::iterator it;
+
+          for (it = rooms.begin(); it != rooms.end(); it++) {
+            if (it->getId() == stoi(roomId)) {
+              if (it->getNumPlayer() == 2) {
+                
+                if (it->getState() == 1) {
+                  it->setState(0);
+                }
+
+                vector<int> status = it->getGame().getStatus();
+                stringstream result;
+                copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
+                m = result.str();
+                tmp = split(m, ' ');
+
+                string board = m.substr(0,m.size() - 6);
+                
+                string score1 = tmp[64];
+                string score2 = tmp[65];
+
+                string save = board;
+
+                string p1 = board.append(to_string(it->getPlayers()[0].getTurn())).append(" ")
+                              .append(it->getPlayers()[0].getName()).append(" ")
+                              .append(it->getPlayers()[1].getName()).append(" ")
+                              .append(score1).append(" ")
+                              .append(score2);
+
+                replaceAll(save, "-1", "0");
+                string p2 = save.append(to_string(it->getPlayers()[0].getTurn())).append(" ")
+                              .append(it->getPlayers()[0].getName()).append(" ")
+                              .append(it->getPlayers()[1].getName()).append(" ")
+                              .append(score1).append(" ")
+                              .append(score2);
+                
+                
+                cout << "Turn: " << it->getPlayers()[0].getTurn() << endl;
+
+                // send to player 1
+                send(it->getPlayers()[0].getSocket(),p1.c_str(),p1.length(),0);
+                send(it->getPlayers()[1].getSocket(),p2.c_str(),p2.length(),0);
+
+                cout << "Send to player 1: " << p1 << endl;
+                cout << "Send to player 2: " << p2 << endl;
+
+                cout << "Game has started" << endl;
+                
               }
-
-              vector<int> status = it->getGame().getStatus();
-              stringstream result;
-              copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
-              m = result.str();
-              tmp = split(m, ' ');
-
-              string board = m.substr(0,m.size() - 6);
-              
-              string score1 = tmp[64];
-              string score2 = tmp[65];
-
-              string save = board;
-
-              string p1 = board.append(to_string(it->getPlayers()[0].getTurn())).append(" ")
-                            .append(it->getPlayers()[0].getName()).append(" ")
-                            .append(it->getPlayers()[1].getName()).append(" ")
-                            .append(score1).append(" ")
-                            .append(score2);
-
-              replaceAll(save, "-1", "0");
-              string p2 = save.append(to_string(it->getPlayers()[0].getTurn())).append(" ")
-                            .append(it->getPlayers()[0].getName()).append(" ")
-                            .append(it->getPlayers()[1].getName()).append(" ")
-                            .append(score1).append(" ")
-                            .append(score2);
-              
-              
-              cout << "Turn: " << it->getPlayers()[0].getTurn() << endl;
-
-              // send to player 1
-              send(it->getPlayers()[0].getSocket(),p1.c_str(),p1.length(),0);
-              send(it->getPlayers()[1].getSocket(),p2.c_str(),p2.length(),0);
-
-              cout << "Send to player 1: " << p1 << endl;
-              cout << "Send to player 2: " << p2 << endl;
-
-              cout << "Game has started" << endl;
-              
             }
           }
         }
@@ -372,69 +410,144 @@ void *connection_handler(void *client_socket){
         string roomId = move[1];
         int x = stoi(move[2]);
         int y = stoi(move[3]);
-        
-        vector<Room>::iterator it;
-        for (it = rooms.begin(); it != rooms.end(); it++) {
-          if (it->getId() == stoi(roomId)) {
-            
-            
+        vector<int> moveBot;
 
-            cout << "x = " << x << endl;
-            cout << "y = " << y << endl;
-
-            // validate input
-            if(it->getGame().validateInput(x, y)) {
-              it->getGame().makeMove(x, y);
-              it->getGame().checkStatus();
-              it->getGame().printStatus();
+        if(stoi(roomId) == 0){
+          vector<Players>::iterator i;
+          for(i = players.begin(); i != players.end(); i++){
+            if(i->getSocket() == socket){
+              break;
             }
+          }
+          if(i->getGame().validateInput(x,y)){
+            i->getGame().makeMove(x,y);
+            i->getGame().checkStatus();
+            i->getGame().printStatus();
+          }
 
-            vector<int> status = it->getGame().getStatus();
-            stringstream result;
-            copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
-            cout << "Result: " << result.str();
-            vector<string> info = split(result.str(),' ');
-            string score1 = info[64];
-            string score2 = info[65];
-            string turn = info[66];
-            string board = "";
+          vector<int> status = i->getGame().getStatus();
+          stringstream result;
+          copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
+          cout << "Result: " << result.str();
+          vector<string> info = split(result.str(),' ');
+          string score1 = info[64];
+          string score2 = info[65];
+          string turn = info[66];
+          string board = "";
+          for(int i = 0; i<64; i++){
+            board.append(info[i]).append(" ");
+          }
+          
+          string message = board;
+          
+          message.append(turn).append(" ")
+                    .append(score1).append(" ")
+                    .append(score2);
+
+          cout << "Message: " << message << endl;
+
+          send(socket, message.c_str(),message.length(),0);
+
+          while(stoi(turn) != i->getTurn()){
+            moveBot = i->getBot().makeMove(i->getGame().getBoard());
+            x = moveBot[0];
+            y = moveBot[1];
+
+            if(i->getGame().validateInput(x,y)){
+              i->getGame().makeMove(x,y);
+              i->getGame().checkStatus();
+              i->getGame().printStatus();
+            }
+            
+            status.clear();
+            info.clear();
+            status = i->getGame().getStatus();
+            stringstream resultBot;
+            copy(status.begin(), status.end(), ostream_iterator<int>(resultBot, " "));
+            cout << "Result: " << resultBot.str();
+            info = split(resultBot.str(),' ');
+            score1 = info[64];
+            score2 = info[65];
+            turn = info[66];
+            board = "";
             for(int i = 0; i<64; i++){
               board.append(info[i]).append(" ");
             }
             
-            string message1 = board;
+            message = board;
             
-            message1.append(turn).append(" ")
-                      .append(it->getPlayers()[0].getName()).append(" ")
-                      .append(it->getPlayers()[1].getName()).append(" ")
+            message.append(turn).append(" ")
                       .append(score1).append(" ")
                       .append(score2);
 
-            cout << "Message: " << message1 << endl;
+            cout << "Message: " << message << endl;
 
-            replaceAll(board,"-1","0");
-            string message2 = board;
-            message2.append(turn).append(" ")
-                    .append(it->getPlayers()[0].getName()).append(" ")
-                    .append(it->getPlayers()[1].getName()).append(" ")
-                    .append(score1).append(" ").append(score2);
+            send(socket, message.c_str(),message.length(),0);
+          }
+        }
+        else{
+          vector<Room>::iterator it;
+          for (it = rooms.begin(); it != rooms.end(); it++) {
+            if (it->getId() == stoi(roomId)) {
+              
+              cout << "x = " << x << endl;
+              cout << "y = " << y << endl;
 
-            if(turn.compare(to_string(it->getPlayers()[0].getTurn())) == 0 && !it->getGame().gameOver()){ 
-              send(it->getPlayers()[0].getSocket(), message1.c_str(),message1.length(),0);
-              send(it->getPlayers()[1].getSocket(), message2.c_str(),message2.length(),0);
-            } else if(turn.compare(to_string(it->getPlayers()[1].getTurn())) == 0 && !it->getGame().gameOver()){
-                send(it->getPlayers()[1].getSocket(), message1.c_str(),message1.length(),0);
-                send(it->getPlayers()[0].getSocket(), message2.c_str(),message2.length(),0);
-            } else if(it->getGame().gameOver()){
-                cout<<"Game over\n";
-                turn = "-1";
-                string m = "";
-                for(int i = 0; i<64; i++){
-                  m.append(info[i]).append(" ");
-                }
-                m.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
-                send(it->getPlayers()[1].getSocket(), m.c_str(),m.length(),0);
-                send(it->getPlayers()[0].getSocket(), m.c_str(),m.length(),0);
+              // validate input
+              if(it->getGame().validateInput(x, y)) {
+                it->getGame().makeMove(x, y);
+                it->getGame().checkStatus();
+                it->getGame().printStatus();
+              }
+
+              vector<int> status = it->getGame().getStatus();
+              stringstream result;
+              copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
+              cout << "Result: " << result.str();
+              vector<string> info = split(result.str(),' ');
+              string score1 = info[64];
+              string score2 = info[65];
+              string turn = info[66];
+              string board = "";
+              for(int i = 0; i<64; i++){
+                board.append(info[i]).append(" ");
+              }
+              
+              string message1 = board;
+              
+              message1.append(turn).append(" ")
+                        .append(it->getPlayers()[0].getName()).append(" ")
+                        .append(it->getPlayers()[1].getName()).append(" ")
+                        .append(score1).append(" ")
+                        .append(score2);
+
+              cout << "Message: " << message1 << endl;
+
+              replaceAll(board,"-1","0");
+              string message2 = board;
+              message2.append(turn).append(" ")
+                      .append(it->getPlayers()[0].getName()).append(" ")
+                      .append(it->getPlayers()[1].getName()).append(" ")
+                      .append(score1).append(" ").append(score2);
+
+              if(turn.compare(to_string(it->getPlayers()[0].getTurn())) == 0 && !it->getGame().gameOver()){ 
+                send(it->getPlayers()[0].getSocket(), message1.c_str(),message1.length(),0);
+                send(it->getPlayers()[1].getSocket(), message2.c_str(),message2.length(),0);
+              } else if(turn.compare(to_string(it->getPlayers()[1].getTurn())) == 0 && !it->getGame().gameOver()){
+                  send(it->getPlayers()[1].getSocket(), message1.c_str(),message1.length(),0);
+                  send(it->getPlayers()[0].getSocket(), message2.c_str(),message2.length(),0);
+              } else if(it->getGame().gameOver()){
+                  cout<<"Game over\n";
+                  turn = "-1";
+                  string m = "";
+                  for(int i = 0; i<64; i++){
+                    m.append(info[i]).append(" ");
+                  }
+                  m.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
+                  send(it->getPlayers()[1].getSocket(), m.c_str(),m.length(),0);
+                  send(it->getPlayers()[0].getSocket(), m.c_str(),m.length(),0);
+              }
+              break;
             }
           }
         }
@@ -556,6 +669,58 @@ void *connection_handler(void *client_socket){
       }
 
       case '9': {
+        string difficulty = split(receive,' ')[1];
+        int dif = stoi(difficulty);
+        vector<Players>::iterator i;
+        for(i = players.begin(); i != players.end(); i++){
+          if(i->getSocket() == socket){
+            break;
+          }
+        }
+        switch(dif){
+          case 0: {//exit bot
+            i->getGame().newGame();
+            send(socket,"0",1,0);
+            break;
+          }
+          case 1: {
+            i->setBot(Bot());
+            vector<int> status = i->getGame().getStatus();
+            stringstream result;
+            copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
+            string m = result.str();
+            m = m.substr(0,m.size()-6);
+            replaceAll(m,"-1","0");
+            m.append("1");
+            send(socket,m.c_str(),m.length(),0);
+            break;
+          }
+          case 2: {
+            i->setBot(MiniMax(2 , 1));
+            vector<int> status = i->getGame().getStatus();
+            stringstream result;
+            copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
+            string m = result.str();
+            m = m.substr(0,m.size()-6);
+            replaceAll(m,"-1","0");
+            m.append("1");
+            send(socket,m.c_str(),m.length(),0);
+            break;
+          }
+          case 3: {
+            i->setBot(MiniMax(2 , 3));
+            vector<int> status = i->getGame().getStatus();
+            stringstream result;
+            copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
+            string m = result.str();
+            m = m.substr(0,m.size()-6);
+            replaceAll(m,"-1","0");
+            m.append("1");
+            send(socket,m.c_str(),m.length(),0);
+            break;
+          }
+          
+        }
         break;
         
       }

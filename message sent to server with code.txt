@@ -28,4 +28,4 @@
 8 - spectator out game ( "8 <room_id>" ) (server -> client: "0")
 
 
-9 - play with bot ( "9 <difficulty>" ) (server -> client: "<board>" )
+9 - play with bot ( "9 <difficulty>" ) (server -> client: "<board> 1" )
