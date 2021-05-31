@@ -34,6 +34,20 @@ router.get('/getMove', (req, res) => {
 
 /* POST */
 
+// Message 11 - get username
+router.post('/getName', (req, res) => {
+  const recv = { message: req.body.message }
+
+  console.log('Receive: ' + recv.message)
+
+  client.write(recv.message)
+
+  client.once('data', data => {
+    console.log('Received from server: ' + data)
+    res.json({ username: data.toString() })
+  })
+})
+
 // Message 0
 router.post('/username', (req, res) => {
 
@@ -134,7 +148,7 @@ router.post('/move', (req, res) => {
 })
 
 router.post('/quit', (req, res) => {
-  const recv = { message: req.body.message, roomID: req.body.roomID, state: req.body.state }
+  const recv = { message: req.body.message, roomID: req.body.roomID, state: req.body.isPlaying }
 
   let tmp = ''
   console.log('Recv: ' + recv.message + ' - ' + recv.roomID + ' - ' + recv.state)

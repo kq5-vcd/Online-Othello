@@ -7,10 +7,17 @@ body {
   background: rgb(85, 128, 85);
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
 .logo {
+  display: flex;
   width: 100vw;
   height: 10vh;
-  text-align: center;
+  justify-content: center;
+  
 }
 
 .logo p {
@@ -20,6 +27,33 @@ body {
   font-size: 60px;
   font-family: Zen Dots;
   font-weight: 2000;
+}
+
+#input-username {
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#input-username input {
+  width: 50vw;
+  height: 30%;
+  margin-right: 10px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+#input-username button {
+  width: 15vw;
+  height: 30%;
+  border-radius: 10px;
+  font-size: 15px
+}
+
+#input-username button:hover {
+  transform: scale(1.1);
+  background-color: rosybrown ;
 }
 
 .header {
@@ -44,6 +78,10 @@ body {
   bottom: 10%;
   left: 40%;
   border-radius: 10px;
+}
+
+.header #popup {
+  z-index: 999;
 }
 
 /* Multi */

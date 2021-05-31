@@ -9,21 +9,22 @@ class Menu extends React.Component {
         super(props)
         this.state = {
             response: '',
-            username: ''
+            username: this.props.username,
+            checkName: this.props.checkName
         }
     }
 
     // select multi play mode
     multiPlay = () => {
-        ReactDOM.render(<Multi username={this.props.username} status={this.props.status} />, document.getElementById('root'))
+        ReactDOM.render(<Multi username={this.props.username} />, document.getElementById('root'))
     }
 
     render() {
         return (
-            <div className='menu'>
+            <div>
                 <div className='button'>
-                    <button disabled={this.props.status} onClick={this.singlePlay}>Single Play</button><br />
-                    <button disabled={this.props.status} onClick={this.multiPlay}>Multiplayer</button><br />
+                    <button disabled={this.props.checkName} onClick={() => this.singlePlay() }>Single Play</button><br />
+                    <button disabled={this.props.checkName} onClick={() => this.multiPlay() }>Multiplayer</button><br />
                     <button>How to Play</button><br />
                     <button>Exit</button>
                 </div>

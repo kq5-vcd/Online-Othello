@@ -33,15 +33,18 @@ class Table extends React.Component {
     }
 
     joinRoom(id, player1) {
+        // Send ("3" <roomdId> <username>)
+        // Receive: (<board> <turn> <host>)
         const req = { message: '3', roomID: id, player2: this.props.username, player1: player1}
 
         axios
-            .post('http://localhost:9000/join', req)
+            .post('http://localhost:9001/join', req)
             .then(res => {
                 const board = res.data.response.split(' ').slice(0,64)
                 const turn = res.data.response.split(' ')[64]
+                const host = player1
                 //this.setState({response: res.data.response})
-                ReactDOM.render(<Game player1={player1} player2={req.player2} board={board} roomID={id} turn={turn}/>, document.getElementById('root'))
+                ReactDOM.render(<Game username={this.props.username} board={board} turn={turn} player1={host} player2={req.player2} roomID={id}/>, document.getElementById('root'))
             }).catch(err => console.log(err))
     }
 
@@ -50,7 +53,7 @@ class Table extends React.Component {
         return (
             <>
                 <div className='table'>
-                    <h1 id='title'>ONLINE ROOMS</h1>
+                    <h1 id='title'>ONLINE ROOMS - Username: {this.props.username} </h1>
                     <table id='rooms'>
                         <tbody>
                             <tr>
