@@ -5,9 +5,8 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Sun May 30 17:05:54 2021
+# Make data base, printed on Mon May 31 09:03:50 2021
 
 # Variables
 
@@ -24,7 +23,7 @@ VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
 LOCALAPPDATA = C:\Users\ADMIN\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-d4b68170-5558-4908-b3ec-6d5c8c618879-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-300aef13-405c-4747-af36-9b2bb9092144-sock
 # environment
 VSCODE_CWD = C:\Users\ADMIN\Desktop\Online-Othello\demo\network\Game
 # environment
@@ -40,7 +39,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12016_NTISZDJTENALRPIO
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_13376_JHKITLWQBMSSLIEX
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -94,7 +93,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 12016
+VSCODE_PID = 13376
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -190,8 +189,7 @@ VXIPNPPATH = C:\Program Files (x86)\IVI Foundation\VISA\
 # environment
 COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
 # environment
-EL 
-ECTRON_RUN_AS_NODE = 1
+ELECTRON_RUN_AS_NODE = 1
 # environment
 TEMP = C:\Users\ADMIN\AppData\Local\Temp
 # environment
@@ -221,7 +219,7 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/ADMIN/Desktop/Online-Othello/demo/network/Game, mtime 1622369128): 21 files, no impossibilities.
+# . (key c:/Users/ADMIN/Desktop/Online-Othello/demo/network/Game, mtime 1622374205): 21 files, no impossibilities.
 
 # 21 files, no impossibilities in 1 directories.
 
@@ -314,6 +312,6 @@ all: server client
 # strcache performance: lookups = 39 / hit rate = 30%
 # hash-table stats:
 # Load=27/8192=0%, Rehash=0, Collisions=0/39=0%
-# Finished Make data base on Sun May 30 17:05:54 2021
+# Finished Make data base on Mon May 31 09:03:50 2021
 
  

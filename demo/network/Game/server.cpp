@@ -21,6 +21,9 @@ using namespace std;
 
 //int id = 0;
 int num_threads = 0;
+
+pthread_mutex_t mut;
+
 vector<Room> rooms ;
 vector<Players> players;
 
@@ -72,11 +75,20 @@ int main(int argc, char **argv)
   
   
   pthread_t threads[LISTENQ];
+
+  if (pthread_mutex_init(&mut, NULL) != 0) {                                    
+    perror("mutex_lock");                                                       
+    exit(1);                                                                    
+  }  
+
   while (num_threads<LISTENQ){
 		printf("Listening...\n");
 		int client_socket = accept(listenfd, NULL, NULL);
     cout<<client_socket<<endl;
 		puts("Connection accepted");
+
+    
+
 		if( pthread_create( &threads[num_threads], NULL ,  connection_handler , &client_socket) < 0){
 			perror("Could not create thread");
 			return 1;
@@ -141,8 +153,14 @@ void *connection_handler(void *client_socket){
   p->setSocket(socket);
   players.push_back(*p);
 
+  
+
   while ((n = recv(socket, buf, MAXLINE, 0)) > 0)
   {
+    if (pthread_mutex_lock(&mut) != 0) {                                          
+      perror("mutex_lock");                                                       
+      exit(2);                                                                    
+    }
     cout<< "Socket:" << socket << endl;
     char b[n];
     for(int c = 0; c<=n; c++){
@@ -729,6 +747,10 @@ void *connection_handler(void *client_socket){
     }
     
     bzero(buf, MAXLINE);
+    if (pthread_mutex_unlock(&mut) != 0) {                                      
+      perror("pthread_mutex_unlock() error");                                     
+      exit(2);                                                                    
+    } 
   }
 
   if (n <= 0){
