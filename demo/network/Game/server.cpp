@@ -782,7 +782,7 @@ void *connection_handler(void *client_socket){
       perror("pthread_mutex_unlock() error");                                     
       exit(2);                                                                    
     }
-    
+
     bzero(buf, MAXLINE);
   }
 
@@ -790,7 +790,10 @@ void *connection_handler(void *client_socket){
     cout<<"Read error"<<endl;
     vector<Room>::iterator it;
     vector<Players>::iterator i;
-    for(it = rooms.begin(); it<=rooms.end(); it++){
+    if(rooms.empty()){
+      return 0;
+    }
+    for(it = rooms.begin(); it != rooms.end(); it++){
       if(it->getNumPlayer() == 2){
         if(it->getPlayers()[0].getSocket() == socket){
           for(i = players.begin() ; i != players.end(); i++){

@@ -1,3 +1,9 @@
 
 /demo/api/node_modules
 /demo/client/node_modules
+/demo/network/Game/*.exe
+
+/test/client1/api/node_modules
+/test/client1/client/node_modules
+/test/client2/api/node_modules
+/test/client2/client/node_modules
