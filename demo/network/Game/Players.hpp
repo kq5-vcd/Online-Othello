@@ -24,5 +24,5 @@ public:
     void setTurn(int turn);
     void setName(string name);
     void setRank(int rank);
-    void setBot(Bot bot);
+    void setBot(Bot& bot);
 };

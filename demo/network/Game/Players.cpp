@@ -47,6 +47,6 @@ Bot& Players::getBot(){
     return this->bot;
 }
 
-void Players::setBot(Bot bot){
+void Players::setBot(Bot& bot){
     this->bot = bot;
 }
