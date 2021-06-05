@@ -694,7 +694,7 @@ void *connection_handler(void *client_socket){
                 cout << "Send to server: " << m << endl;
                 send(socket, m.c_str(),m.length(),0);
               } else if (it->getState() == 1){  // if clicked after
-
+                it->swapTurn();
                 vector<int> status = it->getGame().getStatus();
                 stringstream result;
                 copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));

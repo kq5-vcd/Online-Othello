@@ -78,6 +78,12 @@ void Room::setTurn(int index, int turn){
     this->players[index].setTurn(turn);
 }
 
+void Room::swapTurn(){
+    int tmp = this->players[0].getTurn();
+    this->players[0].setTurn(this->players[1].getTurn());
+    this->players[1].setTurn(tmp);
+}
+
 vector<Players> Room::getPlayers(){
     return this->players;
 }

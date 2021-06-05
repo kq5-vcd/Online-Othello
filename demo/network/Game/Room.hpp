@@ -26,6 +26,7 @@ public:
     void newGame();
     void setTurn(int index, int turn);
     void setState(int state);
+    void swapTurn();
     vector<Players> getPlayers();
     vector<Players> getSpectators();
 };

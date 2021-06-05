@@ -5,9 +5,8 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Sun May 30 14:40:47 2021
+# Make data base, printed on Sat Jun 05 22:25:29 2021
 
 # Variables
 
@@ -24,7 +23,7 @@ VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
 LOCALAPPDATA = C:\Users\ADMIN\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-08f39064-eb05-470c-831b-18bd6e99a0d3-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-363b370e-c42e-42ab-8b53-8ad765621491-sock
 # environment
 VSCODE_CWD = C:\Users\ADMIN\Desktop\Online-Othello\Game
 # environment
@@ -40,7 +39,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12016_NTISZDJTENALRPIO
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12052_NCQUMFDTCTAAJMFL
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -94,7 +93,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 12016
+VSCODE_PID = 12052
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -220,9 +219,9 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1622360147): 21 files, no impossibilities.
+# . (key c:/Users/ADMIN/Desktop/Online-Othello/Game, mtime 1622368918): 22 files, no impossibilities.
 
-# 21 files, no impossibilities in 1 directories.
+# 22 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -281,13 +280,12 @@ all: server client
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 25 / storage = 216 B / avg = 8 B
-# current buf: size = 8174 B / used = 216 B / count = 25 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 26 / storage = 228 B / avg = 8 B
+# current buf: size = 8174 B / used = 228 B / count = 26 / avg = 8 B
 
-# strcache performance: lookups = 38 / hit rate = 34%
+# strcache performance: lookups = 39 / hit rate = 33%
 # hash-table stats:
-# Load=25/8192=0%, Rehash=0, Collisions=0/38=0%
-# Finished Make dat 
-a base on Sun May 30 14:40:47 2021
+# Load=26/8192=0%, Rehash=0, Collisions=0/39=0%
+# Finished Make data base on Sat Jun 05 22:25:29 2021
 
  
