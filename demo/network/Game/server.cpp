@@ -189,11 +189,11 @@ void *connection_handler(void *client_socket){
           
         }
         else if(split(receive,' ').size() > 1){
-          string name = split(receive,' ')[1];
+          string name = receive.substr(2,receive.size()-2);
         
           vector<Players>::iterator i;
           for(i = players.begin(); i != players.end(); i++){
-            if(i->getName() == name && i->getSocket() != socket){
+            if(i->getName().compare(name) == 0 && i->getSocket() != socket){
               send(socket,"0",1,0);
               break;
             }
