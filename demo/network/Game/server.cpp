@@ -323,8 +323,8 @@ void *connection_handler(void *client_socket){
         // join room
         cout << "In message 3" << endl;
         vector<string> join = split(receive, ' ');
-        string player2 = join[1];
-        string roomId = join[2];
+        string roomId = join[1];
+        string player2 = join[2];
         string host = join[3];
         string m;
         join.clear();
@@ -352,7 +352,26 @@ void *connection_handler(void *client_socket){
               cout << "Send to client 1: " << player2 << endl;
               cout << "Send to client 2: " << m << endl;
               cout << "Player 2 joined room" << endl;
+            }
+            else if(it->getNumPlayer() == 2){
+              it->addSpectator(socket,player2);
+              cout<<it->getSpectators()[it->getSpectators().size()-1].getName()<<" watching the game\n";
+              vector<int> status = it->getGame().getStatus();
+              stringstream result;
+              copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
+              join = split(result.str(),' ');
+              string score1 = join[64];
+              string score2 = join[65];
+              string turn = join[66];
+              for(int i = 0; i<64; i++){
+                m.append(join[i]).append(" ");
               }
+              replaceAll(m,"-1","0");
+              m.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
+              for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
+                send(i->getSocket(),m.c_str(),m.length(),0);
+              }
+            }
           }
         } 
         break;
