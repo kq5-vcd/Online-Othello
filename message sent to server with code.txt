@@ -1,7 +1,7 @@
 0 - input username 	( "0 <username>" ) (server -> client: "1"/"0")
 			( "0" ) (server -> client:"<username>")
 
-1 - refresh live matches ( "1" ) (server -> client: "<room_id1> <Score1> <Score2>,<room_id2> <Score3> <Score4>, ..")
+1 - refresh live matches/search rooms by host's name ( "1 (name)" ) (server -> client: "<room_id1> <Score1> <Score2>,<room_id2> <Score3> <Score4>, ..")
 
 2 - create room ( "2 <username>" ) (server -> client: "<board> <room_id> 1")
 

@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <string.h>
+#include <cctype>
 #include "Room.hpp"
 
 #define MAXLINE 4096   /*max text line length*/
@@ -30,7 +31,7 @@ vector<Players> players;
 //string map_to_string(map<int,Room>  &m);
 
 vector<string> split(const string& str, const char& delimiter);
-vector<string> simple_tokenizer(string& s);
+bool findStringIC(const string & strHaystack, const string & strNeedle);
 void *connection_handler(void *client_socket);
 void replaceAll(string& str, const string& from, const string& to);
 
@@ -148,7 +149,7 @@ void *connection_handler(void *client_socket){
 	int socket = *(int*) client_socket;
   
 	int n;
-  string m;
+  string m = "";
 	char buf[MAXLINE];
   Players *p = new Players(false);
   p->setName("");
@@ -218,36 +219,66 @@ void *connection_handler(void *client_socket){
         m.clear();
 
         if (!rooms.empty()) {
-          vector<Room>::iterator it;
+          if(receive.length() == 1){
+            vector<Room>::iterator it;
 
-          for (it = rooms.begin(); it != rooms.end(); it++) {
-            // if room still has at least 1 player and game has not been over yet
-            cout << "Data: " << m << endl;
-            if (it->getNumPlayer() > 0 && !it->getGame().gameOver()) {
-              
-              if (it->getNumPlayer() == 1) {
-                m.append(to_string(it->getId())).append(" ")
-                .append(it->getPlayers()[0].getName()).append(" ")
-                .append(to_string(it->getGame().getScores()[0])).append(" # ")
-                .append(to_string(it->getGame().getScores()[1]));
-              } else {
-                m.append(to_string(it->getId())).append(" ")
-                .append(it->getPlayers()[0].getName()).append(" ")
-                .append(to_string(it->getGame().getScores()[0])).append(" ")
-                .append(it->getPlayers()[1].getName()).append(" ")
-                .append(to_string(it->getGame().getScores()[1]));
+            for (it = rooms.begin(); it != rooms.end(); it++) {
+              if (it->getNumPlayer() > 0 && !it->getGame().gameOver()) {
+                
+                if (it->getNumPlayer() == 1) {
+                  m.append(to_string(it->getId())).append(" ")
+                  .append(it->getPlayers()[0].getName()).append(" ")
+                  .append(to_string(it->getGame().getScores()[0])).append(" # ")
+                  .append(to_string(it->getGame().getScores()[1]));
+                } else {
+                  m.append(to_string(it->getId())).append(" ")
+                  .append(it->getPlayers()[0].getName()).append(" ")
+                  .append(to_string(it->getGame().getScores()[0])).append(" ")
+                  .append(it->getPlayers()[1].getName()).append(" ")
+                  .append(to_string(it->getGame().getScores()[1]));
+                }
+
+                m.append(",");
+                cout << "Send to client: " << m << endl;
               }
-
-              m.append(",");
-              cout << "Send to client: " << m << endl;
+            }
+            
+            cout << "Send to client 2: " << m << endl;
+            if (m.length() == 0) {
+              send(socket, "empty", 5, 0);
+            } else {
+              send(socket, m.c_str(), m.length()-1, 0);
             }
           }
-          
-          cout << "Send to client 2: " << m << endl;
-          if (m.length() == 0) {
-            send(socket, "empty", 5, 0);
-          } else {
-            send(socket, m.c_str(), m.length()-1, 0);
+          else{
+            string name = receive.substr(2,receive.size()-2);
+            vector<Room>::iterator it;
+
+            for (it = rooms.begin(); it != rooms.end(); it++) {
+              if (it->getNumPlayer() > 0 && !it->getGame().gameOver()) {
+                if(findStringIC(it->getPlayers()[0].getName(),name)){
+                  if (it->getNumPlayer() == 1) {
+                    m.append(to_string(it->getId())).append(" ")
+                    .append(it->getPlayers()[0].getName()).append(" ")
+                    .append(to_string(it->getGame().getScores()[0])).append(" # ")
+                    .append(to_string(it->getGame().getScores()[1]));
+                  } else {
+                    m.append(to_string(it->getId())).append(" ")
+                    .append(it->getPlayers()[0].getName()).append(" ")
+                    .append(to_string(it->getGame().getScores()[0])).append(" ")
+                    .append(it->getPlayers()[1].getName()).append(" ")
+                    .append(to_string(it->getGame().getScores()[1]));
+                  }
+                  m.append(",");
+                }
+              }
+            }
+            cout << "Send to client: " << m << endl;
+            if (m.length() == 0) {
+              send(socket, "empty", 5, 0);
+            } else {
+              send(socket, m.c_str(), m.length()-1, 0);
+            }
           }
           
         } else {
@@ -879,14 +910,12 @@ void replaceAll(string& str, const string& from, const string& to) {
     }
 }
 
-vector<string> simple_tokenizer(string& s)
+bool findStringIC(const string & strHaystack, const string & strNeedle)
 {
-    stringstream ss(s);
-    vector<string> word;
-    string token;
-    while (ss >> token) {
-        word.push_back(token);
-    }
-    cout<<"check token"<<endl;
-    return word;
+  auto it = search(
+    strHaystack.begin(), strHaystack.end(),
+    strNeedle.begin(),   strNeedle.end(),
+    [](char ch1, char ch2) { return std::toupper(ch1) == std::toupper(ch2); }
+  );
+  return (it != strHaystack.end() );
 }
