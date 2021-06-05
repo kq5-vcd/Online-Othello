@@ -719,7 +719,15 @@ void *connection_handler(void *client_socket){
       }
 
       case '8': {
-
+        string roomId = split(receive,' ')[1];
+        vector<Room>::iterator it;
+        for(it = rooms.begin(); it != rooms.end(); it++){
+          if(it->getId() == stoi(roomId)){
+            it->removeSpectator(socket);
+            break;
+          }
+        }
+        send(socket, "0",1,0);
         break;
       }
 
