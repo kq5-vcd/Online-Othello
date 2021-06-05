@@ -81,23 +81,28 @@ int main(int argc, char **argv)
     exit(1);                                                                    
   }
 
-  while (num_threads<LISTENQ){
+  while (true){
 		printf("Listening...\n");
 		int client_socket = accept(listenfd, NULL, NULL);
     cout<<client_socket<<endl;
-		puts("Connection accepted");
-		if( pthread_create( &threads[num_threads], NULL ,  connection_handler , &client_socket) < 0){
-			perror("Could not create thread");
-			return 1;
-		}
-		if (client_socket < 0) { 
-			printf("server acccept failed...\n"); 
-			exit(0); 
-			} 
-		else
-			printf("Server acccept the client...\n");
-		puts("Handler assigned");
-		num_threads++;
+    if(num_threads == LISTENQ){
+      send(client_socket,"0",1,0);
+    }
+    else{
+      puts("Connection accepted");
+      if( pthread_create( &threads[num_threads], NULL ,  connection_handler , &client_socket) < 0){
+        perror("Could not create thread");
+        return 1;
+      }
+      if (client_socket < 0) { 
+        printf("server acccept failed...\n"); 
+        exit(0); 
+        } 
+      else
+        printf("Server acccept the client...\n");
+      puts("Handler assigned");
+      num_threads++;
+    }
 	}
 	int k=0;
   for (k=0;k<LISTENQ;k++){
@@ -734,7 +739,8 @@ void *connection_handler(void *client_socket){
             break;
           }
           case 1: {
-            i->setBot(Bot());
+            Bot bot = Bot();
+            i->setBot(bot);
             vector<int> status = i->getGame().getStatus();
             stringstream result;
             copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
@@ -746,7 +752,8 @@ void *connection_handler(void *client_socket){
             break;
           }
           case 2: {
-            i->setBot(MiniMax(2 , 1));
+            MiniMax bot = MiniMax(2 , 1);
+            i->setBot(bot);
             vector<int> status = i->getGame().getStatus();
             stringstream result;
             copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
@@ -758,7 +765,8 @@ void *connection_handler(void *client_socket){
             break;
           }
           case 3: {
-            i->setBot(MiniMax(2 , 3));
+            MiniMax bot = MiniMax(2 , 3);
+            i->setBot(bot);
             vector<int> status = i->getGame().getStatus();
             stringstream result;
             copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
