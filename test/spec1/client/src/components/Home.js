@@ -24,7 +24,7 @@ class Home extends React.Component {
         
         // Get username from server
         const req = { message: '0' }
-        axios.post('http://localhost:9000/getName', req)
+        axios.post('http://localhost:9002/getName', req)
             .then(res => {
                 const username = res.data.username
                 console.log('Username: ' + username)
@@ -41,7 +41,7 @@ class Home extends React.Component {
         const req = { message: '0', username: username}
 
         axios
-            .post('http://localhost:9000/username', req)
+            .post('http://localhost:9002/username', req)
             .then(res => {
                 if (res.data.status === '1') {
                     this.setState({username: username, isNameValid: true, showPopup: true, message: `Welcome ${username} to ONLINE OTHELLO!!`})

@@ -8,10 +8,9 @@ class Home extends React.Component {
         super(props)
         this.state = {
             username: '', //
-            checkName: false,
+            isNameValid: false, // if isNameValid == true, enable mode buttons
             input: '',
-            message: '',
-            showPopup: false
+            message: ''
         }
     }
 
@@ -21,11 +20,9 @@ class Home extends React.Component {
         })
     }
 
-    
     componentDidMount() {
-        // if (this.props.username !== undefined) {
-        //     this.setState({ username: this.props.username, status: this.props.status, input: this.props.username})
-        // }
+        
+        // Get username from server
         const req = { message: '0' }
         axios.post('http://localhost:9001/getName', req)
             .then(res => {
@@ -33,7 +30,7 @@ class Home extends React.Component {
                 console.log('Username: ' + username)
 
                 if (username !== 'null') {
-                    this.setState({ username: username, checkName: true })
+                    this.setState({ username: username, isNameValid: true })
                 }
                 
             }).catch(err => console.error(err))
@@ -47,7 +44,7 @@ class Home extends React.Component {
             .post('http://localhost:9001/username', req)
             .then(res => {
                 if (res.data.status === '1') {
-                    this.setState({username: username, checkName: true, showPopup: true, message: 'Welcome to ONLINE OTHELLO!!'})
+                    this.setState({username: username, isNameValid: true, showPopup: true, message: `Welcome ${username} to ONLINE OTHELLO!!`})
                 } else {
                     this.setState({ showPopup: true, message: 'Name existed. Please try another one!!'})
                 }
@@ -55,37 +52,23 @@ class Home extends React.Component {
     }
 
     render() {
+
         return (
             <>
-                <div className="main">
-                    <div className='logo'>
-                        <p>ONLINE OTHELLO</p>
+                <header>
+                    <center>ONLINE OTHELLO</center>
+                </header>
+                <div className="input-panel">
+                    <div className="input-form">
+                        <input type="text" placeholder="Enter your name" name="input" value={this.state.input} onChange={this.handleUsername} />
+                        <button onClick={this.submitUsername}>Submit</button>
+                    </div>
+                    <div className="message">
+                        {this.state.message}
                     </div>
                 </div>
-                <div id="input-username">
-                    <input type='text' name='input' value={this.state.input} onChange={this.handleUsername} />
-                    <button onClick={this.submitUsername}>Confirm</button><br/>
-                    
-                    {/* <p trigger={this.state.showPopup}>{this.state.message}</p> */}
-                </div>
-            
-                
-                <div className='menu'>
-                    <Menu username={this.state.username} checkName={!this.state.checkName} />
-                </div>
-                {/* <div className='logo'>
-                    <p>ONLINE OTHELLO</p>
-                </div>
 
-                <div className='header'>
-                    <input type='text' name='input' value={this.state.input} onChange={this.handleUsername} /><br />
-                    <button onClick={this.submitUsername}>Confirm</button><br/>
-
-                </div>
-
-                <div className='menu'>
-                    <Menu username={this.state.username} checkName={!this.state.checkName} />
-                </div> */}
+                <Menu username={this.state.username} isNameValid={!this.state.isNameValid} />
             </>
         )
     }

@@ -36,7 +36,7 @@ class Table extends React.Component {
         const req = { message : '3', roomID: id, spectator: this.props.username }
         console.log("[SPECTATE]")
         console.log(req)
-        axios.post('http://localhost:9003/spectate', req)
+        axios.post('http://localhost:9002/spectate', req)
             .then(res => {
                 const tmp = res.data.response.split(' ')
                 const board = tmp.slice(0,64)
@@ -57,7 +57,7 @@ class Table extends React.Component {
         const req = { message: '3', roomID: id, player2: this.props.username, player1: player1}
 
         axios
-            .post('http://localhost:9000/join', req)
+            .post('http://localhost:9002/join', req)
             .then(res => {
                 const board = res.data.response.split(' ').slice(0,64)
                 const turn = res.data.response.split(' ')[64]

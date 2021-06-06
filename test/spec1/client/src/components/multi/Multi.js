@@ -22,7 +22,7 @@ class Multi extends React.Component {
     
         const req = { message: '1'}
         axios
-            .post('http://localhost:9001/loadRoom', req)
+            .post('http://localhost:9002/loadRoom', req)
             .then(res => {
                 if (res.data.rooms != 'empty') {
                 
@@ -54,7 +54,7 @@ class Multi extends React.Component {
         const req = {message: '2', username: this.props.username}
         
         axios
-            .post('http://localhost:9001/create', req)
+            .post('http://localhost:9002/create', req)
             .then(res => {
             
                 // Receive: (<board> <room_id> <turn>)

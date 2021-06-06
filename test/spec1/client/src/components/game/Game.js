@@ -34,7 +34,7 @@ class Game extends React.Component {
 
     const req = { message: '4', roomID: this.props.roomID }
 
-    axios.post('http://localhost:9001/start', req)
+    axios.post('http://localhost:9002/start', req)
       .then(res => {
         const tmp = res.data.response.split(' ')
 
@@ -50,11 +50,10 @@ class Game extends React.Component {
       }).catch(err => console.error(err))
   }
 
-
   /* [GET MOVE] */
   getMove() {
   
-    fetch('http://localhost:9001/getMove')
+    fetch('http://localhost:9002/getMove')
     .then(res => res.text())
     .then(res => {
         const tmp = res.split(' ')
@@ -66,6 +65,10 @@ class Game extends React.Component {
         const score2 = tmp[68]
         this.setState({ board: board, score1: score1 , score2: score2, currentTurn: turn})
 
+        // if (turn !== '-1' && turn !== '-2') {
+        //   this.setState({ showResultForSpec: false})
+        // }
+
         switch(turn) {
           case '-1': // the game finished
             console.log('[GAME FINISHED]')
@@ -75,8 +78,13 @@ class Game extends React.Component {
             } else if (score1 < score2) {
               this.setState({ winner: this.state.player2, loser: this.state.host})
             }
-
-            this.setState({ showResult: true, isPlaying: '0'})
+            if (this.state.turn === '3') {
+              this.setState({ showResultForSpec: true })
+              this.getMove()
+            } else {
+              this.setState({ showResult: true, isPlaying: '0'})
+            }
+            
             break;
           case '-2': // the component quits during game
             console.log('[OPPONENT QUIT]')
@@ -89,42 +97,52 @@ class Game extends React.Component {
 
             if (this.state.turn === '3') {
               this.setState({ showResultForSpec: true })
+              this.getMove()
             } else {
               this.setState({ showResult: true, isPlaying: '0', winByQuit: true})
             }
+            
             break;
           case '1': case '2': // the component keeps playing
+            this.setState({ showResultForSpec: false })
             if (turn !== this.state.turn) this.getMove()
             break;
-          default: break;
+          default: 
+            if (this.state.turn === '3') {
+              this.setState({ showResultForSpec: false })
+              this.getMove()
+            }
+            break;
         }
       }).catch(err => console.error(err))
   }
 
   spectatorQuit() {
+  
     const req = { message: '8', roomID: this.props.roomID }
-    axios.post('http://localhost:9001/spectateQuit', req)
+    axios.post('http://localhost:9002/spectateQuit', req)
       .then(res => {
         if (res.data.response === '0') {
           ReactDOM.render(<Multi username={this.props.username} />, document.getElementById('root'))
         }
       }).catch(err => console.error(err))
+    
+    
   }
 
   /* [QUIT GAME] */
   quitGame() {
-
     if (this.state.turn === '3') {
       this.spectatorQuit()
     } else {
       const req = { message: '6', roomID: this.props.roomID, isPlaying: this.state.isPlaying }
-      axios.post('http://localhost:9001/quit', req)
+      axios.post('http://localhost:9002/quit', req)
         .then(res => {
           if (res.data.response === '0') {
             ReactDOM.render(<Multi username={this.props.username} />, document.getElementById('root'))
           }
         }).catch(err => console.error(err))
-    }
+      }
     
   }
 
@@ -133,7 +151,7 @@ class Game extends React.Component {
     const req = { message: '7', roomID: this.props.roomID }
     this.setState({ score1: '2', score2: '2', winByQuit: false, showResult: false, currentTurn: '', winner: '', loser: ''})
 
-    axios.post('http://localhost:9001/playAgain', req)
+    axios.post('http://localhost:9002/playAgain', req)
       .then(res => {
         const tmp = res.data.response.split(' ')
 
@@ -143,7 +161,7 @@ class Game extends React.Component {
 
         switch(turn) {
           case '0': // clicked 'Play again' first and wait for the other
-            fetch('http://localhost:9001/ingame')
+            fetch('http://localhost:9002/ingame')
             .then(res => res.text())
             .then(res => {
               const turn = res.split(' ')[64]
@@ -204,7 +222,7 @@ class Game extends React.Component {
 
     const req = { message: '5', roomID: this.props.roomID, move_row: move_row, move_col: move_col }
     
-    axios.post('http://localhost:9001/move', req)
+    axios.post('http://localhost:9002/move', req)
     .then(res => {
       const tmp = res.data.response.split(' ')
       const board = tmp.slice(0,64)
@@ -245,7 +263,7 @@ class Game extends React.Component {
 
   /* [WAITING FOR AN OPPONENT TO JOIN] */
   waitForOpponent() {
-    fetch('http://localhost:9001/ingame')
+    fetch('http://localhost:9002/ingame')
     .then(res => res.text())
     .then(res => {
       this.setState({ player2: res, showStart: true })
@@ -254,7 +272,7 @@ class Game extends React.Component {
 
   /* [WAITING FOR THE SIGNAL FROM HOST] */
   waitForSignalFromHost() {
-    fetch('http://localhost:9001/ingame')
+    fetch('http://localhost:9002/ingame')
     .then(res => res.text())
     .then(res => {
       const board = res.split(' ').slice(0,64)
@@ -283,9 +301,7 @@ class Game extends React.Component {
         break;
       case '3': // the one who spectates the game
         /* code for spectator */
-        if (this.state.currentTurn !== '-1' && this.state.currentTurn !== '-2') {
-          this.getMove()
-        }
+        this.getMove()
         break;
 
       default: break;

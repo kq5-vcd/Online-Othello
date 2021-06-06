@@ -33,6 +33,35 @@ router.get('/getMove', (req, res) => {
 
 
 /* POST */
+router.post('/spectate', (req, res) => {
+  const recv = { message: req.body.message, roomID: req.body.roomID, spectator: req.body.spectator}
+  let tmp = ''
+
+  console.log('Recv: ' + recv.message + ' - ' + recv.roomID + ' - ' + recv.spectator)
+
+  client.write(recv.message + ' ' + recv.roomID + ' ' + recv.spectator)
+
+  client.once('data', data => {
+    console.log('Received from server: ' + data)
+    tmp = data.toString()
+    res.json({response: tmp})
+  })
+})
+
+router.post('/spectateQuit', (req, res) => {
+  const recv = { message: req.body.message, roomID: req.body.roomID}
+
+  let tmp = ''
+  console.log('Recv: ' + recv.message + ' - ' + recv.roomID)
+  client.write(recv.message + ' ' + recv.roomID)
+
+  client.once('data', data => {
+    
+    console.log('Received from server: ' + data)
+    tmp = data.toString()
+    res.json({response: tmp})
+  })
+})
 
 // Message 11 - get username
 router.post('/getName', (req, res) => {
@@ -107,7 +136,7 @@ router.post('/join', (req, res) => {
 
   console.log('Recv: ' + recv.message + ' - ' + recv.roomID + ' - ' + recv.player2)
 
-  client.write(recv.message + ' ' + recv.player2 + ' ' + recv.roomID + ' ' + recv.player1)
+  client.write(recv.message + ' ' + recv.roomID + ' ' + recv.player2 + ' ' + recv.player1)
 
   client.once('data', data => {
     console.log('Received from server: ' + data)

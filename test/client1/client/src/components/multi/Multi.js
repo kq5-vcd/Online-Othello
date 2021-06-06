@@ -27,7 +27,7 @@ class Multi extends React.Component {
                 if (res.data.rooms != 'empty') {
                 
                     const rooms = res.data.rooms.split(',')
-
+                    console.log(rooms)
                     for (var i = 0; i < rooms.length; i++) {
                         const room = rooms[i].split(' ')
                         const roomInfo = { id: room[0], player1: room[1], player2: room[3], score1: room[2], score2: room[4]}
@@ -38,10 +38,7 @@ class Multi extends React.Component {
     }
 
     componentDidMount() {
-        //console.log(this.state)
-        console.log('Username: ' + this.props.username)
         this.loadRoom()
-        //this.showRoom()
     }
 
     showRoom() {
@@ -61,16 +58,15 @@ class Multi extends React.Component {
             .then(res => {
             
                 // Receive: (<board> <room_id> <turn>)
-                const board = res.data.response.split(' ').slice(0,64)
-                const roomID = res.data.response.split(' ')[64]
-                const turn = res.data.response.split(' ')[65]
-                const player1 = this.props.username
-                const player2 = ''
-                const start = false
-                console.log('RoomID: ' + roomID)
-
-                //this.setState({response: res.data.response})
-                ReactDOM.render(<Game username={this.props.username} player1={player1} player2={player2}  board={board} roomID={roomID} turn={turn} start={start} />, document.getElementById('root'))
+                const tmp = res.data.response.split(' ')
+                const board = tmp.slice(0,64)
+                const roomID = tmp[64]
+                const turn = tmp[65]
+                const host = this.props.username
+                const currentTurn = ''
+                const isHost = true
+                console.log('[CREATE] - ' + res.data.response)
+                ReactDOM.render(<Game username={this.props.username} isHost={isHost} host={host} board={board} roomID={roomID} turn={turn} currentTurn={currentTurn} />, document.getElementById('root'))
             }).catch(err => {console.error(err)})
     }
 
@@ -82,16 +78,15 @@ class Multi extends React.Component {
     render () {
         return(
             <>
-                <div className='logo'>
-                    
-                    <p>ONLINE OTHELLO </p>
-                    {this.props.username}
-                </div>
-                <div className='toolbar'>
-                    <div className='element'>
-                        <input type='text' name='search' placeholder='Search room' onChange={this.handleSearch} />
-                        <button className='createRoom' onClick={() => this.createNewRoom()}>Create New Room</button>
-                        <button className='backToMenu' onClick={() => this.backToMenu() }>Back to Menu</button>
+                <header>
+                    <button onClick={() => this.backToMenu()}>Back to menu</button>
+                    <center>ONLINE OTHELLO</center>
+                </header>
+                <div className='search-panel'>
+                    <div className="search-form">
+                        <input type="text" name="search" placeholder="Search room" onChange={this.handleSearch} />
+                        <button className="search-btn" onClick={() => this.loadRoom() }>Search</button>
+                        <button className="create-btn" onClick={() => this.createNewRoom()}>Create</button>
                     </div>
                 </div>
                 <div className='table'>

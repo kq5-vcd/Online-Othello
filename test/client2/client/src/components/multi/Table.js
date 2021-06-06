@@ -26,12 +26,31 @@ class Table extends React.Component {
                     <td>{player1}</td>
                     <td>{score1} - {score2}</td>
                     <td>{player2}</td>
-                    <td><button id='join-btn' onClick={() => {this.joinRoom(id, player1)}}>Join</button></td>
+                    <td><button id='join-btn' onClick={() => {if (player2 === '#') {this.joinRoom(id, player1)} else { this.spectateGame(id)}}}>Join</button></td>
                 </tr>
             )
         })
     }
+    /* [FUNCTION] - Spectate a game */
+    spectateGame(id) {
+        const req = { message : '3', roomID: id, spectator: this.props.username }
+        console.log("[SPECTATE]")
+        console.log(req)
+        axios.post('http://localhost:9003/spectate', req)
+            .then(res => {
+                const tmp = res.data.response.split(' ')
+                const board = tmp.slice(0,64)
+                const currentTurn = tmp[64]
+                const host = tmp[65]
+                const player2 = tmp[66]
+                const score1 = tmp[67]
+                const score2 = tmp[68]
+                const turn = '3'
+                ReactDOM.render(<Game username={this.props.username} board={board} currentTurn={currentTurn} turn={turn} host={host} player2={player2} roomID={id} score1={score1} score2={score2} />, document.getElementById('root'))
+            }).catch(err => console.error(err))
+    }
 
+    /* [FUNCTION] - Join a game */
     joinRoom(id, player1) {
         // Send ("3" <roomdId> <username>)
         // Receive: (<board> <turn> <host>)
@@ -43,8 +62,9 @@ class Table extends React.Component {
                 const board = res.data.response.split(' ').slice(0,64)
                 const turn = res.data.response.split(' ')[64]
                 const host = player1
+                const currentTurn = ''
                 //this.setState({response: res.data.response})
-                ReactDOM.render(<Game username={this.props.username} board={board} turn={turn} player1={host} player2={req.player2} roomID={id}/>, document.getElementById('root'))
+                ReactDOM.render(<Game username={this.props.username} board={board} turn={turn} host={host} player2={req.player2} roomID={id} currentTurn={currentTurn} />, document.getElementById('root'))
             }).catch(err => console.log(err))
     }
 
@@ -53,7 +73,7 @@ class Table extends React.Component {
         return (
             <>
                 <div className='table'>
-                    <h1 id='title'>ONLINE ROOMS - Username: {this.props.username} </h1>
+                    <h1 id='title'>ONLINE ROOMS</h1>
                     <table id='rooms'>
                         <tbody>
                             <tr>

@@ -325,14 +325,16 @@ void *connection_handler(void *client_socket){
         vector<string> join = split(receive, ' ');
         string roomId = join[1];
         string player2 = join[2];
-        string host = join[3];
         string m;
         join.clear();
+        
 
         vector<Room>::iterator it;
 
         for (it = rooms.begin(); it != rooms.end(); it++) {
           if (it->getId() == stoi(roomId)) {
+            cout << "[CHECK]" << endl;
+            cout << it->getNumPlayer() << endl;
             if (it->getNumPlayer() == 1) {
 
               it->addPlayer(socket, 2, player2);
@@ -354,7 +356,10 @@ void *connection_handler(void *client_socket){
               cout << "Player 2 joined room" << endl;
             }
             else if(it->getNumPlayer() == 2){
+              cout << "[START ADD SPECTATOR]" << endl;
               it->addSpectator(socket,player2);
+              cout << "[ADDED]" << endl;
+      
               cout<<it->getSpectators()[it->getSpectators().size()-1].getName()<<" watching the game\n";
               vector<int> status = it->getGame().getStatus();
               stringstream result;

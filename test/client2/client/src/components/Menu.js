@@ -10,7 +10,7 @@ class Menu extends React.Component {
         this.state = {
             response: '',
             username: this.props.username,
-            checkName: this.props.checkName
+            isNameValid: this.props.isNameValid
         }
     }
 
@@ -21,13 +21,14 @@ class Menu extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className='button'>
-                    <button disabled={this.props.checkName} onClick={() => this.singlePlay() }>Single Play</button><br />
-                    <button disabled={this.props.checkName} onClick={() => this.multiPlay() }>Multiplayer</button><br />
-                    <button>How to Play</button><br />
-                    <button>Exit</button>
-                </div>
+            <div className='menu'>
+                
+                <button disabled={this.props.isNameValid} onClick={() => this.singlePlay() }>Single Play</button><br />
+                <button disabled={this.props.isNameValid} onClick={() => this.multiPlay() }>Multiplayer</button><br />
+                <button>How to Play</button><br />
+                <button>Exit</button>
+                
+                
             </div>
         )
     }
