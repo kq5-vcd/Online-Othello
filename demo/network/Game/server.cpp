@@ -731,6 +731,9 @@ void *connection_handler(void *client_socket){
             } else if (it->getNumPlayer() == 1) {
                 it->removePlayer(1);
                 it->setNumPlayer(0);
+                for(int i = 0; i < it->getSpectators().size(); i++){
+                  send(it->getSpectators()[i].getSocket(),"empty",5,0);
+                }
             }
             send(socket, "0", 1, 0);
             break;
