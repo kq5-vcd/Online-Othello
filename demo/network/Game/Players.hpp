@@ -25,4 +25,5 @@ public:
     void setName(string name);
     void setRank(int rank);
     void setBot(Bot& bot);
+    void newGame();
 };

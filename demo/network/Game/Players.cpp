@@ -50,3 +50,7 @@ Bot& Players::getBot(){
 void Players::setBot(Bot& bot){
     this->bot = bot;
 }
+
+void Players::newGame() {
+    this->game = Game(false);
+}
