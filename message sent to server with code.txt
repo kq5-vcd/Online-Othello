@@ -20,7 +20,7 @@
 
 
 6 - quit game ( "6 <room_id> <state>" ) (server -> client_inside_room + spectators: if(num_player == 2):
-											if (state == true)  -> ( "<board> -1 <Name_of_remained_player> # 1 0" )
+											if (state == true)  -> ( "<board> -2 <Name_of_remained_player> # 1 0" )
 											if (state == false) -> ( "<board> 0" )
 										    else:
 											spectators: "empty"
