@@ -368,8 +368,8 @@ void *connection_handler(void *client_socket){
               }
               replaceAll(m,"-1","0");
               m.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
-              for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
-                send(i->getSocket(),m.c_str(),m.length(),0);
+              for(int i = 0; i < it->getSpectators().size(); i++){
+                send(it->getSpectators()[i].getSocket(),m.c_str(),m.length(),0);
               }
             }
           }
@@ -466,8 +466,8 @@ void *connection_handler(void *client_socket){
                 send(it->getPlayers()[0].getSocket(),p1.c_str(),p1.length(),0);
                 send(it->getPlayers()[1].getSocket(),p2.c_str(),p2.length(),0);
 
-                for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
-                  send(i->getSocket(),p3.c_str(),p3.length(),0);
+                for(int i = 0; i < it->getSpectators().size(); i++){
+                  send(it->getSpectators()[i].getSocket(),p3.c_str(),p3.length(),0);
                 }
 
                 cout << "Send to player 1: " << p1 << endl;
@@ -627,16 +627,16 @@ void *connection_handler(void *client_socket){
                   send(it->getPlayers()[0].getSocket(), message1.c_str(),message1.length(),0);
                   send(it->getPlayers()[1].getSocket(), message2.c_str(),message2.length(),0);
 
-                  for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
-                    send(i->getSocket(),message2.c_str(),message2.length(),0);
+                  for(int i = 0; i < it->getSpectators().size(); i++){
+                    send(it->getSpectators()[i].getSocket(),message2.c_str(),message2.length(),0);
                   }
 
                 } else if(turn.compare(to_string(it->getPlayers()[1].getTurn())) == 0 && !it->getGame().gameOver()){
                     send(it->getPlayers()[1].getSocket(), message1.c_str(),message1.length(),0);
                     send(it->getPlayers()[0].getSocket(), message2.c_str(),message2.length(),0);
 
-                    for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
-                      send(i->getSocket(),message2.c_str(),message2.length(),0);
+                    for(int i = 0; i < it->getSpectators().size(); i++){
+                      send(it->getSpectators()[i].getSocket(),message2.c_str(),message2.length(),0);
                     }
 
                 } else if(it->getGame().gameOver()){
@@ -649,8 +649,9 @@ void *connection_handler(void *client_socket){
                     m.append(turn).append(" ").append(it->getPlayers()[0].getName()).append(" ").append(it->getPlayers()[1].getName()).append(" ").append(score1).append(" ").append(score2);
                     send(it->getPlayers()[1].getSocket(), m.c_str(),m.length(),0);
                     send(it->getPlayers()[0].getSocket(), m.c_str(),m.length(),0);
-                    for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
-                      send(i->getSocket(),m.c_str(),m.length(),0);
+
+                    for(int i = 0; i < it->getSpectators().size(); i++){
+                      send(it->getSpectators()[i].getSocket(),m.c_str(),m.length(),0);
                     }
                 }
               }
@@ -703,8 +704,8 @@ void *connection_handler(void *client_socket){
                 send(it->getPlayers()[0].getSocket(), m.c_str(),m.length(),0);
 
                 //send to all spectators
-                for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
-                  send(i->getSocket(),m.c_str(),m.length(),0);
+                for(int i = 0; i < it->getSpectators().size(); i++){
+                  send(it->getSpectators()[i].getSocket(),m.c_str(),m.length(),0);
                 }
                 
                 cout << it->getPlayers()[0].getName() << " now is hosting..." << endl;
@@ -722,8 +723,8 @@ void *connection_handler(void *client_socket){
                 send(it->getPlayers()[0].getSocket(), m.c_str(), m.length(), 0);
 
                 //send to all spectators
-                for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
-                  send(i->getSocket(),m.c_str(),m.length(),0);
+                for(int i = 0; i < it->getSpectators().size(); i++){
+                  send(it->getSpectators()[i].getSocket(),m.c_str(),m.length(),0);
                 }
               } 
               
@@ -764,8 +765,8 @@ void *connection_handler(void *client_socket){
               cout << "Play again: " << m << endl;
               send(socket, m.c_str(), m.length(), 0);
               //send to all spectators
-              for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
-                send(i->getSocket(),m.c_str(),m.length(),0);
+              for(int i = 0; i < it->getSpectators().size(); i++){
+                send(it->getSpectators()[i].getSocket(),m.c_str(),m.length(),0);
               }
             } else if (it->getNumPlayer() == 2) {
                 // if clicked first
@@ -785,8 +786,8 @@ void *connection_handler(void *client_socket){
                 cout << "Send to server: " << m << endl;
                 send(socket, m.c_str(),m.length(),0);
                 //send to all spectators
-                for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
-                  send(i->getSocket(),m.c_str(),m.length(),0);
+                for(int i = 0; i < it->getSpectators().size(); i++){
+                  send(it->getSpectators()[i].getSocket(),m.c_str(),m.length(),0);
                 }
               } else if (it->getState() == 1){  // if clicked after
                 it->swapTurn();
@@ -805,8 +806,8 @@ void *connection_handler(void *client_socket){
                 send(it->getPlayers()[1].getSocket(), m2.c_str(), m2.length(), 0);
                 send(it->getPlayers()[0].getSocket(), m1.c_str(), m1.length(), 0);
                 //send to all spectators
-                for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
-                  send(i->getSocket(),m.c_str(),m.length(),0);
+                for(int i = 0; i < it->getSpectators().size(); i++){
+                  send(it->getSpectators()[i].getSocket(),m.c_str(),m.length(),0);
                 }
               }
             }
@@ -940,6 +941,9 @@ void *connection_handler(void *client_socket){
         copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
         string mess = result.str().substr(0,result.str().size() - 6);
         send(it->getPlayers()[0].getSocket(),mess.c_str(),mess.length(),0);
+        for(int i = 0; i < it->getSpectators().size(); i++){
+          send(it->getSpectators()[i].getSocket(),mess.c_str(),mess.length(),0);
+        }
         break;
       }
       else if(it->getNumPlayer() == 1){
