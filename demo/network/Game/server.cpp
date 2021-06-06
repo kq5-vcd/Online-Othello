@@ -763,6 +763,10 @@ void *connection_handler(void *client_socket){
               m.append("3 ").append(it->getPlayers()[0].getName());
               cout << "Play again: " << m << endl;
               send(socket, m.c_str(), m.length(), 0);
+              //send to all spectators
+              for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
+                send(i->getSocket(),m.c_str(),m.length(),0);
+              }
             } else if (it->getNumPlayer() == 2) {
                 // if clicked first
               cout << "State: " << it->getState() << endl;
@@ -780,6 +784,10 @@ void *connection_handler(void *client_socket){
                 m.append("0");
                 cout << "Send to server: " << m << endl;
                 send(socket, m.c_str(),m.length(),0);
+                //send to all spectators
+                for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
+                  send(i->getSocket(),m.c_str(),m.length(),0);
+                }
               } else if (it->getState() == 1){  // if clicked after
                 it->swapTurn();
                 vector<int> status = it->getGame().getStatus();
@@ -789,12 +797,17 @@ void *connection_handler(void *client_socket){
                 m = m.substr(0,m.size()-6);
                 replaceAll(m,"-1","0");
                 string m2 = m;
-                m2.append("2");
-                string m1 = m.append("1");
+                m2.append(to_string(it->getPlayers()[1].getTurn()));
+                string m1 = m;
+                m1.append(to_string(it->getPlayers()[0].getTurn()));
                 cout << "Send here" << endl;
                 // Send to player 2
                 send(it->getPlayers()[1].getSocket(), m2.c_str(), m2.length(), 0);
                 send(it->getPlayers()[0].getSocket(), m1.c_str(), m1.length(), 0);
+                //send to all spectators
+                for(vector<Players>::iterator i = it->getSpectators().begin(); i != it->getSpectators().end(); i++){
+                  send(i->getSocket(),m.c_str(),m.length(),0);
+                }
               }
             }
             break;
