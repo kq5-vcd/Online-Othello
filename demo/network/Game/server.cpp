@@ -463,8 +463,14 @@ void *connection_handler(void *client_socket){
                 cout << "Turn: " << it->getPlayers()[0].getTurn() << endl;
 
                 // send to player 1
-                send(it->getPlayers()[0].getSocket(),p1.c_str(),p1.length(),0);
-                send(it->getPlayers()[1].getSocket(),p2.c_str(),p2.length(),0);
+                if(it->getPlayers()[0].getTurn() == 1){
+                  send(it->getPlayers()[0].getSocket(),p1.c_str(),p1.length(),0);
+                  send(it->getPlayers()[1].getSocket(),p2.c_str(),p2.length(),0);
+                }
+                else if(it->getPlayers()[0].getTurn() == 2){
+                  send(it->getPlayers()[0].getSocket(),p2.c_str(),p2.length(),0);
+                  send(it->getPlayers()[1].getSocket(),p1.c_str(),p1.length(),0);
+                }
 
                 for(int i = 0; i < it->getSpectators().size(); i++){
                   send(it->getSpectators()[i].getSocket(),p3.c_str(),p3.length(),0);
