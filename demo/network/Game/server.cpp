@@ -452,7 +452,7 @@ void *connection_handler(void *client_socket){
                               .append(it->getPlayers()[1].getName()).append(" ")
                               .append(score1).append(" ")
                               .append(score2);
-
+                replaceAll(save3, "-1", "0");
                 string p3 = save3.append(turn).append(" ")
                               .append(it->getPlayers()[0].getName()).append(" ")
                               .append(it->getPlayers()[1].getName()).append(" ")
