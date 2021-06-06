@@ -829,11 +829,17 @@ void *connection_handler(void *client_socket){
       }
 
       case '8': {
+        cout<<"In message 8\n";
         string roomId = split(receive,' ')[1];
         vector<Room>::iterator it;
         for(it = rooms.begin(); it != rooms.end(); it++){
           if(it->getId() == stoi(roomId)){
             it->removeSpectator(socket);
+            cout<<"Spectators: ";
+            for(int i=0; i<it->getSpectators().size(); i++){
+              cout<<it->getSpectators()[i].getName()<<" ";
+            }
+            cout<<endl;
             break;
           }
         }
@@ -842,6 +848,7 @@ void *connection_handler(void *client_socket){
       }
 
       case '9': {
+        cout<<"In message 9\n";
         string difficulty = split(receive,' ')[1];
         int dif = stoi(difficulty);
         vector<Players>::iterator i;
