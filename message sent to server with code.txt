@@ -19,13 +19,24 @@
 								spectators: "<current_board> <current_turn> <user1> <user2> <score1> <score2>"
 
 
-6 - quit game ( "6 <room_id> <state>" ) (server -> 2 clients + spectators:	if (state == true)  -> ( "<board> -1 <Name_of_remained_player> # 1 0" )
-										if (state == false) -> ( "<board> 0" )
+6 - quit game ( "6 <room_id> <state>" ) (server -> client_inside_room + spectators: if(num_player == 2):
+											if (state == true)  -> ( "<board> -1 <Name_of_remained_player> # 1 0" )
+											if (state == false) -> ( "<board> 0" )
+										    else:
+											spectators: "empty"
+
+						-> client_quit_room:	"0"
 
 
-7 - play again ( "7 <room_id> <turn>" ) (server -> 2 clients:	if (turn == 1)  -> ( "<board> 2" )
-								if (turn == 2)  -> ( "<board> 1" )
-                          			   spectators:  "<board>"
+7 - play again ( "7 <room_id> <turn>" ) (server -> 	 	if(num_player == 1):
+									client_inside_room + spectators -> "<board> 3 <Name_of_remained_player>"
+								else if(num_player == 2):
+									if(state == 0):
+										2 clients + spectators  -> "<board> 0"
+									else if(state == 1):
+										if (turn == 1)  -> ( "<board> 2" )
+										if (turn == 2)  -> ( "<board> 1" )
+                          			   				spectators 	->  "<board>"
 
 
 8 - spectator out game ( "8 <room_id>" ) (server -> client: "0")
