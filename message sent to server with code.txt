@@ -22,8 +22,11 @@
 6 - quit game ( "6 <room_id> <state>" ) (server -> 2 clients + spectators:	if (state == true)  -> ( "<board> -1 <Name_of_remained_player> # 1 0" )
 										if (state == false) -> ( "<board> 0" )
 
-7 - play again ( "7 <room_id> <turn>" ) (server -> 2 clients + spectators:	if (turn == 1)  -> ( "<board> 2" )
-										if (turn == 2)  -> ( "<board> 1" )
+
+7 - play again ( "7 <room_id> <turn>" ) (server -> 2 clients:	if (turn == 1)  -> ( "<board> 2" )
+								if (turn == 2)  -> ( "<board> 1" )
+                          			   spectators:  "<board>"
+
 
 8 - spectator out game ( "8 <room_id>" ) (server -> client: "0")
 
