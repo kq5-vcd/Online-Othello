@@ -27,6 +27,7 @@ public:
     void setTurn(int index, int turn);
     void setState(int state);
     void swapTurn();
+    bool findSpectator(int socket);
     vector<Players> getPlayers();
     vector<Players> getSpectators();
 };

@@ -92,3 +92,12 @@ vector<Players> Room::getSpectators(){
     return this->spectators;
 }
 
+bool Room::findSpectator(int socket){
+    for(int i =0; i<this->spectators.size(); i++){
+        if(this->spectators[i].getSocket() == socket){
+            return true;
+        }
+    }
+    return false;
+}
+
