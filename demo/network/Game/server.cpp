@@ -722,7 +722,8 @@ void *connection_handler(void *client_socket){
                 copy(status.begin(), status.end(), ostream_iterator<int>(result, " "));
                 string m = result.str();
                 m = m.substr(0,m.size()-6);
-                m.append("-1 ").append(it->getPlayers()[0].getName()).append(" # 1 0");
+                
+                m.append("-2 ").append(it->getPlayers()[0].getName()).append(" # 1 0");
               
                 cout << "Other quit. Send to client: " << m << endl;
                 
