@@ -916,18 +916,19 @@ void *connection_handler(void *client_socket){
     cout<<"Read error"<<endl;
     vector<Room>::iterator it;
     vector<Players>::iterator i;
+    for(i = players.begin() ; i != players.end(); i++){
+      if(i->getSocket() == socket){
+        players.erase(i);
+        break;
+      }
+    }
     if(rooms.empty()){
       return 0;
     }
     for(it = rooms.begin(); it != rooms.end(); it++){
       if(it->getNumPlayer() == 2){
         if(it->getPlayers()[0].getSocket() == socket){
-          for(i = players.begin() ; i != players.end(); i++){
-            if(i->getName() == it->getPlayers()[0].getName()){
-              players.erase(i);
-              break;
-            }
-          }
+          
           it->removePlayer(1);
           it->setTurn(0,1);
 
@@ -943,12 +944,7 @@ void *connection_handler(void *client_socket){
           }
         }
         else if(it->getPlayers()[1].getSocket() == socket){
-          for(i = players.begin() ; i != players.end(); i++){
-            if(i->getName() == it->getPlayers()[1].getName()){
-              players.erase(i);
-              break;
-            }
-          }
+          
           it->removePlayer(2);
           it->setTurn(0,1);
 
@@ -974,12 +970,7 @@ void *connection_handler(void *client_socket){
       }
       else if(it->getNumPlayer() == 1){
         if(it->getPlayers()[0].getSocket() == socket){
-          for(i = players.begin() ; i != players.end(); i++){
-            if(i->getName() == it->getPlayers()[0].getName()){
-              players.erase(i);
-              break;
-            }
-          }
+          
           string name = "";
           for(vector<Players>::iterator i = players.begin(); i != players.end(); i++){
             name.append(i->getName()).append(" ");
@@ -992,6 +983,11 @@ void *connection_handler(void *client_socket){
         break;
       }
     }
+    string name = "";
+    for(vector<Players>::iterator i = players.begin(); i != players.end(); i++){
+      name.append(i->getName()).append(" ");
+    }
+    cout<<"Current players' names: "<<name<<endl;
     num_threads--; 
   }
 	return 0;
