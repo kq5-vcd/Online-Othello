@@ -5,8 +5,9 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Sat Jun 05 21:58:28 2021
+# Make data base, printed on Sun Jun 06 12:23:38 2021
 
 # Variables
 
@@ -23,7 +24,7 @@ VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
 # environment
 LOCALAPPDATA = C:\Users\ADMIN\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-92c27533-b672-44ea-9e23-c8324ec7cb82-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-27b380a7-7feb-4531-8c83-e344e2d07935-sock
 # environment
 VSCODE_CWD = C:\Users\ADMIN\Desktop\Online-Othello\demo\network\Game
 # environment
@@ -39,7 +40,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12052_NCQUMFDTCTAAJMFL
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_8584_IRIYXTFYTGFBAURE
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -93,7 +94,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 12052
+VSCODE_PID = 8584
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -219,7 +220,7 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 # Directories
 
-# . (key c:/Users/ADMIN/Desktop/Online-Othello/demo/network/Game, mtime 1622440751): 22 files, no impossibilities.
+# . (key c:/Users/ADMIN/Desktop/Online-Othello/demo/network/Game, mtime 1622911565): 22 files, no impossibilities.
 
 # 22 files, no impossibilities in 1 directories.
 
@@ -227,6 +228,7 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 
 # No implicit rules.
 
+ 
 # Files
 
 client:
@@ -294,7 +296,8 @@ all: server client
 
 # Not a target:
 .SUFFIXES:
-#  Implicit rule search has not been done.
+#  Implicit rule searc 
+h has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -311,8 +314,7 @@ all: server client
 
 # strcache performance: lookups = 40 / hit rate = 30%
 # hash-table stats:
-# Load=28/8192=0%, Rehash=0, Collision 
-s=0/40=0%
-# Finished Make data base on Sat Jun 05 21:58:28 2021
+# Load=28/8192=0%, Rehash=0, Collisions=0/40=0%
+# Finished Make data base on Sun Jun 06 12:23:38 2021
 
  
